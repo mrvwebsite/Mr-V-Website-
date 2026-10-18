@@ -2389,7 +2389,7 @@ function setHD(x){try{localStorage.setItem(hdKey(),JSON.stringify(x.slice(-300))
 function addLocalNote(html,ico){if(!ME)return;const x=getLH();x.unshift({id:'l'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),msg:html.replace(/<[^>]*>/g,''),ts:Date.now(),ico:ico||'🔔',from:'System',local:true});setLH(x)}
 
 /* ===== class data: shared when available, otherwise this device ===== */
-const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{}});
+const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{},devs:{}});
 const KINDS=['students','notes','requests','bans','profiles','wallets','music','assignments','comments','friends','events','locks','kicks','sessions','presentations','subs','games','gpl','ctrl','chat','joined','stats','secrets'];
 let C=DEF(),DB=null,WRITE=true,lastXp=null,gotCls=true,loaded=true;
 const LK='mrv_local';
@@ -3554,7 +3554,7 @@ function sfx(name){
       o.connect(g);g.connect(AC.destination);o.start(t+d);o.stop(t+d+l+.08)});
   }catch(e){}
 }
-document.addEventListener('pointerdown',e=>{if(SET.click&&e.target.closest&&e.target.closest('.btn,.tab,.opt,.tile,.pchip,.mode,.stage,.gcard,.pass,.swatch'))sfx('click')},true);
+document.addEventListener('pointerdown',e=>{if(SET.click&&e.target.closest&&e.target.closest('.btn,.opt,.tile,.pchip,.mode,.stage,.gcard,.pass,.swatch'))sfx('click')},true);
 
 /* ===== loading screen: a V that fills from the bottom to the top ===== */
 let ldT=null,ldRaf=0;
@@ -4554,10 +4554,11 @@ function v9Logout(){ttFlush();TT.id=null;try{if(typeof ctrlClear==='function')ct
 const fmtTime=s=>{s=Math.max(0,Math.floor(s||0));const h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h?h+'h '+String(m).padStart(2,'0')+'m':m?m+'m '+String(s%60).padStart(2,'0')+'s':s+'s'};
 
 /* ===== v9 · sounds ===== */
-function sfx(name){
+function sfx(name,arg){
   if(!SET.sound)return;
   try{
-    AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state!=='running'&&!AC._force){try{AC.resume().catch(()=>{})}catch(e){}return}
     const t0=AC.currentTime,vol=(SET.vol||70)/100*.26;
     /* shared output: soft low-pass, gentle compressor and a tiny echo for air */
     if(!AC._m){
@@ -4599,7 +4600,11 @@ function sfx(name){
       lock:()=>{tone(260,0,.07,1.2,'triangle',170);puff(0,.03,.35,1800)},
       unlock:()=>{tone(420,0,.08,.7,'triangle',620);bell(988,.07,.4,.7)},
       send:()=>{puff(0,.12,.3,900,3500);tone(600,0,.1,.5,'sine',1100)},
-      recv:()=>{tone(1100,0,.08,.6,'sine',800);tone(800,.08,.16,.5,'sine',640)}
+      recv:()=>{tone(1100,0,.08,.6,'sine',800);tone(800,.08,.16,.5,'sine',640)},
+      boot:()=>{const d=Math.min(2.6,Math.max(.9,(arg||1800)/1000));
+        tone(196,0,d,.55,'sine',392);tone(294,0,d,.3,'triangle',588);puff(0,d,.22,350,4200,.8);
+        [1319,1568,2093].forEach((f,i)=>bell(f,d*(.3+i*.25),.35,.4))},
+      bootdone:()=>{[523,659,784,1047].forEach((f,i)=>bell(f,i*.06,.9,.7));bell(1568,.3,1.1,.55);puff(0,.35,.3,2000,7000)}
     }[name];
     if(S)S();
   }catch(e){}
@@ -4619,7 +4624,7 @@ function showLoader(ms,done,full){
   full=full||ms>=700;
   L.classList.remove('off','exit');L.classList.toggle('quick',!full);
   $('ldtext').textContent='Loading';if(full)ldVer();
-  ldSetP(0);const t0=performance.now();
+  ldSetP(0);const t0=performance.now();if(full)sfx('boot',ms);
   (function step(t){
     if(tok!==ldTok)return;
     const k=Math.min(1,(t-t0)/ms);ldSetP(ease(k)*100);
@@ -4630,12 +4635,12 @@ function showLoader(ms,done,full){
 }
 function ldExit(tok,full,done){
   if(tok!==ldTok)return;const L=$('loader');
-  if(full){sfx('ding');L.classList.add('exit');ldT2=setTimeout(()=>{if(tok!==ldTok)return;L.classList.add('off');L.classList.remove('exit');if(done)done()},900)}
+  if(full){sfx('bootdone');L.classList.add('exit');ldT2=setTimeout(()=>{if(tok!==ldTok)return;L.classList.add('off');L.classList.remove('exit');if(done)done()},900)}
   else{L.classList.add('off');if(done)done()}
 }
 function startLoader(){
   const t0=performance.now(),MIN=3200;
-  ldVer();const tok=++ldTok;
+  ldVer();const tok=++ldTok;sfx('boot',MIN);
   (function step(t){
     if(tok!==ldTok)return;
     const el=t-t0;
@@ -4676,7 +4681,16 @@ function detectDevice(){
 const DEVOS={pc:['Windows','Mac','Chromebook','Linux'],mobile:['iPad','iPhone','Android phone','Android tablet']};
 let DEV=null,devPick=null,devErr='';
 function loadDev(){try{DEV=JSON.parse(localStorage.getItem('mrv_dev')||'null')}catch(e){DEV=null}applyDev()}
-function applyDev(){document.body.classList.toggle('dev-mobile',!!DEV&&DEV.cls==='mobile');document.body.dataset.device=DEV?DEV.cls:'';const sp=document.querySelector('#devpill span');if(sp)sp.textContent=DEV?'Device: '+DEV.os:'Choose your device'}
+const TOUR_URL='https://vandernoth.com/tour';
+const DEVSCALE={'Windows':1,'Mac':1,'Linux':1,'Chromebook':.96,'iPad':.92,'Android tablet':.92,'iPhone':.8,'Android phone':.8};
+function effDev(){try{if(ME&&C.devs&&C.devs[ME.id]&&C.devs[ME.id].os)return C.devs[ME.id]}catch(e){}return DEV}
+function applyDev(){
+  const D=effDev(),own=D&&D!==DEV;
+  document.body.classList.toggle('dev-mobile',!!D&&D.cls==='mobile');
+  document.body.dataset.device=D?D.cls:'';document.body.dataset.devos=D?D.os:'';
+  const z=D?(DEVSCALE[D.os]||1):1;
+  if(document.body.dataset.dz!==String(z)){document.body.dataset.dz=String(z);document.body.style.zoom=z===1?'':String(z);document.documentElement.style.setProperty('--dz',String(z))}
+  const sp=document.querySelector('#devpill span');if(sp)sp.textContent=D?'Device: '+D.os+(own?' (set by owner)':''):'Choose your device'}
 const devLabel=d=>d?(d.cls==='pc'?'Computer / PC':'Mobile / Tablet')+' · '+d.os:'Not chosen yet';
 function ensureDev(){
   if($('devpill'))return;
@@ -4688,7 +4702,7 @@ function ensureDev(){
 }
 function openDevice(first){
   ensureDev();const m=$('devmodal'),det=detectDevice();
-  devErr='';devPick=DEV?{cls:DEV.cls,os:DEV.os}:null;m.dataset.first=first?'1':'';
+  devErr='';devPick=DEV?{cls:DEV.cls,os:DEV.os}:{cls:det.cls,os:det.os};m.dataset.first=first?'1':'';
   const paint=()=>{
     m.innerHTML='<div class="mbox devbox">'+(first||!DEV?'':'<button class="mx dark" id="devx" aria-label="Close">'+ic('star')+'</button>')+
       '<div class="dvic">'+ic('monitor')+'</div><h3>Which device are you using?</h3>'+
@@ -4716,12 +4730,20 @@ document.addEventListener('click',e=>{
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&$('devmodal')&&!$('devmodal').classList.contains('hide')){if(!$('devmodal').dataset.first)closeDevice();return}
 });
-function deviceFirstVisit(){ensureDev();if(!DEV)openDevice(true)}
+function tourAsk(){
+  let m=$('tourask');
+  if(!m){m=document.createElement('div');m.className='modal hide';m.id='tourask';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-labelledby','tqt');$('v9root').appendChild(m);
+    m.innerHTML='<div class="mbox devbox"><div class="dvic">'+ic('spark')+'</div><h3 id="tqt">Want a quick tour?</h3><p class="note" style="margin:0 0 18px">First time here? Take a short tour of the Mr V website with pictures and step by step help. It opens in a new tab.</p><button class="btn primary" id="tqyes" style="width:100%;justify-content:center;margin-bottom:10px">Yes, show me the tour</button><button class="btn light" id="tqno" style="width:100%;justify-content:center">No thanks</button></div>';
+    const done=yes=>{try{localStorage.setItem('mrv_tourq','1')}catch(e){}m.classList.add('hide');syncScroll();if(yes){try{window.open(TOUR_URL,'_blank','noopener')}catch(e){}}if(!DEV)openDevice(true)};
+    $('tqyes').onclick=()=>done(true);$('tqno').onclick=()=>done(false)}
+  m.classList.remove('hide');syncScroll();sfx('open')}
+function deviceFirstVisit(){ensureDev();let asked=false;try{asked=localStorage.getItem('mrv_tourq')==='1'}catch(e){}if(!asked)tourAsk();else if(!DEV)openDevice(true)}
 setTimeout(()=>{try{if(!DEV&&$('loader').classList.contains('off')&&$('devmodal').classList.contains('hide'))deviceFirstVisit()}catch(e){}},9000);
 loadDev();ensureDev();
 
 /* ===== v9 · per render hook ===== */
 function v9Render(){
+  applyDev();
   if(ME&&TT.id!==ME.id&&ME.role!=='owner')ttStart();
   paintStudyChip();
   if(typeof ctrlApply==='function')ctrlApply();
@@ -6793,6 +6815,36 @@ function sessClear(){
   try{document.cookie=SKEY+'=;max-age=0;path=/'}catch(e){}
   try{if(/^mrv(sess|own)/.test(String(window.name)))window.name=''}catch(e){}
 }
+
+
+/* ===== v9 · owner: set the device (and so the size) of any teacher or student account ===== */
+(function(){
+  const host=$('opanel');if(!host)return;
+  const box=document.createElement('div');box.className='box';box.id='odev';
+  const opts=DEVOS.pc.map(o=>'<option value="pc|'+o+'">'+o+' (computer)</option>').join('')+DEVOS.mobile.map(o=>'<option value="mobile|'+o+'">'+o+' (mobile)</option>').join('');
+  box.innerHTML='<h3 style="margin:0 0 6px">'+ic('monitor')+' Device and size</h3><p class="note" style="margin:0 0 16px">Pick an account and a device. That account will see the site in that device\'s size, for example phones are much smaller.</p>'+
+    '<label class="lab" for="odacc">Account</label><select class="field" id="odacc"></select>'+
+    '<label class="lab" for="oddev">Device</label><select class="field" id="oddev"><option value="">Use their own device</option>'+opts+'</select>'+
+    '<div class="xpbtns" style="margin:14px 0 0"><button class="btn primary" id="odsave">Save device</button></div><div class="err" id="oderr" role="status"></div><div class="note" id="odnow" style="margin-top:10px"></div>';
+  host.appendChild(box);
+  function fill(){
+    const sel=$('odacc'),k=sel.value;
+    const T=Object.keys(TEACHERS).map(id=>[id,'Teacher: '+TEACHERS[id].name]);
+    const S=Object.keys(allStudents()).sort((a,b)=>allStudents()[a].name.localeCompare(allStudents()[b].name)).map(id=>[id,'Student: '+allStudents()[id].name]);
+    const all=T.concat(S);sel.innerHTML=all.map(([id,n])=>'<option value="'+esc(id)+'">'+esc(n)+'</option>').join('');
+    if(all.some(a=>a[0]===k))sel.value=k;show();
+  }
+  function show(){const id=$('odacc').value,d=(C.devs||{})[id];$('oddev').value=d&&d.os?d.cls+'|'+d.os:'';$('odnow').textContent=d&&d.os?'Set to '+d.os+'.':'Using their own device.'}
+  $('odacc').onchange=show;
+  $('odsave').onclick=async()=>{
+    const id=$('odacc').value,v=$('oddev').value;if(!id)return;
+    let ok=true;
+    if(v){const[c,o]=v.split('|');ok=await putQuiet('devs',id,{cls:c,os:o,ts:Date.now()})}else ok=await delQuiet('devs',id)!==false;
+    $('oderr').textContent=ok?'Saved. They will see the new size right away.':'Could not save that.';$('oderr').style.color=ok?'#15803d':'';sfx(ok?'success':'error');applyDev();show()};
+  const old=window.renderOwner;
+  window.renderOwner=function(){old.apply(this,arguments);if(ME&&ME.role==='owner'&&!host.classList.contains('hide')&&document.activeElement!==$('odacc')&&document.activeElement!==$('oddev')){if(!$('odacc').options.length)fill()}};
+  fill();
+})();
 
 /* ===================== end v9 ===================== */
 $('hcoin').appendChild(coin(MAIN,'coin'));$('hvcc').appendChild(coin(GOLD,'coin','gold'));
