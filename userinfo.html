@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Owner login info</title>
+<style>
+  /* ---------- colors ---------- */
+  :root {
+    --bg: #f4f7ff;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --muted: #475569;
+    --line: #dbe4f5;
+    --blue: #2563eb;
+    --blue-soft: #e8efff;
+    --blue-ink: #1d4ed8;
+    --red: #dc2626;
+    --green: #16a34a;
+  }
+
+  /* ---------- page ---------- */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px system-ui, "Segoe UI", Arial, sans-serif;
+    display: grid;
+    place-items: start center;
+    padding: 24px 12px;
+  }
+  .card {
+    width: min(760px, 100%);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.10);
+  }
+  .card.small { width: min(440px, 100%); margin-top: 12vh; }
+  h1 { margin: 0 0 6px; font-size: 1.35rem; }
+  h2 { margin: 18px 0 8px; font-size: 1.05rem; }
+  p { color: var(--muted); margin: 0 0 16px; }
+  .hide { display: none !important; }
+
+  /* ---------- form controls ---------- */
+  input[type="password"],
+  input[type="text"],
+  input[type="search"],
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #fff;
+    color: var(--ink);
+  }
+  input:focus, select:focus {
+    outline: 3px solid rgba(37, 99, 235, 0.25);
+    border-color: var(--blue);
+  }
+  .check { display: block; margin-top: 8px; font-size: 0.9rem; color: var(--muted); }
+  .check input { width: auto; }
+
+  /* ---------- buttons ---------- */
+  button, a.btn {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  button:hover, a.btn:hover { filter: brightness(1.08); }
+  button.light, a.btn.light { background: var(--blue-soft); color: var(--blue-ink); }
+  button.tiny {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    border-radius: 9px;
+  }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .row > * { margin-top: 10px; }
+  @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+
+  /* ---------- messages ---------- */
+  #err { color: var(--red); min-height: 1.4em; margin-top: 10px; font-size: 0.9rem; }
+  #msg { color: var(--green); min-height: 1.4em; margin-top: 6px; font-size: 0.9rem; }
+
+  /* ---------- tables ---------- */
+  .tools { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-top: 10px; }
+  @media (max-width: 520px) { .tools { grid-template-columns: 1fr; } }
+  .tablewrap { max-height: 55vh; overflow: auto; border: 1px solid var(--line); border-radius: 12px; margin-top: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+  th { position: sticky; top: 0; background: var(--blue-soft); color: var(--blue-ink); }
+  td.mono { font-family: ui-monospace, Consolas, monospace; }
+  .count { font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--blue-soft);
+    color: var(--blue-ink);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .staff { border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: #f8fafc; }
+  .staff div { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; font-size: 0.92rem; }
+  .staff b { color: var(--muted); font-weight: 600; }
+  .staff span { font-family: ui-monospace, Consolas, monospace; word-break: break-all; text-align: right; }
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 50vh;
+    overflow: auto;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= LOCK SCREEN ================= -->
+<div id="lock" class="card small">
+  <h1>Owner only</h1>
+  <p>Type the owner password to open the private login info.</p>
+  <form id="form">
+    <input id="pw" type="password" autocomplete="off" autocapitalize="off"
+           spellcheck="false" placeholder="Owner password" autofocus>
+    <label class="check"><input type="checkbox" id="show"> Show what I type</label>
+    <button type="submit">Unlock</button>
+  </form>
+  <div id="err"></div>
+</div>
+
+<!-- ================= OPEN SCREEN ================= -->
+<div id="open" class="card hide">
+  <h1>Welcome, owner</h1>
+  <p>Keep this private. Do not share it or leave it open on a shared screen.</p>
+
+  <div class="row">
+    <button id="dl">Download user info (.txt)</button>
+    <a class="btn light" id="note" target="_blank" rel="noopener"
+       href="https://raw.githubusercontent.com/mrvwebsite/Mr-V-Website-/refs/heads/main/Content/note.txt">Open note.txt</a>
+  </div>
+  <div class="row">
+    <button class="light" id="dlcsv">Download as spreadsheet (.csv)</button>
+    <button class="light" id="toggleraw">Show or hide the raw file</button>
+  </div>
+  <div id="msg"></div>
+  <p class="count">note.txt link: <span style="font-family:ui-monospace,Consolas,monospace;word-break:break-all">https://raw.githubusercontent.com/mrvwebsite/Mr-V-Website-/refs/heads/main/Content/note.txt</span></p>
+
+  <h2>Teacher and owner logins</h2>
+  <div class="staff" id="staff"></div>
+
+  <h2>Students</h2>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search a name or username">
+    <select id="period"><option value="">All periods</option></select>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Name</th><th>Period</th><th>Username</th><th>Password</th><th></th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <pre id="raw" class="hide"></pre>
+  <button class="light" id="relock">Lock again</button>
+</div>
+
+<script>
+/* ===================================================================
+   The login info is NOT stored here as plain text.
+   It is locked with AES-GCM. The key comes from the owner password
+   (PBKDF2, SHA-256, 250000 rounds), so it can only be read after the
+   right password is typed. All of this runs on your own device.
+   =================================================================== */
+const BLOB = {
+  s: (
+    "qtQLoYOYUzUYJIOroptTWg=="+
+    ""
+  ),
+  i: (
+    "MlM911dVZNarsFDs"+
+    ""
+  ),
+  c: (
+    "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"+
+    ""
+  )
+};
+
+/* ---------- small helpers ---------- */
+const $ = id => document.getElementById(id);
+const b64 = s => Uint8Array.from(atob(s), ch => ch.charCodeAt(0));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let TXT = '';            // the unlocked text (kept only in memory)
+let STAFF = [];          // [label, value]
+let STUDENTS = [];       // {name, period, user, pass}
+let wrongTries = 0;
+let waitUntil = 0;
+
+/* ---------- decrypt ---------- */
+async function decrypt(password) {
+  const keyMaterial = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt: b64(BLOB.s), iterations: 250000, hash: 'SHA-256' },
+    keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+  const plain = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv: b64(BLOB.i) }, key, b64(BLOB.c));
+  return new TextDecoder().decode(plain);
+}
+
+/* ---------- read the text into staff + students ---------- */
+function parse(text) {
+  STAFF = [];
+  STUDENTS = [];
+  let period = '';
+  text.split(/\r?\n/).forEach(line => {
+    const p = line.match(/^--- Period (\d+) ---/);
+    if (p) { period = p[1]; return; }
+    const s = line.match(/^(.+?) \| username: (\S+) \| password: (\S+)/);
+    if (s) { STUDENTS.push({ name: s[1], period, user: s[2], pass: s[3] }); return; }
+    const t = line.match(/^(Teacher site password|Classroom confirmation code|Owner password|Owner gate code[^:]*): (.+)$/);
+    if (t) STAFF.push([t[1], t[2]]);
+  });
+}
+
+/* ---------- draw the screen ---------- */
+function drawStaff() {
+  $('staff').innerHTML = STAFF.map(r =>
+    '<div><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span></div>').join('');
+}
+
+function drawPeriods() {
+  const periods = [...new Set(STUDENTS.map(s => s.period))].sort((a, b) => a - b);
+  $('period').innerHTML = '<option value="">All periods</option>' +
+    periods.map(p => '<option value="' + p + '">Period ' + p + '</option>').join('');
+}
+
+function drawStudents() {
+  const q = $('search').value.trim().toLowerCase();
+  const per = $('period').value;
+  const list = STUDENTS.filter(s =>
+    (!per || s.period === per) &&
+    (!q || s.name.toLowerCase().includes(q) || s.user.includes(q)));
+  $('rows').innerHTML = list.map((s, n) =>
+    '<tr><td>' + esc(s.name) + '</td>' +
+    '<td><span class="badge">P' + esc(s.period) + '</span></td>' +
+    '<td class="mono">' + esc(s.user) + '</td>' +
+    '<td class="mono">' + esc(s.pass) + '</td>' +
+    '<td><button class="tiny light" data-copy="' + esc(s.pass) + '">Copy</button></td></tr>').join('');
+  $('count').textContent = 'Showing ' + list.length + ' of ' + STUDENTS.length + ' students';
+}
+
+function say(text) {
+  $('msg').textContent = text;
+  clearTimeout(say.t);
+  say.t = setTimeout(() => { $('msg').textContent = ''; }, 2500);
+}
+
+/* ---------- downloads ---------- */
+async function saveFile(name, mime, data) {
+  /* inside Claude the page asks for permission to save; on a normal website it downloads directly */
+  try {
+    if (window.claude && window.claude.use) {
+      const dl = await window.claude.use('downloads');
+      if (dl) {
+        await dl.save({ filename: name, data: data });
+        say('Saved ' + name);
+        return;
+      }
+    }
+  } catch (x) {
+    if (x && x.code === 'declined') { say('Download cancelled.'); return; }
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([data], { type: mime }));
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+function toCsv() {
+  const q = v => '"' + String(v).replace(/"/g, '""') + '"';
+  const rows = [['Name', 'Period', 'Username', 'Password']]
+    .concat(STUDENTS.map(s => [s.name, s.period, s.user, s.pass]));
+  return rows.map(r => r.map(q).join(',')).join('\r\n');
+}
+
+/* ---------- open and close ---------- */
+function openPage() {
+  parse(TXT);
+  drawStaff();
+  drawPeriods();
+  drawStudents();
+  $('raw').textContent = TXT;
+  $('lock').classList.add('hide');
+  $('open').classList.remove('hide');
+}
+
+function closePage() {
+  TXT = '';
+  STAFF = [];
+  STUDENTS = [];
+  $('raw').textContent = '';
+  $('raw').classList.add('hide');
+  $('rows').innerHTML = '';
+  $('staff').innerHTML = '';
+  $('open').classList.add('hide');
+  $('lock').classList.remove('hide');
+  $('pw').value = '';
+}
+
+/* ---------- events ---------- */
+$('show').onchange = () => {
+  $('pw').type = $('show').checked ? 'text' : 'password';
+};
+
+$('form').onsubmit = async e => {
+  e.preventDefault();
+  if (Date.now() < waitUntil) {
+    $('err').textContent = 'Wait a few seconds and try again.';
+    return;
+  }
+  $('err').textContent = 'Checking...';
+  try {
+    TXT = await decrypt($('pw').value.trim());
+    wrongTries = 0;
+    $('err').textContent = '';
+    openPage();
+    $('pw').value = '';
+  } catch (x) {
+    wrongTries++;
+    waitUntil = Date.now() + Math.min(30000, wrongTries * 3000);
+    $('err').textContent = 'Wrong password. Use the OWNER password (not the teacher site password). ' +
+      'Letters are capital, and 0 is zero, O is the letter.';
+  }
+};
+
+$('dl').onclick = () => saveFile('MrV-Login-Info.txt', 'text/plain', TXT);
+$('dlcsv').onclick = () => saveFile('MrV-Students.csv', 'text/csv', toCsv());
+$('toggleraw').onclick = () => $('raw').classList.toggle('hide');
+$('relock').onclick = closePage;
+$('search').oninput = drawStudents;
+$('period').onchange = drawStudents;
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-copy]');
+  if (!b) return;
+  try {
+    await navigator.clipboard.writeText(b.dataset.copy);
+    say('Copied.');
+  } catch (x) {
+    say('Could not copy. Select it and copy by hand.');
+  }
+});
+
+/* lock again by itself after 10 minutes of being open */
+setInterval(() => {
+  if (!$('open').classList.contains('hide') && Date.now() - openedAt > 600000) closePage();
+}, 15000);
+let openedAt = Date.now();
+const _open = openPage;
+openPage = function () { openedAt = Date.now(); _open(); };
+</script>
+</body>
+</html>
