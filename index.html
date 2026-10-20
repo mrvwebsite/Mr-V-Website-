@@ -2055,6 +2055,45 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
 
 .orip{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line,#dbe4f3)}
 
+/* ===== v11 · Daily Agenda, teacher access, chat ===== */
+.aggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.agc{padding:0;overflow:hidden}
+.agh{display:flex;align-items:center;gap:12px;padding:14px 18px;background:linear-gradient(135deg,var(--ac),color-mix(in srgb,var(--ac) 70%,#000));color:#fff}
+.agh b{display:block;font-size:1.05rem}.agh small{opacity:.9}
+.agh .agi{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
+.agh .agi .i{width:22px;height:22px}
+.agh .btn{margin-left:auto}
+.agb{padding:16px 18px 18px}
+.aglab{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#64748b;margin:12px 0 4px}
+.agg{font-weight:700;margin:0}.agp{margin:0}
+.agl{margin:0;padding-left:22px}.agl li{padding:2px 0}
+.agold{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:10px;padding:6px 10px;font-size:.85rem}
+.agby{display:block;margin-top:14px;color:#64748b}
+.agleg{margin-top:16px}
+.tacc{border:1px solid var(--line,#dbe4f3);border-radius:16px;padding:14px;margin:10px 0}
+.ocgrid{display:grid;grid-template-columns:260px minmax(0,1fr);gap:16px;margin-top:14px;align-items:start}
+.ocbar{padding:14px 18px}
+.ocrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-radius:12px;padding:8px;cursor:pointer;color:inherit}
+.ocrow:hover{background:var(--soft,#f1f5fd)}.ocrow.on{background:var(--soft,#e8efff);box-shadow:inset 3px 0 0 #2563eb}
+.ocrow small{display:block;color:#64748b}.ocrow span{flex:1;min-width:0}
+.ochd{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line,#dbe4f3)}
+.ochd small{display:block;color:#64748b}
+.ocav{width:40px;height:40px;border-radius:50%;background:#dbeafe;display:grid;place-items:center;color:#1d4ed8;flex:none}
+.occ{padding:0;overflow:hidden}
+.ocmsgs{height:min(50vh,420px);overflow:auto;padding:14px 18px;display:flex;flex-direction:column;gap:10px;background:var(--soft,#f6f9ff)}
+.ocm{display:flex;flex-direction:column;align-items:flex-start;max-width:80%}.ocm.me{align-self:flex-end;align-items:flex-end}
+.ocb{background:#fff;border:1px solid var(--line,#dbe4f3);border-radius:16px 16px 16px 4px;padding:9px 13px;word-break:break-word}
+.ocm.me .ocb{background:#2563eb;color:#fff;border-color:#2563eb;border-radius:16px 16px 4px 16px}
+.ocm small{color:#64748b;font-size:.72rem;margin:3px 4px 0}
+.ocin{display:flex;gap:10px;padding:12px 14px;border-top:1px solid var(--line,#dbe4f3)}.ocin .field{flex:1}
+.ocoff{padding:14px 18px;border-top:1px solid var(--line,#dbe4f3);color:#9f1239;background:#fff1f2;display:flex;gap:8px;align-items:center}
+@media(max-width:800px){.aggrid,.ocgrid{grid-template-columns:1fr}}
+.tacc .who{display:flex;gap:12px;align-items:center}.tacc .who small{display:block;color:#64748b}
+.tacc .pcbs{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.tacc .pcb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line,#dbe4f3);border-radius:99px;padding:6px 12px;background:#fff;cursor:pointer;font-size:.9rem}
+.tacc .pcb:has(input:checked){background:#e8efff;border-color:#2563eb}
+.tacc select.field{margin-bottom:8px}
+
 </style>
 </head>
 <body>
@@ -2402,6 +2441,18 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
   <div class="panel" id="ordreq"><div class="wrap" style="max-width:1000px">
     <div class="pagehead"><h2>Mr V Enterprise requests</h2><p class="lead">Every order sent from the Buy Mr V Enterprise page shows up here. Give the subscription right away, or cancel it.</p></div>
     <div id="ordbody"></div>
+  </div></div>
+
+  <!-- DAILY AGENDA -->
+  <div class="panel" id="agenda"><div class="wrap" style="max-width:1100px">
+    <div class="pagehead"><h2>Daily Agenda</h2><p class="lead">What every class is doing today: English, American History / Social Studies, Math and Science.</p></div>
+    <div id="agbody"></div>
+  </div></div>
+
+  <!-- CHAT WITH MR V -->
+  <div class="panel" id="chat"><div class="wrap" style="max-width:1000px">
+    <div class="pagehead"><h2>Chat with Mr V</h2><p class="lead">Ask questions about your Mr V Enterprise order. Mr V can turn chat on or off.</p></div>
+    <div id="ocbody"></div>
   </div></div>
 
   <!-- LOCKED -->
@@ -2930,7 +2981,7 @@ EXTRA2.forEach((e,i)=>['easy','mid','hard'].forEach(l=>D[i][l].push(...e[l])));
 /* ===== helpers ===== */
 const $=id=>document.getElementById(id);
 let ME=null;
-const isT=()=>!!ME&&(ME.role==='teacher'||ME.role==='owner');
+const isT=()=>!!ME&&(ME.role==='owner'||(ME.role==='teacher'&&!(typeof UTCH==='function'&&UTCH())));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
 const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
@@ -3124,8 +3175,8 @@ function setHD(x){try{localStorage.setItem(hdKey(),JSON.stringify(x.slice(-300))
 function addLocalNote(html,ico){if(!ME)return;const x=getLH();x.unshift({id:'l'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),msg:html.replace(/<[^>]*>/g,''),ts:Date.now(),ico:ico||'🔔',from:'System',local:true});setLH(x)}
 
 /* ===== class data: shared when available, otherwise this device ===== */
-const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{},devs:{},teachers:{},olock:{},party:{},spam:{},subm:{},devreq:{},visit:{},ipban:{},aiw:{},aihist:{},orders:{}});
-const KINDS=['students','notes','requests','bans','profiles','wallets','music','assignments','comments','friends','events','locks','kicks','sessions','presentations','subs','games','gpl','ctrl','chat','joined','stats','secrets','teachers','olock','party','spam','subm','devreq','visit','ipban','aiw','aihist','orders'];
+const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{},devs:{},teachers:{},olock:{},party:{},spam:{},subm:{},devreq:{},visit:{},ipban:{},aiw:{},aihist:{},orders:{},agenda:{}});
+const KINDS=['students','notes','requests','bans','profiles','wallets','music','assignments','comments','friends','events','locks','kicks','sessions','presentations','subs','games','gpl','ctrl','chat','joined','stats','secrets','teachers','olock','party','spam','subm','devreq','visit','ipban','aiw','aihist','orders','agenda'];
 let C=DEF(),DB=null,WRITE=true,lastXp=null,gotCls=true,loaded=true;
 const LK='mrv_local';
 function loadLocal(){try{const j=JSON.parse(localStorage.getItem(LK)||'null');if(j){C=Object.assign(DEF(),j);C.cls=Object.assign({xp:0,hue:221,coinMult:1},C.cls)}}catch(e){}}
@@ -5019,6 +5070,7 @@ const VERS=[
   'AI Helper with the V logo: it creates assignments and well-made presentations, calculates anything, explains science topics, and quizzes you. Calculator, ruler, timer and notepad windows can stay on every tab, and teachers can give them to students.',
   'Presentation editor: double-click to edit text, a floating Properties panel with search and fonts, free resizing, right-click menus, template slides, rainbow and gold colors, a better drawing tool, and animations with Start and End squares.',
   'Open and save presentations as Pptx, Odp, Pdf, Txt, Jpg, Png and Svg. Print with the V loader. Full-screen naming and saved messages.',
+  'New: Daily Agenda tab, Chat with Mr V, universal 7th grade teachers (Mrs. Harris, Mrs. Trucios, Mr. Morris), and a 6-stage buy page with promo codes and student search.',
   'Owner: IP address finder with ban reasons, a profile page, and a 5-step party wizard. Assignments can now be posted later, to certain periods or students, with due times and late rules.',
   'New V Coin and XP coin pictures, and new rewards: 35 V Coins for your first lesson each day and 50 for a perfect lesson. Game play time costs 100 V Coins a minute (500 for 5 minutes, 1,000 for 10).',
   'Buy Mr V Enterprise page: pick a plan and send an order. The owner gets a new Mr V Enterprise requests tab to give the subscription now or cancel it.',
@@ -5519,6 +5571,8 @@ function renderV9(on){
   if(on('calc')&&typeof renderCalc==='function')renderCalc();
   if(on('sub')&&typeof renderSub==='function')renderSub();
   if(on('ordreq')&&typeof renderOrdReq==='function')renderOrdReq();
+  if(on('agenda')&&typeof renderAgenda==='function')renderAgenda();
+  if(on('chat')&&typeof renderOChat==='function')renderOChat();
   if(on('friends')&&typeof renderFriends2==='function')renderFriends2();
   if(on('profile')&&typeof pfxRender==='function')pfxRender();
   if(on('presentations')&&typeof renderPresLib2==='function')renderPresLib2();
@@ -7656,7 +7710,7 @@ const teacherPer=id=>(TEACHERS[id]&&TEACHERS[id].per)||[];
 const perText=a=>{a=(a||[]).slice().sort((x,y)=>x-y);if(!a.length)return 'No periods';if(a.length>=PER_OPEN.length&&PER_OPEN.every(p=>a.includes(p)))return 'All periods (3, 4, 6, 8)';return (a.length>1?'Periods ':'Period ')+a.join(', ')};
 
 /* ===== v10 · locked secrets (AES-GCM, key made from a password) ===== */
-const OWNER_BLOB='kEVka1+ry0An5UllXe0Elg==.3KrsWHbi09Uc3U+W.q/Hv96Z6DnFwy3W+nDRWLN4uYuaiwBE1SWVrsIt2xBdlxhlvfONlGQH81KxUkANYwy8RiU88IwzhBAm1LupjKG3juAkJPnhMAYYL',TEACH_BLOB='d+2W6dF9Naa477mWXCTxVQ==.u5Xx4+hZTQ28CFdJ.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';
+const OWNER_BLOB='EAl7GCOECyloGfxwBWtWmQ==.ulp13ejb2A3dh2NN.X2battGALSV/rnDjk8Bf1vgMKhnBZrJ+sW89DfT0JeOM/O5K4rR8D5hpu03cj6sdK51AGsEre3q8Z3vy6huOHF9qvpkODenTON7N',TEACH_BLOB='10/ibB55NRBgt6IKCutQag==.xOmARPxbQJvMgS14.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';
 const b64e=u=>{let s='';u.forEach(c=>{s+=String.fromCharCode(c)});return btoa(s)};
 const b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function kdf(pw,salt){
@@ -11715,13 +11769,14 @@ document.addEventListener('keydown',e=>{if(e.target.id==='aiq'&&e.key==='Enter')
 
 /* ===== v11 · Mr V Enterprise requests (owner): orders from the Buy page ===== */
 const ORD={fil:'open',q:'',pick:{},seen:null,note:null};
-const ORDTIER={e:'starter',p:'plus'},ORDNAME={e:'Enterprise',p:'Enterprise+'},ORDMETH={envelope:'Envelope',cash:'Cash in person',debit:'Debit card',card:'Card (secure link)'};
+const ORDTIER={e:'starter',p:'plus'},ORDNAME={e:'Enterprise Starter',p:'Enterprise+'},ORDMETH={envelope:'Envelope',cash:'Cash in person',debit:'Debit card',card:'Card (secure link)'};
 Object.assign(TABICON,{ordreq:'gift'});Object.assign(TABNAME,{ordreq:'Mr V Enterprise requests'});
 const _ordTabs=tabsDef;
 tabsDef=function(){const t=_ordTabs();if(ME&&ME.role==='owner'&&!t.includes('ordreq'))t.splice(1,0,'ordreq');return t};
 const _ordAllowed=allowed;
 allowed=function(id){if(ME&&ME.role==='owner'&&id==='ordreq')return true;return _ordAllowed(id)};
 const ordList=()=>Object.entries(C.orders||{}).filter(([k,o])=>o&&o.plan&&o.ts).map(([k,o])=>Object.assign({id:k},o)).sort((a,b)=>b.ts-a.ts);
+const ordArr=a=>a==='morning'?'Morning 8:16-9:45 AM':a==='lunch'?'Lunch':/^p\d$/.test(a||'')?'Period '+a.slice(1):'';
 const ordByIp=k=>ordList().filter(o=>o.ipk===k);
 const ordMoney=n=>'$'+(+n).toFixed(2);
 const ordStatus=o=>({pending:['Waiting for payment','wait'],sent:['Buyer says payment sent','sent'],given:['Subscription given','done'],cancelled:['Cancelled','no']})[o.state]||['Waiting','wait'];
@@ -11742,7 +11797,7 @@ function renderOrdReq(force){
     const w=ordWho(o),st=ordStatus(o),fin=o.state==='given'||o.state==='cancelled',tier=ORDTIER[o.plan];
     const sel=ORD.pick[o.id]||w.id;
     return '<div class="orc '+st[1]+'" data-oid="'+esc(o.id)+'"><div class="orh"><div class="orwho">'+(w.id?avHTML(w.id,w.name,44):'<span class="orav" aria-hidden="true">?</span>')+'<div><b>'+esc(w.name)+'</b><small>'+(w.known?'Logged in account':'Guest: not logged in')+' · '+esc(o.id)+(o.ipm?' · IP '+esc(o.ipm):'')+'</small></div></div><span class="orst '+st[1]+'">'+st[0]+'</span></div>'+
-     '<div class="orgrid"><div><small>Plan</small><b class="orp '+(o.plan==='p'?'plus':'')+'">'+(o.plan==='p'?'👑 ':'⭐ ')+ORDNAME[o.plan]+'</b></div><div><small>Length</small><b>'+o.days+' days</b></div><div><small>Price</small><b>'+ordMoney(o.total)+'</b></div><div><small>Pays by</small><b>'+esc(ORDMETH[o.method]||o.method||'')+'</b></div><div><small>Sent</small><b>'+ago(o.ts)+'</b></div></div>'+
+     '<div class="orgrid"><div><small>Plan</small><b class="orp '+(o.plan==='p'?'plus':'')+'">'+(o.plan==='p'?'👑 ':'⭐ ')+ORDNAME[o.plan]+'</b></div><div><small>Length</small><b>'+o.days+' days</b></div><div><small>Price</small><b>'+ordMoney(o.total)+'</b></div><div><small>Pays by</small><b>'+esc(ORDMETH[o.method]||o.method||'')+'</b></div><div><small>Sent</small><b>'+ago(o.ts)+'</b></div>'+(o.arrive?'<div><small>Arrives</small><b>'+esc(ordArr(o.arrive))+'</b></div>':'')+(o.promo?'<div><small>Promo</small><b>'+o.promo+'% off (was '+ordMoney(o.orig||o.total)+')</b></div>':'')+'</div>'+(o.note?'<p class="note" style="margin:10px 0 0"><b>Note:</b> '+esc(o.note)+'</p>':'')+
      (o.state==='given'?'<p class="note" style="margin:10px 0 0">Given '+ago(o.at||o.ts)+' to <b>'+esc(sName(o.sid)||w.name)+'</b>.</p>':o.state==='cancelled'?'<p class="note" style="margin:10px 0 0">Cancelled '+ago(o.at||o.ts)+'. Nothing was given.</p>':
        (w.known?'':'<div class="orpick"><label class="lab" for="orsel-'+esc(o.id)+'">Which account gets it?</label><select class="field" id="orsel-'+esc(o.id)+'" data-orsel="'+esc(o.id)+'"><option value="">Pick a student account…</option>'+studs.map(([i,s])=>'<option value="'+esc(i)+'"'+(sel===i?' selected':'')+'>'+esc(s.name)+(s.period?' (P'+s.period+')':'')+'</option>').join('')+'</select></div>')+
        '<div class="orbtn"><button class="btn primary" data-ogive="'+esc(o.id)+'">'+ic('gift')+' Give subscription now</button><button class="btn light" data-ocancel="'+esc(o.id)+'">'+ic('x')+' Cancel</button></div>')+
@@ -11755,7 +11810,7 @@ function renderOrdReq(force){
    '<div class="box orbar"><div class="pchips" style="margin:0">'+chip('open','Needs action',open.length)+chip('given','Given',given.length)+chip('cancelled','Cancelled',can.length)+chip('all','All',L.length)+'</div><div class="orsearch"><input class="field" id="orq" placeholder="Search name or order code…" value="'+esc(ORD.q)+'" autocomplete="off" aria-label="Search orders"></div></div>'+
    (rows.length?'<div class="orlist">'+rows.map(card).join('')+'</div>':'<div class="box orempty"><div class="orbig" aria-hidden="true">'+ic('gift')+'</div><h3>'+(ORD.fil==='open'?'No requests right now':'Nothing here')+'</h3><p class="note" style="margin:0">'+(ORD.fil==='open'?'When someone orders from the Buy page, it shows up here right away.':'Orders will be listed here.')+'</p></div>')+
    ipBox(L)+
-   '<div class="box orlinkbox"><h3 style="margin:0 0 4px">'+ic('key')+' Card payments</h3><p class="note" style="margin:0 0 10px">The buy page never takes card numbers itself. Paste a secure payment link from Stripe, Square or PayPal and buyers can pay by card there. Leave it empty to turn card payments off.</p><div class="orlinkrow"><input class="field" id="orlink" placeholder="https://buy.stripe.com/…" value="'+esc((C.cls&&C.cls.paylink)||'')+'" autocomplete="off" aria-label="Card payment link"><button class="btn primary" id="orlinksave">Save link</button></div><p class="note" style="margin:8px 0 0">'+((C.cls&&C.cls.paylink)?'Card payments are <b>on</b>.':'Card payments are <b>off</b>.')+' For card orders, check your payment dashboard before you press Give subscription now.</p></div>'+
+   '<div class="box orlinkbox"><h3 style="margin:0 0 4px">'+ic('lock')+' Payments</h3><p class="note" style="margin:0">Buyers can pay by <b>envelope</b> or <b>cash in person</b>. Online debit and credit card payments are turned off on the buy page. Check the envelope or cash before you press Give subscription now.</p></div>'+
    '<div class="xpbtns" style="margin:16px 0 0"><a class="btn light" href="/enterprise" target="_blank" rel="noopener">'+ic('link')+' Open the buy page</a>'+(given.length+can.length?'<button class="btn light" id="orclear">'+ic('trash')+' Clear finished orders</button>':'')+'</div>';
   if(box.dataset.sig===h)return;box.dataset.sig=h;box.innerHTML=h;
 }
@@ -11831,6 +11886,238 @@ function ordWatch(){
   }
 }
 setInterval(()=>{try{ordWatch()}catch(e){}},3000);
+
+/* ===== v11 · Daily Agenda tab + Universal 7th grade teachers ===== */
+const UNIV0={'mrs-harris':'Mrs. Harris','mrs-trucios':'Mrs. Trucios','mr-morris':'Mr. Morris'};
+Object.keys(UNIV0).forEach(id=>{TEACHER_BASE[id]={name:UNIV0[id],per:[]}});
+try{syncTeachers()}catch(e){}
+const UNIVTXT='Universal 7th Grade Teacher',UNIVSUB='Part of the 7th Blue Team (not the 7th Science Blue Team). Teaches a different subject.';
+const AGSUBJ=[['english','English','book','#2563eb'],['social','American History / Social Studies','globe','#b45309'],['math','Math','chart','#7c3aed'],['science','Science','flask','#16a34a']];
+const UPERMS=[['study','Practice & Study'],['dates','Dates'],['periods','Periods'],['presentations','Presentations'],['ai','AI Helper'],['calc','Calculating'],['coins','Currency'],['gameroom','Game Room'],['classes','All Students & Teachers'],['join','Join Classroom'],['jgame','Join Game'],['sub','Mr.V Enterprise'],['chat','Chat']];
+Object.assign(TABICON,{agenda:'calendar',chat:'chat'});Object.assign(TABNAME,{agenda:'Daily Agenda',chat:'Chat with Mr V'});
+const univ=id=>{const o=(C.teachers||{})[id];return o&&typeof o.univ==='boolean'?o.univ:!!UNIV0[id]};
+const uperm=id=>{const o=(C.teachers||{})[id];return o&&Array.isArray(o.perm)?o.perm:[]};
+const usubj=id=>{const o=(C.teachers||{})[id];return o&&Array.isArray(o.subj)?o.subj:AGSUBJ.map(s=>s[0])};
+function UTCH(){try{return !!ME&&ME.role==="teacher"&&univ(ME.id)}catch(e){return false}}
+
+/* tabs */
+const _agTabs=tabsDef;
+tabsDef=function(){
+  const t=_agTabs();if(!ME)return t;
+  if(ME.role==='owner'){const i=t.indexOf('ordreq');t.splice(i>=0?i+1:1,0,'agenda','chat');return t}
+  if(!t.includes('dates'))return t;
+  t.splice(t.indexOf('dates')+1,0,'agenda');
+  const si=t.indexOf('sub');if(si>=0)t.splice(si+1,0,'chat');
+  if(UTCH()){
+    const ok=new Set(['home','agenda','notifs','settings','profile',...uperm(ME.id)]);
+    const r=[];t.filter(x=>x==='|'||ok.has(x)).forEach(x=>{if(x==='|'&&(!r.length||r[r.length-1]==='|'))return;r.push(x)});
+    if(r[r.length-1]==='|')r.pop();return r;
+  }
+  return t;
+};
+const _agAllowed=allowed;
+allowed=function(id){
+  if(ME&&ME.role==='owner'&&(id==='agenda'||id==='chat'))return true;
+  let ok=_agAllowed(id);
+  if(ok&&ME&&UTCH())ok=['home','agenda','notifs','settings','profile'].includes(id)||uperm(ME.id).includes(id);
+  return ok;
+};
+const _agHead=renderHead;
+renderHead=function(){_agHead();if(ME&&UTCH())$('wrole').textContent=UNIVTXT};
+const _agClass=renderClass;
+renderClass=function(){_agClass();document.querySelectorAll('#pt .pcard[data-role="t"]').forEach(c=>{if(univ(c.dataset.view)){const rb=c.querySelector('.rb');if(rb){rb.textContent='Universal 7th';rb.title=UNIVTXT+'. '+UNIVSUB}}})};
+
+/* ---------- Daily Agenda ---------- */
+const AG={edit:null};
+const isoDay=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const dayLabel=s=>{const m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(s||'');if(!m)return '';return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})};
+function agCan(sub){
+  if(!ME)return false;if(ME.role==='owner')return true;
+  if(ME.role!=='teacher')return false;
+  return !UTCH()||usubj(ME.id).includes(sub);
+}
+function agLines(t){return String(t||'').split('\n').map(x=>x.trim()).filter(Boolean)}
+function renderAgenda(force){
+  const box=$('agbody');if(!box||!ME)return;
+  if(!force&&focusIn('agbody'))return;
+  const today=isoDay(new Date());
+  const card=s=>{
+    const [id,name,ico,col]=s,a=(C.agenda||{})[id],ed=AG.edit===id&&agCan(id),can=agCan(id);
+    const head='<div class="agh" style="--ac:'+col+'"><span class="agi">'+ic(ico)+'</span><div><b>'+esc(name)+'</b><small>'+(a&&a.date?(a.date===today?'Today · ':'')+esc(dayLabel(a.date)):'Nothing posted yet')+'</small></div>'+(can&&!ed?'<button class="btn light sm" data-agedit="'+id+'">'+ic('edit')+' Edit</button>':'')+'</div>';
+    if(ed){
+      const d=a||{};
+      return '<div class="box agc" data-agc="'+id+'">'+head+'<div class="agb"><label class="lab" for="agd-'+id+'">Date</label><input class="field" type="date" id="agd-'+id+'" value="'+esc(d.date||today)+'">'+
+        '<label class="lab" for="agg-'+id+'">Learning goal</label><input class="field" id="agg-'+id+'" maxlength="160" autocomplete="off" placeholder="What are we learning today?" value="'+esc(d.goal||'')+'">'+
+        '<label class="lab" for="agi-'+id+'">Today\'s agenda (one line each)</label><textarea class="field" id="agi-'+id+'" rows="6" maxlength="700" placeholder="Warm-up&#10;Lesson&#10;Practice">'+esc(d.items||'')+'</textarea>'+
+        '<label class="lab" for="agh-'+id+'">Homework</label><input class="field" id="agh-'+id+'" maxlength="200" autocomplete="off" placeholder="None" value="'+esc(d.hw||'')+'">'+
+        '<label class="lab" for="agn-'+id+'">Notes (optional)</label><input class="field" id="agn-'+id+'" maxlength="200" autocomplete="off" value="'+esc(d.notes||'')+'">'+
+        '<div class="xpbtns" style="margin:12px 0 0"><button class="btn primary" data-agsave="'+id+'">Save agenda</button><button class="btn light" data-agcancel="1">Cancel</button>'+(a?'<button class="btn light" data-agclear="'+id+'">Clear</button>':'')+'</div></div></div>';
+    }
+    if(!a||(!a.goal&&!a.items&&!a.hw&&!a.notes))return '<div class="box agc">'+head+'<div class="agb"><p class="note" style="margin:0">Nothing is posted for this class yet.'+(can?' Press Edit to add today\'s agenda.':'')+'</p></div></div>';
+    const L=agLines(a.items);
+    return '<div class="box agc">'+head+'<div class="agb">'+(a.date&&a.date!==today?'<div class="agold">Posted for '+esc(dayLabel(a.date))+', not today.</div>':'')+
+      (a.goal?'<div class="aglab">Learning goal</div><p class="agg">'+esc(a.goal)+'</p>':'')+(L.length?'<div class="aglab">Agenda</div><ol class="agl">'+L.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>':'')+
+      (a.hw?'<div class="aglab">Homework</div><p class="agp">'+esc(a.hw)+'</p>':'')+(a.notes?'<div class="aglab">Notes</div><p class="agp">'+esc(a.notes)+'</p>':'')+
+      '<small class="agby">Updated '+ago(a.ts||0)+(a.by?' by '+esc(a.by):'')+'</small></div></div>';
+  };
+  const ut=Object.keys(TEACHERS).filter(univ).map(i=>TEACHERS[i].name);
+  box.innerHTML='<div class="aggrid">'+AGSUBJ.map(card).join('')+'</div>'+
+    (ut.length?'<div class="box agleg"><b>'+ic('users')+' '+UNIVTXT+'s</b><p class="note" style="margin:6px 0 0">'+esc(ut.join(', '))+'. '+UNIVSUB+' They can post the Daily Agenda.</p></div>':'');
+}
+document.addEventListener('click',async e=>{
+  let b;if(!ME)return;
+  if(b=e.target.closest('[data-agedit]')){AG.edit=b.dataset.agedit;sfx('open');renderAgenda(true);return}
+  if(e.target.closest('[data-agcancel]')){AG.edit=null;renderAgenda(true);return}
+  if(b=e.target.closest('[data-agclear]')){const id=b.dataset.agclear;if(!agCan(id))return;askConfirm('Clear this agenda?','Removes everything posted for '+(AGSUBJ.find(s=>s[0]===id)||[])[1]+'.',async()=>{await put('agenda',id,{date:'',goal:'',items:'',hw:'',notes:'',by:ME.name,ts:Date.now()});AG.edit=null;renderAgenda(true);pushToast('Agenda cleared.','🧹',2500)});return}
+  if(b=e.target.closest('[data-agsave]')){
+    const id=b.dataset.agsave;if(!agCan(id)){flash('You can not edit this agenda.');return}
+    const v=k=>($(k+'-'+id).value||'').trim();
+    const data={date:v('agd')||isoDay(new Date()),goal:v('agg'),items:v('agi'),hw:v('agh'),notes:v('agn'),by:ME.name,ts:Date.now()};
+    act('agsave'+id,async()=>{if(await put('agenda',id,data)){AG.edit=null;sfx('success');renderAgenda(true);pushToast('Agenda saved for <b>'+esc((AGSUBJ.find(s=>s[0]===id)||[])[1])+'</b>.','📅',3000)}});return}
+});
+
+/* ---------- owner: who is what, and what they can open ---------- */
+(function(){
+  const s=$('osec-teachers');if(!s)return;
+  const d=document.createElement('details');d.className='box ownsec';d.id='osec-tacc';
+  d.innerHTML='<summary>'+ic('shield')+'<b>Teacher roles and access</b><span class="chev" aria-hidden="true"></span></summary><div class="osb"><p class="note" style="margin:0 0 12px">Universal 7th grade teachers can log in and only edit the <b>Daily Agenda</b>. Unlock more tabs for them here, or make them a full teacher. Changes save right away.</p><div id="otacc"></div></div>';
+  s.after(d);
+  const nb=document.querySelector('#ownnav [data-oj="teachers"]');if(nb){const c=nb.cloneNode(true);c.dataset.oj='tacc';c.textContent='Teacher access';nb.after(c)}
+})();
+function ownTacc(){
+  const host=$('otacc');if(!host||focusIn('otacc'))return;
+  const ids=Object.keys(TEACHERS),sg=JSON.stringify(ids.map(i=>[i,TEACHERS[i].name,univ(i),uperm(i),usubj(i)]));
+  if(!sigSet('tacc',sg))return;
+  host.innerHTML=ids.map(id=>{
+    const u=univ(id),locked=id==='mr-v';
+    return '<div class="tacc" data-tacc="'+esc(id)+'"><div class="who">'+avHTML(id,TEACHERS[id].name,38)+'<div><b>'+esc(TEACHERS[id].name)+'</b><small>'+(u?UNIVTXT+' · 7th Blue Team, not 7th Science Blue Team':'Full teacher')+'</small></div></div>'+
+     (locked?'<p class="note" style="margin:8px 0 0">Mr. V always has full access.</p>':
+      '<label class="lab">Role</label><select class="field" data-taty="'+esc(id)+'"><option value="full"'+(u?'':' selected')+'>Full teacher (all teacher tabs)</option><option value="univ"'+(u?' selected':'')+'>'+UNIVTXT+' (Daily Agenda only)</option></select>'+
+      (u?'<div class="lab">Agenda subjects they can edit</div><div class="pcbs">'+AGSUBJ.map(x=>'<label class="pcb"><input type="checkbox" data-tasu="'+esc(id)+'" value="'+x[0]+'"'+(usubj(id).includes(x[0])?' checked':'')+'><span>'+esc(x[1])+'</span></label>').join('')+'</div>'+
+        '<div class="lab">Extra tabs you unlock for them</div><div class="pcbs">'+UPERMS.map(x=>'<label class="pcb"><input type="checkbox" data-tape="'+esc(id)+'" value="'+x[0]+'"'+(uperm(id).includes(x[0])?' checked':'')+'><span>'+esc(x[1])+'</span></label>').join('')+'</div>':''))+'</div>';
+  }).join('');
+}
+const _agOwnRef=ownerRefresh;
+ownerRefresh=function(){_agOwnRef();try{ownTacc()}catch(e){}};
+async function taccSave(id,patch){
+  const ok=await put('teachers',id,Object.assign({},(C.teachers||{})[id]||{},patch,{ts:Date.now()}));
+  if(ok){ownSig.tacc='';sfx('success');pushToast('Saved access for <b>'+esc(TEACHERS[id]?TEACHERS[id].name:'teacher')+'</b>.','✅',2500)}
+}
+document.addEventListener('change',e=>{
+  if(!OWN())return;const t=e.target;
+  if(t.dataset&&t.dataset.taty){taccSave(t.dataset.taty,{univ:t.value==='univ'});return}
+  if(t.dataset&&t.dataset.tasu){const id=t.dataset.tasu,v=[...document.querySelectorAll('[data-tasu="'+id+'"]')].filter(x=>x.checked).map(x=>x.value);if(!v.length){t.checked=true;flash('Pick at least one subject.');sfx('error');return}taccSave(id,{subj:v});return}
+  if(t.dataset&&t.dataset.tape){const id=t.dataset.tape;taccSave(id,{perm:[...document.querySelectorAll('[data-tape="'+id+'"]')].filter(x=>x.checked).map(x=>x.value)})}
+});
+
+/* ===== v11 · Chat with Mr V (for people who bought or ordered Mr V Enterprise) ===== */
+const OCH={sel:'',last:0,key:'',base:null,sendT:0};
+const ocKey=s=>'oc:'+s;
+const ocMe=()=>ME?(ME.role==='owner'?'owner':ME.id):'';
+const ocStaff=()=>!!ME&&(ME.role==='owner'||(ME.role==='teacher'&&!UTCH()));
+const ocGlobalOn=()=>!(C.cls&&C.cls.ordchat===false);
+const ocStuOn=s=>ocGlobalOn()&&!((C.cls&&C.cls.chatoff)||{})[s];
+const ocEligible=s=>!!s&&(ordList().some(o=>o.sid===s)||tierOf(s)!=='none');
+const ocThread=s=>Object.entries(C.chat||{}).filter(([i,m])=>m&&m.t===ocKey(s)).map(([i,m])=>Object.assign({id:i},m)).sort((a,b)=>a.ts-b.ts);
+const ocSeenKey=()=>'v_ocseen_'+ocMe();
+function ocSeen(){try{return JSON.parse(localStorage.getItem(ocSeenKey())||'{}')}catch(e){return{}}}
+function ocMark(s,ts){const x=ocSeen();if((x[s]||0)>=ts)return;x[s]=ts;try{localStorage.setItem(ocSeenKey(),JSON.stringify(x))}catch(e){}}
+function ocUnread(s){const seen=ocSeen()[s]||0;return ocThread(s).filter(m=>(ocStaff()?!m.staff:m.staff)&&m.ts>seen).length}
+function ocStudents(){
+  const set=new Set();ordList().forEach(o=>{if(o.sid)set.add(o.sid)});
+  Object.values(C.chat||{}).forEach(m=>{if(m&&m.t&&m.t.indexOf('oc:')===0)set.add(m.t.slice(3))});
+  return [...set].filter(s=>allStudents()[s]).map(s=>({id:s,name:sName(s),last:(ocThread(s).slice(-1)[0]||{}).ts||0,un:ocUnread(s)})).sort((a,b)=>b.un-a.un||b.last-a.last||a.name.localeCompare(b.name));
+}
+function ocBubbles(s){
+  const L=ocThread(s),mine=m=>ocStaff()?!!m.staff:!m.staff;
+  return L.length?L.map(m=>'<div class="ocm'+(mine(m)?' me':'')+'"><div class="ocb">'+esc(m.text||'')+'</div><small>'+(m.staff?esc(m.fromName||'Mr. V'):esc(short(sName(s))))+' · '+ago(m.ts)+'</small></div>').join(''):'<p class="note" style="text-align:center;margin:30px 0">No messages yet. Say hi!</p>';
+}
+function ocBox(s,canSend,why){
+  return '<div class="ocmsgs" id="ocmsgs" aria-live="polite">'+ocBubbles(s)+'</div>'+
+   (canSend?'<div class="ocin"><input class="field" id="ocin" maxlength="300" autocomplete="off" placeholder="Type a message…" aria-label="Message"><button class="btn primary" id="ocsend">'+ic('send')+' Send</button></div>':'<div class="ocoff">'+ic('lock')+' '+esc(why)+'</div>');
+}
+function renderOChat(force){
+  const root=$('ocbody');if(!root||!ME)return;
+  const staff=ocStaff();
+  let sel=staff?OCH.sel:ME.id;
+  if(staff){const L=ocStudents();if(!sel||!L.some(x=>x.id===sel))sel=OCH.sel=(L[0]&&L[0].id)||'';}
+  const mode=(staff?'s':'u')+'|'+sel+'|'+ocGlobalOn()+'|'+(sel&&ocStuOn(sel))+'|'+(sel&&ocEligible(sel));
+  const msgs=$('ocmsgs');
+  if(!force&&msgs&&root.dataset.key===mode){
+    const h=ocBubbles(sel),near=msgs.scrollHeight-msgs.scrollTop-msgs.clientHeight<80;
+    if(msgs.dataset.h!==h){msgs.innerHTML=h;msgs.dataset.h=h;if(near)msgs.scrollTop=msgs.scrollHeight}
+    if(staff)ocList();
+    ocSeenNow(sel);return;
+  }
+  if(!force&&focusIn('ocbody'))return;
+  root.dataset.key=mode;
+  if(!staff){
+    let ok=true,why='';
+    if(!ocEligible(sel)){ok=false;why='Chat opens after you place a Mr V Enterprise order.'}
+    else if(!ocStuOn(sel)){ok=false;why='Chat is turned off by Mr V right now. You can still read old messages.'}
+    root.innerHTML='<div class="box occ"><div class="ochd"><div class="ocav">'+ic('chat')+'</div><div><b>Mr V</b><small>Questions about your Mr V Enterprise order</small></div></div>'+(ocEligible(sel)||ocThread(sel).length?ocBox(sel,ok,why):'<div class="orempty" style="padding:30px"><div class="orbig" aria-hidden="true">'+ic('gift')+'</div><h3>No order yet</h3><p class="note" style="margin:0 0 12px">Chat opens after you place a Mr V Enterprise order.</p><a class="btn primary" href="/enterprise">Buy Mr V Enterprise</a></div>')+'</div>';
+  }else{
+    const g=ocGlobalOn();
+    root.innerHTML='<div class="box ocbar"><label class="sw" style="margin:0"><input type="checkbox" id="ocglobal"'+(g?' checked':'')+(OWN()?'':' disabled')+'><i></i><span>Students can chat with me'+(OWN()?'':' (only the owner can change this)')+'</span></label></div>'+
+     '<div class="ocgrid"><div class="box ocside"><div class="h4" style="margin-top:0">Conversations</div><div id="oclist"></div></div><div class="box occ" id="occ">'+(sel?
+       '<div class="ochd"><div class="ocav">'+avHTML(sel,sName(sel),40)+'</div><div><b>'+esc(sName(sel))+'</b><small>'+(ocEligible(sel)?'Has a Mr V Enterprise order or plan':'No order yet')+'</small></div>'+(OWN()?'<label class="sw" style="margin:0 0 0 auto"><input type="checkbox" id="ocone"'+(ocStuOn(sel)?' checked':'')+'><i></i><span>Chat on</span></label>':'')+'</div>'+ocBox(sel,true,''):
+       '<div class="orempty" style="padding:30px"><h3>No conversations yet</h3><p class="note" style="margin:0">When someone orders, they can message you here.</p></div>')+'</div></div>';
+    ocList();
+  }
+  const m=$('ocmsgs');if(m){m.dataset.h=ocBubbles(sel);m.scrollTop=m.scrollHeight}
+  ocSeenNow(sel);
+}
+function ocList(){
+  const el=$('oclist');if(!el)return;
+  const h=ocStudents().map(x=>'<button class="ocrow'+(x.id===OCH.sel?' on':'')+'" data-ocpick="'+esc(x.id)+'">'+avHTML(x.id,x.name,32)+'<span><b>'+esc(short(x.name))+'</b><small>'+(x.last?ago(x.last):'No messages')+'</small></span>'+(x.un?'<i class="cbadge">'+x.un+'</i>':'')+'</button>').join('')||'<p class="note" style="margin:0">Nobody yet.</p>';
+  if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}
+}
+function ocSeenNow(s){
+  if(!s||curTab!=='chat')return;const L=ocThread(s);if(L.length)ocMark(s,L[L.length-1].ts);
+}
+async function ocSend(){
+  const inp=$('ocin');if(!inp||!ME)return;const txt=(inp.value||'').trim().slice(0,300);if(!txt)return;
+  const s=ocStaff()?OCH.sel:ME.id;if(!s)return;
+  if(!ocStaff()&&!(ocEligible(s)&&ocStuOn(s))){flash('Chat is turned off right now.');sfx('error');return}
+  if(Date.now()-OCH.sendT<900){flash('Slow down a little.');return}OCH.sendT=Date.now();
+  const staff=ocStaff(),ok=await putSilent('chat','o'+rid(),{t:ocKey(s),from:ocMe(),staff,fromName:staff?(ME.role==='owner'?'Mr. V':ME.name):'',text:txt,ts:Date.now(),react:{}});
+  if(ok){inp.value='';sfx('send');renderOChat();const m=$('ocmsgs');if(m)m.scrollTop=m.scrollHeight;
+    if(staff){try{await notify(s,'sent you a chat message.','Mr. V',true)}catch(e){}}}
+  else flash('Your message could not be saved.');
+}
+async function ocSetCls(patch){
+  const ok=await put('cls','',Object.assign({},C.cls,patch));if(ok){sfx('pop');renderOChat(true)}
+}
+document.addEventListener('click',e=>{
+  if(!ME)return;let b;
+  if(e.target.closest('#ocsend')){ocSend();return}
+  if(b=e.target.closest('[data-ocpick]')){OCH.sel=b.dataset.ocpick;renderOChat(true);return}
+  if(b=e.target.closest('[data-ochat]')){const s=b.dataset.ochat;if(!OWN())return;const off=Object.assign({},(C.cls&&C.cls.chatoff)||{});if(off[s])delete off[s];else off[s]=1;ocSetCls({chatoff:off}).then(()=>{pushToast('Chat '+(off[s]?'turned off':'turned on')+' for <b>'+esc(short(sName(s)))+'</b>.','💬',2800);ownSig&&0;box_sig()});return}
+});
+document.addEventListener('change',e=>{
+  if(!OWN())return;
+  if(e.target.id==='ocglobal'){ocSetCls({ordchat:e.target.checked});return}
+  if(e.target.id==='ocone'&&OCH.sel){const off=Object.assign({},(C.cls&&C.cls.chatoff)||{});if(e.target.checked)delete off[OCH.sel];else off[OCH.sel]=1;ocSetCls({chatoff:off})}
+});
+document.addEventListener('keydown',e=>{if(e.target.id==='ocin'&&e.key==='Enter'){e.preventDefault();ocSend()}});
+/* small button for the owner's order cards */
+function ocOrderBtn(sid){
+  if(!sid||!OWN())return '';
+  return '<button class="btn light sm" data-ochat="'+esc(sid)+'">'+ic('chat')+' Chat: '+(ocStuOn(sid)?'on':'off')+'</button>';
+}
+/* tell people when a message comes in */
+setInterval(()=>{
+  try{
+    if(!ME)return;const staff=ocStaff();
+    const L=Object.values(C.chat||{}).filter(m=>m&&m.t&&m.t.indexOf('oc:')===0&&(staff?!m.staff:m.staff&&m.t==='oc:'+ME.id));
+    if(OCH.base==null){OCH.base=Math.max(0,...L.map(m=>m.ts||0));return}
+    const fresh=L.filter(m=>m.ts>OCH.base);if(!fresh.length)return;
+    OCH.base=Math.max(...fresh.map(m=>m.ts));
+    if(curTab==='chat')return;
+    const m=fresh[fresh.length-1],who=staff?short(sName(m.t.slice(3))):(m.fromName||'Mr. V');
+    pushToast('<b>'+esc(who)+'</b> sent a chat message.','💬',5000,{hist:true});sfx('success');
+  }catch(e){}
+},3000);
 
 /* ===================== end v9 ===================== */
 $('hcoin').appendChild(coin(MAIN,'coin'));$('hvcc').appendChild(coin(GOLD,'coin','gold'));
