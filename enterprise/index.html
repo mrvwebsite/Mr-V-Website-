@@ -63,7 +63,7 @@ main{max-width:1160px;margin:0 auto;padding:6px 20px 90px}
 .stp i{width:32px;height:32px;border-radius:50%;background:var(--card);border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-weight:800;z-index:1;transition:.35s var(--ease)}
 .stp.d{color:var(--ink)} .stp.d i{background:var(--ok);border-color:var(--ok);color:#fff} .stp.d:before{background:var(--ok)}
 .stp.c{color:var(--ink)} .stp.c i{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 6px rgba(37,99,235,.18)} .stp.c:before{background:var(--ok)}
-.stp.jmp{cursor:pointer}
+.stp.go{cursor:pointer}
 
 /* ============ cards ============ */
 .panel{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px;box-shadow:var(--shadow)}
@@ -217,6 +217,57 @@ details.faq p{margin:8px 0 0;color:var(--mut)}
 @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
 .mbar{display:none}
 
+
+/* ============ v2 additions ============ */
+.pagehero{text-align:center;padding:10px 0 6px}
+.pagehero h1{font-size:clamp(2rem,6vw,3.4rem);margin:10px 0 8px}
+.pagehero p{max-width:620px;margin:0 auto 6px}
+.plans.full{max-width:980px;margin:22px auto 0}
+.plans.full .plan{padding:32px}
+.plans.full .price{font-size:3.4rem}
+.detail{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+.dleft{background:linear-gradient(160deg,var(--card),var(--blueSoft));border:1px solid var(--line);border-radius:28px;padding:30px;box-shadow:var(--shadow)}
+.dleft.plus{background:linear-gradient(160deg,var(--card),var(--goldSoft));border-color:#fcd34d}
+.dleft .top{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.dleft .bigprice{font-size:3.6rem;font-weight:900;letter-spacing:-.04em;line-height:1}
+.dleft h2{font-size:1.6rem;margin:4px 0 2px}
+.dleft ul{list-style:none;padding:0;margin:18px 0 6px}
+.dleft li{padding:8px 0 8px 32px;position:relative;border-bottom:1px dashed var(--line)}
+.dleft li:last-child{border:0}
+.dleft li:before{content:"✓";position:absolute;left:0;top:7px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:900}
+.dright{position:sticky;top:14px}
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.day{border:2px solid var(--line);background:var(--card);border-radius:16px;padding:12px 8px;text-align:center;cursor:pointer;transition:.2s var(--ease)}
+.day:hover{border-color:#93b4f5;transform:translateY(-3px)}
+.day.on{border-color:var(--blue);background:var(--blueSoft);box-shadow:0 0 0 4px rgba(37,99,235,.14)}
+.day b{display:block;font-size:1.15rem}.day small{color:var(--mut);display:block;font-size:.78rem}
+.day .p{font-weight:800;margin-top:4px}
+.slist{max-height:380px;overflow:auto;border:2px solid var(--line);border-radius:18px;margin-top:10px;background:var(--card)}
+.srow{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
+.srow:last-child{border:0}.srow:hover{background:var(--soft)}
+.srow.on{background:var(--blueSoft)}
+.srow .rd{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.srow.on .rd{border-color:var(--blue);background:var(--blue)}
+.srow.on .rd:after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.srow small{margin-left:auto;color:var(--mut)}
+.arr h3{margin:20px 0 8px;font-size:1rem}
+.arr .rec{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pbtn{position:relative;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;transition:.2s var(--ease);font-weight:800}
+.pbtn small{display:block;font-weight:500;color:var(--mut);font-size:.75rem}
+.pbtn:hover{border-color:#93b4f5;transform:translateY(-3px)}
+.pbtn.on{border-color:var(--blue);background:var(--blueSoft)}
+.pbtn.best{border-color:#f59e0b;background:var(--goldSoft)}
+.pbtn.best:before{content:"📌 RECOMMENDED";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#fff;font-size:.62rem;padding:2px 9px;border-radius:99px;white-space:nowrap;letter-spacing:.04em}
+.pbtn.busy{opacity:.8}
+.wc{font-size:.85rem;color:var(--mut);text-align:right;margin-top:4px}.wc.bad{color:var(--bad);font-weight:700}
+.opt.off .chip{background:#fecdd3;color:#9f1239}
+.why{border-left:4px solid var(--bad);background:var(--badSoft);border-radius:12px;padding:10px 14px;margin:6px 0 0;font-size:.9rem;color:var(--ink)}
+.promo-ok{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.sum .row.disc b{color:var(--ok)}
+.sum .row .was{margin-left:6px}
+@media(max-width:900px){.detail{grid-template-columns:1fr}.dright{position:static}.pgrid{grid-template-columns:repeat(2,1fr)}}
+
 /* ============ responsive + print + motion ============ */
 @media(max-width:900px){
   .shell{grid-template-columns:1fr}.side{position:static;order:-1}.plans{grid-template-columns:1fr}
@@ -242,27 +293,30 @@ details.faq p{margin:8px 0 0;color:var(--mut)}
 </header>
 <div id="conn" style="max-width:1160px;margin:0 auto;padding:0 20px"></div>
 <main id="app"></main>
-<p class="mut small" style="text-align:center;margin:-50px 0 60px">Owner? <a href="/" style="color:var(--blue2);font-weight:700">Log in on the website</a> to see requests and give subscriptions.</p>
+<p class="mut small" style="text-align:center;margin:-50px 0 60px">Owner? <a href="index.html" style="color:var(--blue2);font-weight:700">Log in on the website</a> to see requests and give subscriptions.</p>
 <div id="load" role="status" aria-label="Loading"><div class="v">V</div><b id="loadt">Loading…</b><div class="bar"><i></i></div></div>
 <div id="modal" class="modal hide" role="dialog" aria-modal="true"></div>
 <div id="toast" class="hide" role="status"></div>
 <script>
 /* =====================================================================
-   Mr V Enterprise - buy page
-   Flow: Plan > Length > Method > Details > Review > Order (pending > sent > received > claimed)
-   Card numbers are NEVER typed here. Card payments go to a secure link set by Mr V.
+   Mr V Enterprise - buy page (v2)
+   Subscription > Promo > Student > Payment > Arrival > Notes > Order
+   Card numbers are NEVER typed here. Online card payment is turned off.
    ===================================================================== */
 const PR={e:{7:.99,30:2.99,90:6.99},p:{7:1.49,30:4.99,90:11.99}};
-const NAME={e:'Enterprise',p:'Enterprise+'},ICON={e:'⭐',p:'👑'};
+const NAME={e:'Enterprise Starter',p:'Enterprise+'},ICON={e:'⭐',p:'👑'};
 const FEAT={
-  e:['All Mr V Enterprise features','Works on every device','Pick your own expiry date','Order updates in real time'],
-  p:['Everything in Enterprise','Extra Enterprise+ features','Priority claim in Mr V\'s room','Crown badge on your plan']
+  e:['All Mr V Enterprise features','Works on every device','Pick your own expiry date','Live order updates','Chat with Mr V about your order'],
+  p:['Everything in Enterprise Starter','Extra Enterprise+ features','Priority claim in Mr V\'s room','Crown badge on your plan','Chat with Mr V about your order']
 };
-const METH={envelope:'Envelope',cash:'Cash in person',card:'Card (secure link)'};
-const SLOTS=[['morning','Morning','Before first class'],['lunch','Lunch','Midday break'],['after','After school','Last bell'],['any','Any time','Mr V decides']];
-const STEPS=[['plan','Plan'],['length','Length'],['method','Pay with'],['details','Details'],['review','Review']];
+const METH={envelope:'Envelope',cash:'Cash in person',card:'Card (turned off)'};
+const STEPS=[['promo','Promo'],['student','Student'],['pay','Payment'],['arrive','Arrival'],['notes','Notes']];
+const TEACHING=[3,4,6,8,9],BEST=[1,2],MAXW=9;
+const PROMO={"80b7a9e71b75ce12": 20, "fcaa0acbda210e78": 10, "08b4a178b57facf9": 25, "4a0cd76ef249ada6": 10, "6c297c82eee014b7": 35, "8d476e75837d3469": 10, "b8a17b302fda0114": 25, "968452ced5676794": 25, "f5a84e245b297526": 20, "7c5c40a9b9766981": 10, "7eaa2563a195b2f6": 25, "e060e795a1e68abd": 10, "5a5e4bb045df503a": 25, "b450cba1b01482bd": 20, "4c2b45f3516b9860": 25, "586a7b3cd0598638": 10, "0473cd8a60cff689": 20, "d933a17625691e46": 10, "24280e8c1a1d4734": 10, "a7b5e698f4ba8ad6": 10, "ef93e3662fc8268a": 20, "dc75a23c0e4081d4": 20, "48ed5383ec81e2ef": 10, "5e40455389227a82": 10, "783378b0fd9ff475": 10, "55f20c3ce98002d9": 20, "67a4ceb43f97ea79": 10, "4ee05fb8f0294e1f": 10, "6878e0c52abf3b71": 35, "dbaae31754eb0de7": 20, "1907c395e5266ce9": 10, "9bf5dc47bbc40770": 20, "35e92760d174fa94": 10, "ebada0f5fd48b5a5": 10, "fe784c965cb63a1c": 35, "4141287f9b3393c9": 20, "a5edaae2da58c612": 35, "9a77a2643078b481": 10, "4bdf5b1503afe86c": 25, "a10e04f343537974": 20, "aa831c880bc366b1": 10, "df825a5c1ab5319e": 10, "2b1886dc2a415c4f": 10, "268e32190fa13d9c": 10, "e2cf6279c0c46f10": 10, "29eb6a22b3e5b700": 10, "88ff3f8df925cd0b": 10, "8984cf6eac841118": 25, "b6ad872cc531c5b3": 10, "71ad3482f439da6a": 10, "30608fe16fd35f91": 20, "010d99f561bda92a": 20, "106b5b2e4573f144": 25, "b65a71c8eb5e26c3": 20, "47fdf76f0870abc5": 35, "366ad246d237bf41": 10, "086ea4c7c0a8e847": 20, "84e9ee9f0749b7c1": 20, "6f4f9880237d74b4": 25, "5fe77089dd6a1ea0": 10, "18e9bf154e2acb7f": 10, "e1f5cdbc8845f96c": 10, "c5a82ac42bdfd807": 25, "0b72c052b12641e6": 20, "9d4114ead1ed2881": 20, "cc4d921c3ebfa351": 10, "475155ded511083a": 10, "0dfa1b4688c902f6": 10, "663160640552b169": 20, "24449bfaaab5f5e4": 10, "bec2203ec8098fdf": 20, "87d911c1e8d22fa9": 10, "59c944e93960f41e": 25, "129f4cdb83259dcd": 25, "07add303a37946ba": 35, "114ce980eb8e247c": 10, "9fc97b6ade02d0b0": 35, "ebc1b4ce315d671c": 35, "e2fc63b9793baff6": 10, "5d6ca6b8ccd3f98b": 20, "492ba00865c383a8": 10, "4ed660253fac8752": 25, "7fcaf419d1ad0919": 25, "e60862dffcea2146": 35, "3d8329244b098de4": 20, "f28351c72c26e7a0": 10, "72e42cbed56cff73": 20, "e00e52f4c2b7f651": 10, "1168dffea9cb77da": 25, "3868c885efd0c132": 35, "60902eccc1741721": 20, "8d83debbbfbf5f2c": 10, "9e9fbf7c32f20c84": 10, "7e1b45e81d43bbeb": 10, "212830b32752932f": 10, "62cf87217c96a3fa": 25, "35272e53a4055f03": 10, "dc9441213347a16b": 25, "83bc2201783932c5": 25, "64af17463a99a998": 20, "a85f9fcd083a8424": 10, "785ccf65c609ac35": 10, "fb5642c551974cf8": 25, "8997ea0a1f5a3562": 10, "432ae5307b87c599": 10};
+const STU=[["aaron-edwards", "Aaron Edwards", 6], ["adam-campos", "Adam Campos", 8], ["akia-bryan", "Akia Bryan", 3], ["alessandro-ponce-martinez", "Alessandro Ponce Martinez", 6], ["alyssa-ayub", "Alyssa Ayub", 3], ["anthony-repetti", "Anthony Repetti", 4], ["ariana-campos", "Ariana Campos", 8], ["ashley-gigila", "Ashley Gigila", 3], ["austin-mcnamara", "Austin McNamara", 8], ["ava-oliviera", "Ava Oliviera", 4], ["bennett-kleczka", "Bennett Kleczka", 8], ["betty-driscoll", "Betty Driscoll", 4], ["breadan-foley", "Breadan Foley", 8], ["brynn-winters", "Brynn Winters", 4], ["caitlin-maggiore", "Caitlin Maggiore", 3], ["carter-baravarian", "Carter Baravarian", 4], ["christopher-clarke", "Christopher Clarke", 6], ["christopher-lucero-sarceno", "Christopher Lucero Sarceno", 3], ["colton-hughes", "Colton Hughes", 6], ["damian-peranio", "Damian Peranio", 6], ["danie-schnipper", "Danie Schnipper", 6], ["declan-rennard", "Declan Rennard", 6], ["diego-quirogas-escobar", "Diego Quirogas Escobar", 3], ["eden-peral-fieseler", "Eden Peral Fieseler", 8], ["elizabeth-arana", "Elizabeth Arana", 8], ["elizabeth-ho", "Elizabeth Ho", 4], ["ella-negreira", "Ella Negreira", 4], ["emily-quevara-cruz", "Emily Guevara Cruz", 3], ["emma-buckely", "Emma Buckley", 4], ["ethan-turner", "Ethan Turner", 8], ["finn-borg", "Finn Borg", 4], ["francesca-lanzetta", "Francesca Lanzetta", 6], ["frank-ofrias", "Frank Ofrias", 4], ["genesis-ventura", "Genesis Ventura", 8], ["gianluca-gesmundo", "Gianluca Gesmundo", 3], ["giuliana-lanzetta", "Giuliana Lanzetta", 8], ["giuliana-sangimino", "Giuliana Sangimino", 8], ["grace-park", "Grace Park", 6], ["hailey-zak", "Hailey Zak", 8], ["hansel-fuentess-murillo", "Hansel Fuentes Murillo", 4], ["hunter-allstadt", "Hunter Allstadt", 4], ["isabella-molina-narvaes", "Isabella Molina-Narvaes", 6], ["isabelle-minkoff", "Isabelle Minkoff", 6], ["jace-rowe", "Jace Rowe", 6], ["jack-mitola", "Jack Mitola", 6], ["jackson-liskow", "Jackson Liskow", 3], ["jacqueline-paz", "Jacqueline Paz", 6], ["jenna-brenseke", "Jenna Brenseke", 4], ["jeremy-cruz", "Jeremy Cruz", 6], ["jolie-roman", "Jolie Roman", 3], ["joseph-demarco", "Joseph DeMarco", 3], ["joshua-flores-padilla", "Joshua Flores Padilla", 6], ["juila-petrone", "Julia Petrone", 6], ["juliana-dos-santos", "Juliana Dos Santos", 6], ["juliana-reciniello", "Juliana Reciniello", 3], ["kaia-trombetta", "Kaia Trombetta", 4], ["kendrick-scott", "Kendrick Scott", 8], ["kent-bianco", "Kent Bianco", 3], ["khadija-alvi", "Khadija Alvi", 8], ["kiera-florio", "Kiera Florio", 3], ["kyla-ashcroff", "Kyla Ashcroff", 6], ["leo-johnson", "Leo Johnson", 6], ["liam-vivas-colman", "Liam Vivas-Colman", 4], ["luca-kaminsky", "Luca Kaminsky", 8], ["lucas-yabut", "Lucas Yabut", 8], ["luke-caviedes", "Luke Caviedes", 6], ["macky-robert", "Macky Robert", 4], ["madison-roseto", "Madison Roseto", 4], ["makayla-bickoff", "Makayla Bickoff", 8], ["mariah-fardette", "Mariah Fardette", 8], ["massimo-kazandjilan", "Massimo Kazandjian", 8], ["melanie-fardette", "Melanie Fardette", 6], ["melany-guevara-cruz", "Melany Guevara Cruz", 6], ["meybelin-saravia-garcia", "Meybelin Saravia Garcia", 8], ["mikayla-zito", "Mikayla Zito", 8], ["oliva-portugal", "Olivia Portugal", 8], ["peter-grimaldi", "Peter Grimaldi", 8], ["phoenix-callway", "Phoenix Callway", 3], ["rebecca-station", "Rebecca Station", 3], ["saika-dalusma", "Saika Dalusma", 6], ["sakina-shazad", "Sakina Shazad", 4], ["samuel-davis", "Samuel Davis", 4], ["sarah-pensamiento-bratti", "Sarah Pensamiento Bratti", 3], ["savannah-hardy", "Savannah Hardy", 4], ["sean-reinhardt", "Sean Reinhardt", 4], ["taylor-lawrence", "Taylor Lawrence", 3], ["tiffany-show", "Tiffany Show", 3], ["victoria-risani", "Victoria Risani", 8], ["william-gallagher", "William Gallagher", 3], ["yonatan-adaki", "Yonatan Adaki", 3], ["zoey-jung", "Zoey Jung", 3]].map(a=>({id:a[0],name:a[1],period:a[2]}));
 const $=id=>document.getElementById(id);
-const money=n=>'$'+n.toFixed(2);
+const money=n=>'$'+(+n).toFixed(2);
+const r2=n=>Math.round(n*100)/100;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ls={
   g(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},
@@ -271,14 +325,12 @@ const ls={
 const KEY='mrv_buy_orders',NK='mrv_buy_notif',LK='mrv_buy_last',TK='mrv_buy_theme',ORDER_COOL=5,SITE='vandernoth.com';
 const SESS=(()=>{try{return JSON.parse(localStorage.getItem('mrv_sess'))}catch(e){return null}})();
 const SID=SESS&&SESS.role==='student'?SESS.id:'';
-let FB='',PAYLINK='';
+let FB='',FBERR='';
 
 /* ---------- firebase (REST) ---------- */
-let FBERR='';
 async function fbConnect(){
-  FB='';FBERR='';
-  let url='';
-  for(const u of ["firebase.txt","/firebase.txt","../firebase.txt",'https://vandernoth.com/firebase.txt']){
+  FB='';FBERR='';let url='';
+  for(const u of ['firebase.txt','/firebase.txt','../firebase.txt']){
     try{const r=await fetch(u+'?'+Date.now(),{cache:'no-store'});if(!r.ok)continue;const x=(await r.text()).trim().split(/\s+/)[0];if(/^https?:\/\/\S+$/.test(x)&&!/YOUR/i.test(x)){url=x.replace(/\/+$/,'');break}}catch(e){}
   }
   if(!url){FBERR='nofile';return}
@@ -286,53 +338,71 @@ async function fbConnect(){
     const r=await fetch(url+'/cls.json',{cache:'no-store'});
     if(r.status===401||r.status===403){FBERR='perm';return}
     if(!r.ok){FBERR='http'+r.status;return}
-    const c=await r.json();FB=url;
-    if(c&&/^https:\/\/\S+$/.test(c.paylink||''))PAYLINK=c.paylink;
-    /* a write test: orders must be writable too, or requests would never reach Mr V */
+    FB=url;
     const w=await fetch(url+'/orders/_ping.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:'{"t":'+Date.now()+'}'});
     if(!w.ok){FB='';FBERR=(w.status===401||w.status===403)?'perm':'http'+w.status;return}
     fetch(url+'/orders/_ping.json',{method:'DELETE'}).catch(()=>{});
+    /* students added after the roster was built */
+    fetch(url+'/students.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
+      if(!d||typeof d!=='object')return;
+      Object.entries(d).forEach(([id,o])=>{if(o&&o.name&&!STU.some(s=>s.id===id))STU.push({id,name:String(o.name),period:o.period||''})});
+      STU.sort((a,b)=>a.name.localeCompare(b.name));if(view==='student')draw();
+    }).catch(()=>{});
   }catch(e){FB='';FBERR='net'}
 }
 let fbReady=fbConnect();
 const fbPut=o=>fetch(FB+'/orders/'+o.id+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).then(r=>{if(!r.ok)throw new Error('save')});
 const fbGet=id=>fetch(FB+'/orders/'+id+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():null);
-const pub=o=>({id:o.id,sid:SID,role:SID?'student':'guest',name:o.name,plan:o.plan,days:o.days,total:o.total,method:o.method,
-  slot:o.slot||'any',note:o.note||'',ipk:o.ipk||'',ipm:o.ipm||'',state:o.state==='claimed'?'given':o.state==='got'?'sent':o.state,ts:o.ts});
+const pub=o=>({id:o.id,sid:o.sid||'',role:'student',name:o.name,plan:o.plan,days:o.days,total:o.total,orig:o.orig||o.total,method:o.method,
+  arrive:o.arrive||'',note:o.note||'',promo:o.promo||0,ipk:o.ipk||'',ipm:o.ipm||'',
+  state:o.state==='claimed'?'given':o.state==='got'?'sent':o.state,ts:o.ts});
 
 /* ---------- state ---------- */
-let S={plan:'',dur:30,method:'',name:ls.g('mrv_buy_name',''),slot:'any',note:'',agree:false};
-let view='plan',cur=null,busy=false,rev=false,filt='all';
+const S0=()=>({plan:'',dur:30,promo:null,pcode:'',sid:SID,method:'',arrive:'',note:'',nonote:false});
+let S=S0();
+let view='plan',cur=null,busy=false,rev=false,filt='all',squery='';
 const orders=()=>ls.g(KEY,[]);
-/* IP fingerprint: only a scrambled hash and a masked IP (like 73.12.x.x) are saved, never the full IP */
+const code=()=>'MV-'+Math.random().toString(36).slice(2,6).toUpperCase();
+const expDate=d=>new Date(Date.now()+d*864e5).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+const base=()=>PR[S.plan][S.dur];
+const price=()=>S.promo?r2(base()*(100-S.promo.pct)/100):base();
+const monthly=(p,d)=>PR[p][d]/d*30;
+const savePct=(p,d)=>Math.round((1-monthly(p,d)/PR[p][30])*100);
+const stuName=id=>(STU.find(s=>s.id===id)||{}).name||'';
+const stuOf=id=>STU.find(s=>s.id===id);
+const words=t=>String(t).trim().split(/\s+/).filter(Boolean).length;
+function arrText(a){
+  if(a==='morning')return 'Morning (8:16–9:45 AM)';if(a==='lunch')return 'Lunch';
+  const m=/^p(\d)$/.exec(a||'');return m?'Period '+m[1]:'Not chosen';
+}
+const STATE_TXT={pending:'Pending',sent:'Sent',got:'Received',claimed:'Claimed',cancelled:'Cancelled'};
+const STATE_CLS={pending:'',sent:'s',got:'s',claimed:'c',cancelled:'x'};
+async function sha16(s){
+  const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+  return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,16);
+}
+const promoKey=c=>sha16('mrv-promo|'+String(c).toUpperCase().replace(/[^A-Z0-9-]/g,''));
+
+/* ---------- IP fingerprint (hash + masked only) ---------- */
 async function ipInfo(){
   for(const u of ['https://api.ipify.org?format=json','https://api64.ipify.org?format=json']){
     try{const c=new AbortController();setTimeout(()=>c.abort(),3500);const r=await fetch(u,{signal:c.signal,cache:'no-store'}),j=await r.json();
       if(j&&j.ip){const ip=String(j.ip),m=/^\d+\.\d+\.\d+\.\d+$/.test(ip)?ip.split('.').slice(0,2).join('.')+'.x.x':ip.split(':').slice(0,2).join(':')+'::x';
-        const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('mrv-ip|'+ip));return{ipk:[...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,16),ipm:m}}}catch(e){}
+        return{ipk:await sha16('mrv-ip|'+ip),ipm:m}}}catch(e){}
   }
   return{ipk:'',ipm:''};
 }
-const code=()=>'MV-'+Math.random().toString(36).slice(2,6).toUpperCase();
-const expDate=d=>new Date(Date.now()+d*864e5).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
-const price=()=>PR[S.plan][S.dur];
-const monthly=(p,d)=>PR[p][d]/d*30;
-const savePct=(p,d)=>Math.round((1-monthly(p,d)/PR[p][30])*100);
-const STATE_TXT={pending:'Pending',sent:'Sent',got:'Received',claimed:'Claimed',cancelled:'Cancelled'};
-const STATE_CLS={pending:'',sent:'s',got:'s',claimed:'c',cancelled:'x'};
 
 /* ---------- the spinning V loader (on EVERYTHING) ---------- */
 function withLoad(text,fn,ms){
   if(busy)return;busy=true;
   $('loadt').textContent=text||'Loading…';$('load').classList.add('on');
-  setTimeout(()=>{
-    Promise.resolve().then(fn).catch(()=>{}).finally(()=>setTimeout(()=>{$('load').classList.remove('on');busy=false},180));
-  },ms||800);
+  setTimeout(()=>{Promise.resolve().then(fn).catch(()=>{}).finally(()=>setTimeout(()=>{$('load').classList.remove('on');busy=false},180))},ms||800);
 }
 const CD={};
 function cool(k,ms){const n=Date.now();if(CD[k]&&n-CD[k]<ms)return false;CD[k]=n;return true}
 
-/* ---------- toast, notify, confetti, copy ---------- */
+/* ---------- toast, notify, confetti, copy, theme ---------- */
 function toast(t){
   const x=$('toast');x.classList.remove('hide');x.style.animation='none';x.offsetWidth;x.style.animation='';
   x.textContent=t;clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.add('hide'),4500);
@@ -343,29 +413,26 @@ function notify(t,b){
 }
 function confetti(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  for(let i=0;i<80;i++){
-    const c=document.createElement('i');c.className='cf';
+  for(let i=0;i<80;i++){const c=document.createElement('i');c.className='cf';
     c.style.cssText='left:'+Math.random()*100+'vw;background:hsl('+Math.floor(Math.random()*360)+',85%,60%);animation-duration:'+(1.6+Math.random()*1.6)+'s;animation-delay:'+Math.random()*.4+'s';
-    document.body.appendChild(c);setTimeout(()=>c.remove(),4200);
-  }
+    document.body.appendChild(c);setTimeout(()=>c.remove(),4200)}
 }
 function copyText(t){
   const done=()=>toast('Copied '+t);
   if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done).catch(done);
   else{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()}
 }
+function setTheme(t){document.documentElement.dataset.theme=t;$('htheme').textContent=t==='dark'?'☀️':'🌙';ls.s(TK,t)}
+setTheme(ls.g(TK,matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
 
 /* ---------- connection status ---------- */
 function connMsg(){
-  return {nofile:'Mr V\'s data file (firebase.txt) was not found next to this page.',perm:'Mr V\'s database is refusing orders (permission denied). Its rules may have expired.',net:'Could not reach Mr V\'s database. Check your internet.'}[FBERR]||('Mr V\'s database answered with an error ('+FBERR+').');
+  return {nofile:'Mr V\'s data file (firebase.txt) was not found.',perm:'Mr V\'s database is refusing orders (permission denied).',net:'Could not reach Mr V\'s database. Check your internet.'}[FBERR]||('Mr V\'s database answered with an error ('+FBERR+').');
 }
 function drawConn(){
   const c=$('conn');if(!c)return;
   c.innerHTML=FB?'':'<div class="warn" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="flex:1;min-width:200px"><b>Not connected.</b> '+esc(connMsg())+' You can look around, but you can not place an order yet.</span><button class="btn sm light" id="retryc">Try again</button></div>';
 }
-/* ---------- theme ---------- */
-function setTheme(t){document.documentElement.dataset.theme=t;$('htheme').textContent=t==='dark'?'☀️':'🌙';ls.s(TK,t)}
-setTheme(ls.g(TK,matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
 
 /* ---------- modals ---------- */
 function openModal(html,wide){
@@ -387,28 +454,31 @@ function notifYes(){
 }
 function compareModal(){
   const row=(l,a,b)=>'<tr><td>'+l+'</td><td>'+a+'</td><td>'+b+'</td></tr>';
-  openModal('<h2>Compare plans</h2><table><tr><th></th><th>⭐ Enterprise</th><th>👑 Enterprise+</th></tr>'+
+  openModal('<h2>Compare plans</h2><table><tr><th></th><th>⭐ Starter</th><th>👑 Enterprise+</th></tr>'+
     row('7 days',money(PR.e[7]),money(PR.p[7]))+row('30 days <span class="chip">DEFAULT</span>',money(PR.e[30]),money(PR.p[30]))+row('90 days',money(PR.e[90]),money(PR.p[90]))+
     row('Per month at 90 days',money(monthly('e',90)),money(monthly('p',90)))+
-    row('Enterprise features','✓','✓')+row('Extra Enterprise+ features','—','✓')+row('Priority claim','—','✓')+row('Crown badge','—','✓')+
+    row('Enterprise features','✓','✓')+row('Extra Enterprise+ features','—','✓')+row('Priority claim','—','✓')+row('Crown badge','—','✓')+row('Chat with Mr V','✓','✓')+
     '</table><p class="mut small" style="margin-top:12px">You always pay once. No splitting, no automatic renewals.</p>',true);
 }
 function faqModal(){
   const q=(a,b)=>'<details class="faq"><summary>'+a+'</summary><p>'+b+'</p></details>';
   openModal('<h2>Help</h2>'+
     q('How long until I get my plan?','Usually 1 to 8 hours after Mr V gets your payment, often sooner. You can watch the status on your order page.')+
-    q('Is it risky to pay in cash or an envelope?','No. Your order has a code. Mr V matches the code to your payment and marks the order given.')+
-    q('Can I pay with a card?','Yes, when Mr V has switched it on. You pay on a secure payment page. This site never sees or stores your card number.')+
+    q('How can I pay?','Put the money in an envelope and bring it to Mr V\'s room, or hand cash to Mr V in person. Debit and credit cards are turned off.')+
+    q('Why are cards turned off?','Mr. Vandernoth turned them off for users. Paying online by debit or credit card is not authorized, and no safer method has been found yet.')+
+    q('How do promo codes work?','Type a code at the Promo step. Each code works one time and takes a percent off your price. Promo is optional.')+
+    q('Can I chat with Mr V?','Yes. Log in on '+SITE+' and open the Chat tab. Mr V can turn chat on or off.')+
     q('Can I make more than one order?','Yes. There is no limit. There is a short wait of '+ORDER_COOL+' seconds between orders.')+
-    q('What if I cancel or Mr V cancels?','Nothing is given and nothing is charged by this page. Ask Mr V about any money you already handed over.')+
-    q('How do I get updates?','Turn on notifications when asked, or open My orders any time. The page checks for updates every few seconds.')+
+    q('What if Mr V cancels?','Nothing is given. Ask Mr V about any money you already handed over.')+
     q('Where are my orders saved?','In this browser, plus a copy that Mr V can see so he can give your plan.'),true);
 }
 function receiptModal(o){
   openModal('<div class="receipt" id="rc"><h3>Mr V Enterprise</h3><div style="text-align:center">'+SITE+'</div><hr>'+
-    '<div class="r"><span>Order</span><b>'+o.id+'</b></div><div class="r"><span>Name</span><span>'+esc(o.name)+'</span></div>'+
+    '<div class="r"><span>Order</span><b>'+o.id+'</b></div><div class="r"><span>Student</span><span>'+esc(o.name)+'</span></div>'+
     '<div class="r"><span>Plan</span><span>'+NAME[o.plan]+'</span></div><div class="r"><span>Length</span><span>'+o.days+' days</span></div>'+
-    '<div class="r"><span>Pay with</span><span>'+METH[o.method]+'</span></div><div class="r"><span>Date</span><span>'+new Date(o.ts).toLocaleString()+'</span></div><hr>'+
+    '<div class="r"><span>Pay with</span><span>'+METH[o.method]+'</span></div><div class="r"><span>Arrive</span><span>'+arrText(o.arrive)+'</span></div>'+
+    '<div class="r"><span>Date</span><span>'+new Date(o.ts).toLocaleString()+'</span></div><hr>'+
+    (o.promo?'<div class="r"><span>Price</span><span>'+money(o.orig)+'</span></div><div class="r"><span>Promo</span><span>-'+o.promo+'%</span></div>':'')+
     '<div class="r"><b>Total</b><b>'+money(o.total)+'</b></div><div class="r"><span>Status</span><span>'+STATE_TXT[o.state]+'</span></div><hr>'+
     '<div style="text-align:center">Thanks for shopping with us.</div></div>'+
     '<div class="btnrow"><button class="btn light" data-copy="'+o.id+'">Copy code</button><button class="btn" id="printb">Print</button></div>');
@@ -417,25 +487,23 @@ function receiptModal(o){
 /* ---------- reusable view pieces ---------- */
 function stepper(cur){
   const i=STEPS.findIndex(s=>s[0]===cur);
-  return '<div class="stepper" aria-label="Step '+(i+1)+' of '+STEPS.length+'">'+STEPS.map((s,n)=>
+  return '<div class="stepper" aria-label="Stage '+(i+1)+' of '+STEPS.length+'">'+STEPS.map((s,n)=>
     '<div class="stp '+(n<i?'d jmp':n===i?'c':'')+'" '+(n<i?'data-jump="'+s[0]+'"':'')+'><i>'+(n<i?'✓':n+1)+'</i><span>'+s[1]+'</span></div>').join('')+'</div>';
 }
 const back=(to,l)=>'<button class="back" data-back="'+to+'">← '+l+'</button>';
-function opt(a,v,ic,t,sub,right,cls,off,on){
-  return '<button class="opt '+(cls||'')+(on?' on':'')+'" data-'+a+'="'+v+'"'+(off?' disabled':'')+'><span class="ic" aria-hidden="true">'+ic+'</span><span class="t"><b>'+t+'</b><span>'+sub+'</span></span>'+(right?'<span class="pr">'+right+'</span>':'')+'</button>';
+function opt(a,v,ic,t,sub,right,cls,off,on,why){
+  return '<button class="opt '+(cls||'')+(on?' on':'')+(off?' off':'')+'" data-'+a+'="'+v+'"'+(off?' disabled aria-disabled="true"':'')+'><span class="ic" aria-hidden="true">'+ic+'</span><span class="t"><b>'+t+'</b><span>'+sub+'</span></span>'+(right?'<span class="pr">'+right+'</span>':'')+'</button>'+(why?'<div class="why">'+why+'</div>':'');
 }
 function summary(){
-  if(!S.plan)return '<div class="panel sum"><h3>Your order</h3><p class="empty">Pick a plan to start.</p></div>';
-  const t=S.plan&&PR[S.plan][S.dur],sv=savePct(S.plan,S.dur);
+  const had=S.promo?'<span class="was">'+money(base())+'</span>':'';
   return '<div class="panel sum"><h3 style="margin-bottom:8px">Your order</h3>'+
     '<div class="row"><span>Plan</span><b>'+ICON[S.plan]+' '+NAME[S.plan]+'</b></div>'+
-    '<div class="row"><span>Length</span><b>'+(view==='plan'?'—':S.dur+' days')+'</b></div>'+
-    '<div class="row"><span>Expires</span><b>'+(view==='plan'?'—':expDate(S.dur))+'</b></div>'+
+    '<div class="row"><span>Length</span><b>'+S.dur+' days</b></div><div class="row"><span>Expires</span><b>'+expDate(S.dur)+'</b></div>'+
+    (S.promo?'<div class="row disc"><span>Promo</span><b>'+S.promo.pct+'% off</b></div>':'')+
+    '<div class="row"><span>Student</span><b>'+(S.sid?esc(stuName(S.sid)):'—')+'</b></div>'+
     '<div class="row"><span>Pay with</span><b>'+(S.method?METH[S.method]:'—')+'</b></div>'+
-    (S.method&&view!=='plan'?'<div class="row"><span>Pickup time</span><b>'+(SLOTS.find(s=>s[0]===S.slot)||SLOTS[3])[1]+'</b></div>':'')+
-    (sv>0&&view!=='plan'?'<div class="row"><span>You save</span><b class="save">'+sv+'% a month</b></div>':'')+
-    '<div class="mut small" style="margin-top:12px">One payment</div><div class="big">'+(view==='plan'?'—':money(t))+'</div>'+
-    '<p class="mut small" style="margin:6px 0 0">Prices are a single payment. No splitting.</p></div>';
+    '<div class="row"><span>Arrive</span><b>'+(S.arrive?arrText(S.arrive):'—')+'</b></div>'+
+    '<div class="mut small" style="margin-top:12px">One payment</div><div class="big">'+money(price())+had+'</div></div>';
 }
 function infoBox(){
   return '<div class="panel" style="margin-top:16px"><b>Safe and simple</b><ul class="mut small" style="margin:8px 0 0;padding-left:18px"><li>No card numbers are typed on this page.</li><li>Your order code proves your payment.</li><li>Plans are claimed in about 1 to 8 hours.</li></ul></div>';
@@ -444,68 +512,95 @@ function infoBox(){
 /* ---------- the stages ---------- */
 const V={
   plan(){
-    const card=p=>'<button class="plan '+(p==='p'?'plus':'')+'" data-plan="'+p+'"><div class="ico" aria-hidden="true">'+ICON[p]+'</div><h2>'+NAME[p]+(p==='p'?' <span class="chip g">MORE</span>':'')+'</h2>'+
+    const card=p=>'<button class="plan '+(p==='p'?'plus':'')+'" data-plan="'+p+'"><div class="ico" aria-hidden="true">'+ICON[p]+'</div><h2>Mr V '+NAME[p]+(p==='p'?' <span class="chip g">MORE</span>':'')+'</h2>'+
       '<div class="price">'+money(PR[p][30])+'<span class="mut small" style="font-weight:600"> / 30 days</span></div><div class="mut small">or '+money(PR[p][7])+' for 7 days · '+money(PR[p][90])+' for 90 days</div>'+
-      '<ul>'+FEAT[p].map(f=>'<li>'+f+'</li>').join('')+'</ul><span class="go">Choose '+NAME[p]+'</span></button>';
-    return '<div class="hero"><span class="kick">Mr V Enterprise</span><h1>Pick your subscription</h1><p class="mut">Choose a plan, then how long, then how to pay. Five easy steps.</p></div>'+stepper('plan')+
-      '<div class="plans stagger">'+card('e')+card('p')+'</div>'+
-      '<div class="btnrow"><button class="btn light" id="cmp">Compare plans side by side</button></div>';
+      '<ul>'+FEAT[p].map(f=>'<li>'+f+'</li>').join('')+'</ul><span class="go">See '+NAME[p]+'</span></button>';
+    return '<div class="pagehero"><span class="kick">Mr V Enterprise</span><h1>Choose your subscription</h1><p class="mut">Pick Enterprise Starter or Enterprise+. You choose how many days on the next page.</p></div>'+
+      '<div class="plans full stagger">'+card('e')+card('p')+'</div><div class="btnrow" style="max-width:980px;margin:16px auto 0"><button class="btn light" id="cmp">Compare plans side by side</button></div>';
   },
-  length(){
-    return back('plan','Change plan')+stepper('length')+'<div class="hero"><h1>How long?</h1><p class="mut">When should your '+NAME[S.plan]+' expire?</p></div><div class="opts stagger">'+
-      [7,30,90].map(d=>{const sv=savePct(S.plan,d);return opt('dur',d,d===7?'📅':d===30?'🗓️':'📆',d+' days'+(d===30?' <span class="chip">DEFAULT</span>':'')+(sv>0?' <span class="chip b">SAVE '+sv+'%</span>':''),'Expires '+expDate(d)+' · '+money(monthly(S.plan,d))+' a month',money(PR[S.plan][d]),S.plan==='p'?'gold':'',false,S.dur===d)}).join('')+'</div>';
+  detail(){
+    const p=S.plan,pl=p==='p';
+    const days=[7,30,90].map(d=>{const sv=savePct(p,d);return '<div class="day '+(S.dur===d?'on':'')+'" data-dur="'+d+'" tabindex="0" role="button"><b>'+d+' days'+(d===30?'':'')+'</b><small>'+(d===30?'Default':sv>0?'Save '+sv+'%':'Short')+'</small><div class="p">'+money(PR[p][d])+'</div></div>'}).join('');
+    return back('plan','All subscriptions')+'<div class="detail page-in">'+
+      '<div class="dleft '+(pl?'plus':'')+'"><span class="kick">'+(pl?'Most features':'Great start')+'</span><div class="top" style="margin-top:12px"><div class="bigprice">'+money(PR[p][S.dur])+'</div><span class="mut">for '+S.dur+' days</span></div>'+
+        '<h2>'+ICON[p]+' Mr V '+NAME[p]+'</h2><p class="mut">All the features that come with this subscription:</p><ul>'+FEAT[p].map(f=>'<li>'+f+'</li>').join('')+'</ul><p class="mut small" style="margin:10px 0 0">More features are coming soon.</p></div>'+
+      '<div class="dright"><div class="panel"><h3>Your subscription</h3>'+
+        '<div class="sum"><div class="row"><span>Name</span><b>'+ICON[p]+' '+NAME[p]+'</b></div><div class="row"><span>Subscription</span><b>Mr V Enterprise</b></div><div class="row"><span>Days</span><b>'+S.dur+' days</b></div><div class="row"><span>Expires</span><b>'+expDate(S.dur)+'</b></div></div>'+
+        '<label class="lab">How many days?</label><div class="days">'+days+'</div>'+
+        '<div class="mut small">One payment</div><div class="big">'+money(PR[p][S.dur])+'</div>'+
+        '<button class="btn '+(pl?'gold':'')+'" id="gopay" style="margin-top:16px">Continue and pay</button></div></div></div>';
   },
-  method(){
-    return back('length','Change length')+stepper('method')+'<div class="hero"><h1>How will you pay?</h1><p class="mut">One payment of <b>'+money(price())+'</b>. Pick what is easiest.</p></div><div class="opts stagger">'+
-      opt('m','envelope','✉️','Envelope <span class="chip">RECOMMENDED</span>','Put the money in an envelope and take it to Mr V\'s room.','',  '',false,S.method==='envelope')+
+  promo(){
+    const pr=S.promo;
+    return back('detail','Change subscription')+stepper('promo')+'<div class="hero"><h1>Promo code</h1><p class="mut">Optional. Have a promo code? Type it here. If not, just press Next.</p></div><div class="panel">'+
+      (pr?'<div class="good promo-ok"><span>🎉 <b>'+pr.pct+'% off</b> applied. New price <b>'+money(price())+'</b> <span class="mut">(was '+money(base())+')</span></span><button class="btn sm light" id="premove">Remove</button></div>':
+      '<label class="lab" for="pc">Promo code</label><div class="inrow"><input type="text" id="pc" maxlength="20" placeholder="MRV-XXXXXX" autocomplete="off" autocapitalize="characters" spellcheck="false" value="'+esc(S.pcode)+'"><button class="btn sm" id="papply" style="width:auto">Apply</button></div><div id="pmsg" class="small mut" style="margin-top:8px">Each code works one time.</div>')+
+      '<button class="btn" id="promonext" style="margin-top:18px">Next</button></div>';
+  },
+  student(){
+    const q=squery.trim().toLowerCase(),L=STU.filter(s=>!q||s.name.toLowerCase().includes(q));
+    return back('promo','Back to promo')+stepper('student')+'<div class="hero"><h1>What is your student name?</h1><p class="mut">Find your name in the list. Use the search box to find it fast.</p></div><div class="panel">'+
+      '<label class="lab" for="sq" style="margin-top:0">Search</label><input type="text" id="sq" placeholder="Type a name…" autocomplete="off" value="'+esc(squery)+'">'+
+      '<div class="slist" id="slist" role="radiogroup" aria-label="Student names">'+stuRows(L)+'</div>'+
+      '<button class="btn" id="stunext" style="margin-top:16px"'+(S.sid?'':' disabled')+'>Next</button></div>';
+  },
+  pay(){
+    const why='Mr. Vandernoth turned this off for users. Online debit and credit card payments are not authorized, and no safer method has been found yet.';
+    return back('student','Change student')+stepper('pay')+'<div class="hero"><h1>How are you going to pay it?</h1><p class="mut">One payment of <b>'+money(price())+'</b>.</p></div><div class="opts">'+
+      opt('m','envelope','✉️','Envelope <span class="chip">RECOMMENDED</span>','Put the money in an envelope and bring it to Mr V\'s room.','','',false,S.method==='envelope')+
       opt('m','cash','💵','Cash in person','Hand your cash straight to Mr V.','','',false,S.method==='cash')+
-      opt('m','card','💳','Credit or debit card',PAYLINK?'Pay on a secure card page. Your card info goes to the payment company, never to this site.':'Not set up yet. Ask Mr V to turn it on.','','',!PAYLINK,S.method==='card')+'</div>'+
-      '<div class="info">All three work the same: you get an order code, pay once, and Mr V gives your plan.</div>';
+      opt('x','debit','💳','Debit card <span class="chip">TURNED OFF</span>','Online debit payment is disabled.','','',true,false)+
+      opt('x','credit','💳','Credit card <span class="chip">TURNED OFF</span>','Online credit card payment is disabled.','','',true,false)+'<div class="why"><b>Why are cards turned off?</b><br>'+why+'</div></div>'+
+      '<div class="info">Envelope and cash work the same: you get an order code, pay once, and Mr V gives your plan.</div>';
   },
-  details(){
-    const m=S.method,slots=m==='card'?'':'<label class="lab">When will you hand it over?</label><div class="slots">'+SLOTS.map(s=>'<div class="slot '+(S.slot===s[0]?'on':'')+'" data-slot="'+s[0]+'" tabindex="0" role="button">'+s[1]+'<small>'+s[2]+'</small></div>').join('')+'</div>';
-    return back('method','Change payment')+stepper('details')+'<div class="hero"><h1>A few details</h1><p class="mut">So Mr V knows who the order is from.</p></div><div class="panel">'+
-      '<label class="lab" for="nm">Your name</label><input type="text" id="nm" maxlength="40" placeholder="First name and last initial" autocomplete="off" value="'+esc(S.name)+'">'+
-      (SID?'<div class="good">You are logged in on the website. Your order will be linked to your account.</div>':'<div class="info">Not logged in. That is fine, just type your name clearly.</div>')+
-      slots+'<label class="lab" for="nt">Note for Mr V <span class="mut" style="font-weight:500">(optional)</span></label><input type="text" id="nt" maxlength="80" placeholder="Anything he should know" value="'+esc(S.note)+'">'+
-      '<button class="btn" id="tonext" style="margin-top:18px">Continue to review</button></div>';
+  arrive(){
+    const mk=p=>{const t=TEACHING.includes(p),b=BEST.includes(p);return '<button class="pbtn '+(b?'best':'')+(S.arrive==='p'+p?' on':'')+'" data-arr="p'+p+'">Period '+p+'<small>'+(b?'Best time to come':t?'Mr V is teaching, not recommended':'Mr V is free')+'</small></button>'};
+    return back('pay','Change payment')+stepper('arrive')+'<div class="hero"><h1>When will you arrive?</h1><p class="mut">Pick the time you will come to Mr V\'s room.</p></div><div class="panel arr">'+
+      '<h3 style="margin-top:0">📌 Recommended</h3><div class="rec">'+BEST.map(mk).join('')+'</div>'+
+      '<h3>Before and during the day</h3><div class="rec"><button class="pbtn '+(S.arrive==='morning'?'on':'')+'" data-arr="morning">Morning<small>8:16 – 9:45 AM</small></button><button class="pbtn '+(S.arrive==='lunch'?'on':'')+'" data-arr="lunch">Lunch<small>Lunch time</small></button></div>'+
+      '<h3>Other periods</h3><div class="pgrid">'+[3,4,5,6,7,8,9].map(mk).join('')+'</div>'+
+      '<p class="mut small" style="margin:14px 0 0">Periods 3, 4, 6, 8 and 9 are when Mr V is teaching. You can still pick them, but periods 1 and 2 are best.</p></div>';
   },
-  review(){
-    const t=price(),env=Math.ceil(t);
-    return back('details','Change details')+stepper('review')+'<div class="hero"><h1>Check and pay</h1><p class="mut">Last step. Look it over.</p></div><div class="panel">'+
-      '<table><tr><td class="mut">Plan</td><td><b>'+ICON[S.plan]+' '+NAME[S.plan]+'</b></td></tr><tr><td class="mut">Length</td><td><b>'+S.dur+' days</b> (expires '+expDate(S.dur)+')</td></tr>'+
-      '<tr><td class="mut">Pay with</td><td><b>'+METH[S.method]+'</b></td></tr><tr><td class="mut">Name</td><td><b>'+esc(S.name)+'</b></td></tr>'+
-      (S.method!=='card'?'<tr><td class="mut">Hand over</td><td><b>'+(SLOTS.find(s=>s[0]===S.slot)||SLOTS[3])[1]+'</b></td></tr>':'')+(S.note?'<tr><td class="mut">Note</td><td>'+esc(S.note)+'</td></tr>':'')+'</table>'+
-      '<div class="mut small" style="margin-top:14px">Total, paid once</div><div class="big">'+money(t)+'</div>'+
-      (S.method==='envelope'?'<div class="good">Put <b>$'+env+'</b> in your envelope (rounded up to a whole dollar).</div>':S.method==='cash'?'<div class="good">Bring <b>$'+env+'</b> in cash and hand it to Mr V.</div>':'<div class="good">A secure card page opens from your order. Pay <b>'+money(t)+'</b> there.</div>')+
-      '<label class="check"><input type="checkbox" id="agree"'+(S.agree?' checked':'')+'><span>I checked my order. I understand I pay <b>once</b> and Mr V gives my plan after he gets it.</span></label>'+
+  notes(){
+    const w=words(S.note),over=w>MAXW;
+    return back('arrive','Change arrival')+stepper('notes')+'<div class="hero"><h1>Any notes or suggestions?</h1><p class="mut">Write a short note for this subscription, or choose no note needed.</p></div><div class="panel">'+
+      '<label class="lab" for="nt" style="margin-top:0">Your note (under 10 words)</label><input type="text" id="nt" maxlength="90" placeholder="Example: Please give it before lunch"'+(S.nonote?' disabled':'')+' value="'+esc(S.nonote?'':S.note)+'">'+
+      '<div class="wc '+(over?'bad':'')+'" id="wc">'+(S.nonote?'':w+' of '+MAXW+' words')+'</div>'+
+      '<label class="check"><input type="checkbox" id="nonote"'+(S.nonote?' checked':'')+'><span><b>No note needed</b><br><span class="mut small">Check this box if you do not want to write anything.</span></span></label>'+
+      '<div class="mut small" style="margin-top:6px">Total, paid once</div><div class="big">'+money(price())+(S.promo?'<span class="was">'+money(base())+'</span>':'')+'</div>'+
       '<button class="btn '+(S.plan==='p'?'gold':'')+'" id="payb" disabled>Pay Mr V Enterprise<i class="cd" id="cdbar" style="width:0"></i></button><p class="small mut" id="cdtxt" style="text-align:center;margin:10px 0 0"></p></div>';
   }
 };
+function stuRows(L){
+  return L.length?L.map(s=>'<div class="srow '+(S.sid===s.id?'on':'')+'" data-sid="'+esc(s.id)+'" role="radio" aria-checked="'+(S.sid===s.id)+'" tabindex="0"><span class="rd"></span><b>'+esc(s.name)+'</b><small>'+(s.period?'Period '+s.period:'')+'</small></div>').join(''):'<p class="empty" style="padding:20px">No names match. Check the spelling.</p>';
+}
+function noteOk(){return S.nonote||(S.note.trim()&&words(S.note)<=MAXW)}
+
 const STG=[['pending','Pending'],['sent','Sent'],['got','Received'],['claimed','Claimed']];
 function etaPct(o){
   if(o.state==='claimed')return 100;if(o.state==='cancelled')return 0;
-  const base={pending:8,sent:40,got:75}[o.state]||8,mins=(Date.now()-o.ts)/6e4;
-  return Math.min(95,Math.round(base+Math.min(20,mins/24)));
+  const b={pending:8,sent:40,got:75}[o.state]||8,mins=(Date.now()-o.ts)/6e4;
+  return Math.min(95,Math.round(b+Math.min(20,mins/24)));
 }
 function timeline(o){
-  const ev=[['Order placed',new Date(o.ts).toLocaleString(),'pending'],['You sent the payment','Press the button when you did','sent'],['Mr V received it','He is checking your code','got'],['Plan claimed','Your plan is on your account','claimed']];
+  const ev=[['Order placed',new Date(o.ts).toLocaleString()],['You sent the payment','Press the button when you did'],['Mr V received it','He is checking your code'],['Plan claimed','Your plan is on your account']];
   const cu=Math.max(0,STG.findIndex(s=>s[0]===o.state));
   return '<ul class="tl">'+ev.map((e,i)=>'<li class="'+(i<cu||o.state==='claimed'?'':i===cu?'now':'next')+'"><b>'+e[0]+'</b><small>'+e[1]+'</small></li>').join('')+'</ul>';
 }
 function order(o){
   const ok=o.state==='claimed',no=o.state==='cancelled',p=Math.ceil(o.total);
-  const how=o.method==='envelope'?'<h2>Make your envelope</h2><div class="env"><div class="fl"></div><div class="seal">V</div><div class="lab">For Mr V · Room<br><b>$'+p+'</b>'+esc(o.name)+' · '+o.id+'</div></div><ol class="steps"><li>Put <b>$'+p+'</b> in an envelope.</li><li>Write your name and <b>'+o.id+'</b> on the front.</li><li>Take it to Mr V\'s room.</li><li>Press the button below.</li></ol>':
-    o.method==='cash'?'<h2>Pay in cash</h2><ol class="steps"><li>Find Mr V and say your order code <b>'+o.id+'</b>.</li><li>Hand him <b>$'+p+'</b> in cash.</li><li>Press the button below.</li></ol>':
-    '<h2>Pay by card</h2><ol class="steps"><li>Press <b>Open card payment</b>.</li><li>Pay <b>'+money(o.total)+'</b> on the secure page. Type <b>'+o.id+'</b> in the note box if it asks.</li><li>Come back and press the button below.</li></ol>'+(PAYLINK?'<a class="btn" style="margin-bottom:10px" href="'+esc(PAYLINK)+'" target="_blank" rel="noopener">Open card payment</a>':'');
+  const how=o.method==='envelope'?'<h2>Make your envelope</h2><div class="env"><div class="fl"></div><div class="seal">V</div><div class="lab">For Mr V · Room<br><b>$'+p+'</b>'+esc(o.name)+' · '+o.id+'</div></div><ol class="steps"><li>Put <b>$'+p+'</b> in an envelope.</li><li>Write your name and <b>'+o.id+'</b> on the front.</li><li>Take it to Mr V\'s room ('+arrText(o.arrive)+').</li><li>Press the button below.</li></ol>':
+    '<h2>Pay in cash</h2><ol class="steps"><li>Find Mr V ('+arrText(o.arrive)+') and say your order code <b>'+o.id+'</b>.</li><li>Hand him <b>$'+p+'</b> in cash.</li><li>Press the button below.</li></ol>';
   return back('history','All orders')+'<div class="shell"><div><div class="pend '+(ok?'ok':no?'no':'')+'"><div class="ck" aria-hidden="true">'+(ok?'✓':no?'✕':'⏳')+'</div>'+
     '<h1 style="font-size:2rem;margin:0 0 6px">'+(ok?'Plan claimed!':no?'Order cancelled':'Payment pending')+'</h1>'+
     '<p style="margin:0"><b>'+(ok?'Enjoy '+NAME[o.plan]+'!':no?'Mr V cancelled this order. Nothing was given.':'Thanks for shopping with us.')+'</b></p>'+
     '<p class="mut small" style="margin:6px 0 0">'+ICON[o.plan]+' '+NAME[o.plan]+' · '+o.days+' days · '+money(o.total)+'</p></div>'+
     '<div class="codebox"><span class="mut small">Order code</span><b>'+o.id+'</b><button class="btn light sm" data-copy="'+o.id+'">Copy</button></div>'+
+    '<div class="panel" style="margin-top:14px"><table><tr><td class="mut">Student</td><td><b>'+esc(o.name)+'</b></td></tr><tr><td class="mut">Arrive</td><td>'+arrText(o.arrive)+'</td></tr>'+
+    (o.promo?'<tr><td class="mut">Promo</td><td>'+o.promo+'% off (was '+money(o.orig)+')</td></tr>':'')+(o.note?'<tr><td class="mut">Note</td><td>'+esc(o.note)+'</td></tr>':'')+'</table></div>'+
     (no?'':'<div class="panel" style="margin-top:14px"><b>Progress</b><div class="eta" aria-hidden="true"><i style="width:'+etaPct(o)+'%"></i></div>'+timeline(o)+
     (ok?'':'<p class="mut small" style="margin:0">Your plan is claimed about 1 to 8 hours after Mr V gets your payment, or sooner.</p>')+'</div>')+
-    (FB?'':'<div class="warn">Offline: this order is saved on this device only, so Mr V can not see it yet.</div>')+'</div>'+
+    '<div class="info">💬 Questions? Log in on <b>'+SITE+'</b> and open the <b>Chat</b> tab to talk with Mr V.</div></div>'+
     '<div class="side"><div class="panel">'+(no?'<h2>This order was cancelled</h2><p class="mut">You can order again any time.</p>':ok?'<h2>All done</h2><p class="mut">Your plan expires on <b>'+expDate(o.days)+'</b>.</p>':how+
     '<button class="btn" id="sentb" data-id="'+o.id+'"'+(o.state!=='pending'?' disabled':'')+'>'+(o.state==='pending'?'I sent my payment':'Payment marked as sent')+'</button>')+
     '<div class="btnrow"><button class="btn light" data-receipt="'+o.id+'">Receipt</button><button class="btn light" id="again">Buy another</button></div></div></div></div>';
@@ -521,25 +616,38 @@ function history(){
 }
 
 /* ---------- drawing + navigation ---------- */
-const FLOWV=['plan','length','method','details','review'];
+const FLOWV=['promo','student','pay','arrive','notes'];
 function draw(){
   drawConn();
   const flow=FLOWV.includes(view),inner=view==='order'?order(cur):view==='history'?history():V[view]();
   $('app').innerHTML='<div class="page '+(rev?'rev':'')+'">'+(flow?'<div class="shell"><div>'+inner+'</div><div class="side">'+summary()+infoBox()+'</div></div>':inner)+'</div>';
   rev=false;scrollTo(0,0);
-  if(view==='review')cdTick();
-  if(view==='details'&&$('nm')&&!S.name)$('nm').focus();
+  if(view==='notes')cdTick();
 }
-function nav(v,text,fn,bk){withLoad(text,()=>{if(fn)fn();view=v;rev=!!bk;draw()},700)}
+function nav(v,text,fn,bk,ms){withLoad(text,()=>{if(fn)fn();view=v;rev=!!bk;draw()},ms||700)}
 function cdLeft(){return Math.max(0,Math.ceil(ORDER_COOL-(Date.now()-ls.g(LK,0))/1000))}
 function cdTick(){
-  clearTimeout(cdTick.t);const b=$('payb');if(!b)return;const l=cdLeft(),ag=$('agree')&&$('agree').checked;
-  b.disabled=l>0||!ag;$('cdbar').style.width=(l>0?l/ORDER_COOL*100:0)+'%';
-  $('cdtxt').textContent=l>0?'Please wait '+l+' seconds before another order.':ag?'':'Tick the box to continue.';
+  clearTimeout(cdTick.t);const b=$('payb');if(!b)return;const l=cdLeft(),ok=noteOk();
+  b.disabled=l>0||!ok;$('cdbar').style.width=(l>0?l/ORDER_COOL*100:0)+'%';
+  $('cdtxt').textContent=l>0?'Please wait '+l+' seconds before another order.':ok?'':'Write a short note, or check "No note needed".';
   if(l>0)cdTick.t=setTimeout(cdTick,1000);
 }
 function upd(id,text,fn){const L=orders(),o=L.find(x=>x.id===id);if(!o)return;withLoad(text,async()=>{await fn(o);ls.s(KEY,L);cur=o;draw()},800)}
-function reset(){S.plan='';S.dur=30;S.method='';S.slot='any';S.note='';S.agree=false}
+function reset(){S=S0();squery=''}
+
+/* ---------- promo ---------- */
+async function applyPromo(){
+  const raw=($('pc').value||'').trim();S.pcode=raw;
+  if(!raw){$('pmsg').className='small mut';$('pmsg').textContent='Type a code first, or just press Next.';return}
+  if(!FB){fbReady=fbConnect();await fbReady;drawConn()}
+  const msg=(t,c)=>{const m=$('pmsg');if(m){m.className='small '+(c||'');m.textContent=t}};
+  if(!FB){msg('Can not check codes right now. '+connMsg(),'');$('pmsg').className='warn';return}
+  const h=await promoKey(raw),pct=PROMO[h];
+  if(!pct){$('pmsg').className='warn';$('pmsg').textContent='That code is not valid. Check it and try again.';return}
+  try{const u=await fetch(FB+'/promo/'+h+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():null);
+    if(u){$('pmsg').className='warn';$('pmsg').textContent='That code was already used.';return}}catch(e){$('pmsg').className='warn';$('pmsg').textContent='Could not check the code. Try again.';return}
+  S.promo={pct,h};S.pcode='';draw();notify('Promo applied',pct+'% off your price');
+}
 
 /* ---------- clicks ---------- */
 document.addEventListener('click',e=>{
@@ -550,30 +658,44 @@ document.addEventListener('click',e=>{
   if(b=t.closest('[data-copy]')){copyText(b.dataset.copy);return}
   if(t.id==='printb'){window.print();return}
   if(busy)return;
+  if(b=t.closest('[data-sid]')){S.sid=b.dataset.sid;document.querySelectorAll('.srow').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-checked',on)});$('stunext').disabled=false;return}
+  if(t.id==='stuyes'){if(cool('s',900)){closeModal();nav('pay','Next…')}return}
+  if(t.id==='stuno'){closeModal();return}
   if(b=t.closest('[data-receipt]')){const o=orders().find(x=>x.id===b.dataset.receipt);if(o)receiptModal(o);return}
   if(b=t.closest('[data-filt]')){filt=b.dataset.filt;draw();return}
-  if(b=t.closest('[data-plan]')){if(cool('s',900))nav('length','Next…',()=>{if(S.plan!==b.dataset.plan)S.method='';S.plan=b.dataset.plan});return}
-  if(b=t.closest('[data-dur]')){if(cool('s',900))nav('method','Next…',()=>{S.dur=+b.dataset.dur});return}
-  if(b=t.closest('[data-m]')){if(cool('s',900))nav('details','Next…',()=>{S.method=b.dataset.m});return}
-  if(b=t.closest('[data-slot]')){S.slot=b.dataset.slot;document.querySelectorAll('.slot').forEach(x=>x.classList.toggle('on',x===b));return}
+  if(b=t.closest('[data-plan]')){if(cool('s',900))nav('detail','Opening…',()=>{S.plan=b.dataset.plan});return}
+  if(b=t.closest('[data-dur]')){if(cool('d',500))withLoad('Updating…',()=>{S.dur=+b.dataset.dur;draw()},450);return}
+  if(t.id==='gopay'){if(cool('s',900))nav('promo','Next…');return}
+  if(t.id==='papply'){if(cool('pa',1200))withLoad('Checking your code…',applyPromo,900);return}
+  if(t.id==='premove'){if(cool('pa',900))withLoad('Removing…',()=>{S.promo=null;draw()},500);return}
+  if(t.id==='promonext'){if(cool('s',900))nav('student','Next…');return}
+  if(t.id==='stunext'){
+    if(!S.sid){toast('Pick your name first.');return}
+    const s=stuOf(S.sid);openModal('<div style="text-align:center"><div style="font-size:3rem">🙋</div><h2 style="margin:8px 0">Is this you?</h2><p class="big" style="font-size:1.8rem;margin:10px 0">'+esc(s?s.name:'')+'</p><p class="mut">'+(s&&s.period?'Period '+s.period+'. ':'')+'Mr V will give the subscription to this student.</p><button class="btn" id="stuyes">Yes, this is me</button><button class="btn light" id="stuno" style="margin-top:10px">No, go back</button></div>');
+    $('modal').querySelector('.x').classList.add('hide');return}
+  if(b=t.closest('[data-m]')){if(cool('s',900))nav('arrive','Next…',()=>{S.method=b.dataset.m});return}
+  if(b=t.closest('[data-arr]')){if(cool('s',900))nav('notes','Next…',()=>{S.arrive=b.dataset.arr});return}
   if(b=t.closest('[data-back]')){if(cool('s',900))nav(b.dataset.back,'Going back…',null,true);return}
   if(b=t.closest('[data-jump]')){if(cool('s',900))nav(b.dataset.jump,'Going back…',null,true);return}
-  if(t.id==='tonext'){
-    const n=$('nm').value.trim();S.name=n;S.note=$('nt').value.trim();
-    if(!n){$('nm').focus();toast('Type your name first.');return}
-    if(cool('s',900)){ls.s('mrv_buy_name',n);nav('review','Next…')}return}
-  if(t.id==='agree'){S.agree=t.checked;cdTick();return}
   if(t.id==='cmp'){compareModal();return}
   if(t.id==='retryc'){if(cool('rc',2000)){fbReady=fbConnect();withLoad('Connecting to Mr V…',async()=>{await fbReady;draw();toast(FB?'Connected!':connMsg())},900)}return}
   if(t.id==='payb'){
-    if(!$('agree').checked){toast('Tick the box first.');return}
+    if(!noteOk()){toast('Write a short note (under 10 words) or check "No note needed".');return}
     if(!FB){toast('Not connected to Mr V yet, so the order would be lost. Press Try again at the top.');return}
     if(cdLeft()>0||!cool('pay',3000))return;
-    const o={id:code(),name:S.name,plan:S.plan,days:S.dur,total:price(),method:S.method,slot:S.slot,note:S.note,ts:Date.now(),state:'pending'};
-    const prev=ls.g(LK,0);ls.s(LK,Date.now());
+    const orig=base(),total=price(),st=stuOf(S.sid);
+    const o={id:code(),sid:S.sid,name:st?st.name:stuName(S.sid),plan:S.plan,days:S.dur,total,orig,method:S.method,arrive:S.arrive,note:S.nonote?'':S.note.trim(),promo:S.promo?S.promo.pct:0,ts:Date.now(),state:'pending'};
+    const ph=S.promo&&S.promo.h,prev=ls.g(LK,0);ls.s(LK,Date.now());
     withLoad('Paying Mr V Enterprise…',async()=>{
       await fbReady;Object.assign(o,await ipInfo());
-      if(FB){try{await fbPut(pub(o))}catch(err){ls.s(LK,prev);toast('Could not send your order to Mr V. Check your internet and try again.');return}}
+      try{
+        if(ph){const u=await fetch(FB+'/promo/'+ph+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():null);
+          if(u){ls.s(LK,prev);S.promo=null;toast('That promo code was just used by someone else. It was removed.');view='promo';draw();return}
+          const pr=await fetch(FB+'/promo/'+ph+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:o.id,ts:o.ts})});if(!pr.ok)throw new Error('promo')}
+        await fbPut(pub(o));
+      }catch(err){
+        if(ph)fetch(FB+'/promo/'+ph+'.json',{method:'DELETE'}).catch(()=>{});
+        ls.s(LK,prev);toast('Could not send your order to Mr V. Check your internet and try again.');return}
       const L=orders();L.unshift(o);ls.s(KEY,L);cur=o;view='order';reset();draw();
       notify('Payment pending','Thanks for shopping with us. Order '+o.id)
     },2400);return}
@@ -586,12 +708,20 @@ document.addEventListener('click',e=>{
       else toast('Saved here, but Mr V can not be reached yet. I will keep trying: '+connMsg());
     });return}
 });
+document.addEventListener('change',e=>{
+  if(e.target.id==='nonote'){S.nonote=e.target.checked;if(S.nonote)S.note='';const n=$('nt');n.disabled=S.nonote;if(S.nonote)n.value='';$('wc').textContent=S.nonote?'':words(S.note)+' of '+MAXW+' words';$('wc').className='wc';cdTick()}
+});
 document.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&(e.target.id==='nm'||e.target.id==='nt')&&$('tonext'))$('tonext').click();
-  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.slot,.ocard')){e.preventDefault();e.target.click()}
+  if(e.key==='Enter'&&e.target.id==='pc'&&$('papply'))$('papply').click();
+  if(e.key==='Enter'&&e.target.id==='nt'&&$('payb')&&!$('payb').disabled)$('payb').click();
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.ocard,.day,.srow')){e.preventDefault();e.target.click()}
   if(e.key==='Escape'&&!$('modal').classList.contains('hide')){$('nno')?$('nno').click():closeModal()}
 });
-document.addEventListener('input',e=>{if(e.target.id==='nm')S.name=e.target.value;if(e.target.id==='nt')S.note=e.target.value});
+document.addEventListener('input',e=>{
+  if(e.target.id==='pc')S.pcode=e.target.value;
+  if(e.target.id==='nt'){S.note=e.target.value;const w=words(S.note);$('wc').textContent=w+' of '+MAXW+' words';$('wc').className='wc'+(w>MAXW?' bad':'');cdTick()}
+  if(e.target.id==='sq'){squery=e.target.value;const q=squery.trim().toLowerCase();$('slist').innerHTML=stuRows(STU.filter(s=>!q||s.name.toLowerCase().includes(q)))}
+});
 $('hordersb').onclick=()=>{if(!busy&&cool('ob',900))nav('history','Loading your orders…')};
 $('hcompare').onclick=()=>{if(!busy)compareModal()};
 $('hfaq').onclick=()=>{if(!busy)faqModal()};
