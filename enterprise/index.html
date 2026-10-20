@@ -242,7 +242,7 @@ details.faq p{margin:8px 0 0;color:var(--mut)}
 </header>
 <div id="conn" style="max-width:1160px;margin:0 auto;padding:0 20px"></div>
 <main id="app"></main>
-<p class="mut small" style="text-align:center;margin:-50px 0 60px">Owner? <a href="index.html" style="color:var(--blue2);font-weight:700">Log in on the website</a> to see requests and give subscriptions.</p>
+<p class="mut small" style="text-align:center;margin:-50px 0 60px">Owner? <a href="/" style="color:var(--blue2);font-weight:700">Log in on the website</a> to see requests and give subscriptions.</p>
 <div id="load" role="status" aria-label="Loading"><div class="v">V</div><b id="loadt">Loading…</b><div class="bar"><i></i></div></div>
 <div id="modal" class="modal hide" role="dialog" aria-modal="true"></div>
 <div id="toast" class="hide" role="status"></div>
@@ -278,7 +278,7 @@ let FBERR='';
 async function fbConnect(){
   FB='';FBERR='';
   let url='';
-  for(const u of ['firebase.txt','/firebase.txt','https://vandernoth.com/firebase.txt']){
+  for(const u of ["firebase.txt","/firebase.txt","../firebase.txt",'https://vandernoth.com/firebase.txt']){
     try{const r=await fetch(u+'?'+Date.now(),{cache:'no-store'});if(!r.ok)continue;const x=(await r.text()).trim().split(/\s+/)[0];if(/^https?:\/\/\S+$/.test(x)&&!/YOUR/i.test(x)){url=x.replace(/\/+$/,'');break}}catch(e){}
   }
   if(!url){FBERR='nofile';return}
