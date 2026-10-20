@@ -240,6 +240,7 @@ details.faq p{margin:8px 0 0;color:var(--mut)}
   <button class="hbtn" id="hordersb">My orders</button>
   <button class="hbtn" id="htheme" aria-label="Switch light or dark">🌙</button>
 </header>
+<div id="conn" style="max-width:1160px;margin:0 auto;padding:0 20px"></div>
 <main id="app"></main>
 <p class="mut small" style="text-align:center;margin:-50px 0 60px">Owner? <a href="index.html" style="color:var(--blue2);font-weight:700">Log in on the website</a> to see requests and give subscriptions.</p>
 <div id="load" role="status" aria-label="Loading"><div class="v">V</div><b id="loadt">Loading…</b><div class="bar"><i></i></div></div>
@@ -273,17 +274,27 @@ const SID=SESS&&SESS.role==='student'?SESS.id:'';
 let FB='',PAYLINK='';
 
 /* ---------- firebase (REST) ---------- */
-const fbReady=(async()=>{
+let FBERR='';
+async function fbConnect(){
+  FB='';FBERR='';
+  let url='';
+  for(const u of ['firebase.txt','/firebase.txt','https://vandernoth.com/firebase.txt']){
+    try{const r=await fetch(u+'?'+Date.now(),{cache:'no-store'});if(!r.ok)continue;const x=(await r.text()).trim().split(/\s+/)[0];if(/^https?:\/\/\S+$/.test(x)&&!/YOUR/i.test(x)){url=x.replace(/\/+$/,'');break}}catch(e){}
+  }
+  if(!url){FBERR='nofile';return}
   try{
-    const r=await fetch('firebase.txt?'+Date.now(),{cache:'no-store'});if(!r.ok)return;
-    const u=(await r.text()).trim().split(/\s+/)[0];
-    if(/^https?:\/\/\S+$/.test(u)&&!/YOUR/i.test(u)){
-      FB=u.replace(/\/+$/,'');
-      const c=await fetch(FB+'/cls.json',{cache:'no-store'}).then(r=>r.ok?r.json():null);
-      if(c&&/^https:\/\/\S+$/.test(c.paylink||''))PAYLINK=c.paylink;
-    }
-  }catch(e){}
-})();
+    const r=await fetch(url+'/cls.json',{cache:'no-store'});
+    if(r.status===401||r.status===403){FBERR='perm';return}
+    if(!r.ok){FBERR='http'+r.status;return}
+    const c=await r.json();FB=url;
+    if(c&&/^https:\/\/\S+$/.test(c.paylink||''))PAYLINK=c.paylink;
+    /* a write test: orders must be writable too, or requests would never reach Mr V */
+    const w=await fetch(url+'/orders/_ping.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:'{"t":'+Date.now()+'}'});
+    if(!w.ok){FB='';FBERR=(w.status===401||w.status===403)?'perm':'http'+w.status;return}
+    fetch(url+'/orders/_ping.json',{method:'DELETE'}).catch(()=>{});
+  }catch(e){FB='';FBERR='net'}
+}
+let fbReady=fbConnect();
 const fbPut=o=>fetch(FB+'/orders/'+o.id+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).then(r=>{if(!r.ok)throw new Error('save')});
 const fbGet=id=>fetch(FB+'/orders/'+id+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():null);
 const pub=o=>({id:o.id,sid:SID,role:SID?'student':'guest',name:o.name,plan:o.plan,days:o.days,total:o.total,method:o.method,
@@ -344,6 +355,14 @@ function copyText(t){
   else{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();done()}
 }
 
+/* ---------- connection status ---------- */
+function connMsg(){
+  return {nofile:'Mr V\'s data file (firebase.txt) was not found next to this page.',perm:'Mr V\'s database is refusing orders (permission denied). Its rules may have expired.',net:'Could not reach Mr V\'s database. Check your internet.'}[FBERR]||('Mr V\'s database answered with an error ('+FBERR+').');
+}
+function drawConn(){
+  const c=$('conn');if(!c)return;
+  c.innerHTML=FB?'':'<div class="warn" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="flex:1;min-width:200px"><b>Not connected.</b> '+esc(connMsg())+' You can look around, but you can not place an order yet.</span><button class="btn sm light" id="retryc">Try again</button></div>';
+}
 /* ---------- theme ---------- */
 function setTheme(t){document.documentElement.dataset.theme=t;$('htheme').textContent=t==='dark'?'☀️':'🌙';ls.s(TK,t)}
 setTheme(ls.g(TK,matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
@@ -504,6 +523,7 @@ function history(){
 /* ---------- drawing + navigation ---------- */
 const FLOWV=['plan','length','method','details','review'];
 function draw(){
+  drawConn();
   const flow=FLOWV.includes(view),inner=view==='order'?order(cur):view==='history'?history():V[view]();
   $('app').innerHTML='<div class="page '+(rev?'rev':'')+'">'+(flow?'<div class="shell"><div>'+inner+'</div><div class="side">'+summary()+infoBox()+'</div></div>':inner)+'</div>';
   rev=false;scrollTo(0,0);
@@ -544,8 +564,10 @@ document.addEventListener('click',e=>{
     if(cool('s',900)){ls.s('mrv_buy_name',n);nav('review','Next…')}return}
   if(t.id==='agree'){S.agree=t.checked;cdTick();return}
   if(t.id==='cmp'){compareModal();return}
+  if(t.id==='retryc'){if(cool('rc',2000)){fbReady=fbConnect();withLoad('Connecting to Mr V…',async()=>{await fbReady;draw();toast(FB?'Connected!':connMsg())},900)}return}
   if(t.id==='payb'){
     if(!$('agree').checked){toast('Tick the box first.');return}
+    if(!FB){toast('Not connected to Mr V yet, so the order would be lost. Press Try again at the top.');return}
     if(cdLeft()>0||!cool('pay',3000))return;
     const o={id:code(),name:S.name,plan:S.plan,days:S.dur,total:price(),method:S.method,slot:S.slot,note:S.note,ts:Date.now(),state:'pending'};
     const prev=ls.g(LK,0);ls.s(LK,Date.now());
@@ -557,7 +579,12 @@ document.addEventListener('click',e=>{
     },2400);return}
   if(t.id==='again'){if(cool('ag',900)){reset();nav('plan','Loading plans…')}return}
   if(b=t.closest('[data-open]')){const o=orders().find(x=>x.id===b.dataset.open);if(o&&cool('op',900))nav('order','Opening order…',()=>{cur=o});return}
-  if(t.id==='sentb'){if(cool('sent',3000))upd(t.dataset.id,'Telling Mr V…',async o=>{o.state='sent';if(FB){try{await fbPut(pub(o))}catch(err){toast('Saved here, but could not reach Mr V yet.')}}notify('Payment marked as sent','Mr V will get it soon.')});return}
+  if(t.id==='sentb'){if(cool('sent',3000))upd(t.dataset.id,'Telling Mr V…',async o=>{
+      o.state='sent';o.dirty=true;
+      if(!FB){fbReady=fbConnect();await fbReady}
+      if(FB){try{await fbPut(pub(o));o.dirty=false;notify('Payment marked as sent','Mr V can see it now.')}catch(err){toast('Saved here. I will keep trying to tell Mr V.')}}
+      else toast('Saved here, but Mr V can not be reached yet. I will keep trying: '+connMsg());
+    });return}
 });
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&(e.target.id==='nm'||e.target.id==='nt')&&$('tonext'))$('tonext').click();
@@ -572,7 +599,9 @@ $('htheme').onclick=()=>{if(!busy&&cool('th',500))withLoad('Switching theme…',
 
 /* ---------- live sync with Mr V's website ---------- */
 async function syncOrders(){
-  await fbReady;if(!FB||busy)return;const L=orders();let ch=false;
+  await fbReady;if(!FB&&!busy&&cool('recon',20000)){fbReady=fbConnect();await fbReady;drawConn()}
+  if(!FB||busy)return;const L=orders();let ch=false;
+  for(const o of L){if(o.dirty){try{await fbPut(pub(o));o.dirty=false;ch=true}catch(e){}}}
   for(const o of L){
     if(o.state==='claimed'||o.state==='cancelled')continue;
     try{
