@@ -2026,6 +2026,33 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
 .ainp{width:100%;box-sizing:border-box;min-height:160px;resize:vertical;font:1rem/1.5 Inter,system-ui,sans-serif;border:2px solid var(--line,#cbd5e1);border-radius:10px;padding:10px;background:#fffbeb;color:#0f172a}
 @media(max-width:600px){.aiheader{flex-direction:column;text-align:center}.aimsg2{max-width:100%}}
 
+/* ===== v11 Mr V Enterprise requests ===== */
+.orstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 14px}
+.orsc{background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:18px;padding:14px 16px;box-shadow:0 4px 14px rgba(30,64,175,.06)}
+.orsc b{display:block;font-size:1.7rem;line-height:1.1}.orsc small{color:var(--muted)}
+.orsc.hot{background:linear-gradient(135deg,#fffbeb,#fef3c7);border-color:#fcd34d}
+.orbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 14px}
+.orbar .pchip b{margin-left:4px;opacity:.8}
+.orsearch{flex:1;min-width:200px;max-width:320px}.orsearch .field{margin:0}
+.orlist{display:grid;gap:14px;margin-top:14px}
+.orc{background:#fff;border:1px solid var(--line,#e2e8f0);border-left:6px solid #fbbf24;border-radius:20px;padding:16px 18px;box-shadow:0 6px 20px rgba(30,64,175,.07);animation:orIn .4s ease both}
+.orc.sent{border-left-color:#2563eb}.orc.done{border-left-color:#16a34a;background:#f9fffb}.orc.no{border-left-color:#94a3b8;opacity:.8}
+@keyframes orIn{from{opacity:0;transform:translateY(10px)}}
+.orh{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.orwho{display:flex;gap:12px;align-items:center}.orwho small{display:block;color:var(--muted)}
+.orav{width:44px;height:44px;border-radius:50%;background:#e2e8f0;display:grid;place-items:center;font-weight:800;color:#64748b}
+.orst{font-size:.8rem;font-weight:800;border-radius:99px;padding:4px 12px;background:#fef3c7;color:#92400e}
+.orst.sent{background:#dbeafe;color:#1e40af}.orst.done{background:#dcfce7;color:#166534}.orst.no{background:#e2e8f0;color:#475569}
+.orgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 4px;background:#f8fafc;border-radius:14px;padding:12px}
+.orgrid small{display:block;color:var(--muted);font-size:.75rem}.orgrid b{font-size:.95rem}
+.orp.plus{color:#b45309}
+.orpick{margin-top:12px}.orbtn{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.orbtn .btn{flex:1;min-width:180px;justify-content:center}
+.orempty{text-align:center;padding:34px 18px;margin-top:14px}.orbig{width:56px;height:56px;margin:0 auto 8px;color:var(--blue)}.orbig .i{width:56px;height:56px}
+@media(max-width:700px){.orstats{grid-template-columns:1fr 1fr}.orgrid{grid-template-columns:1fr 1fr}}
+
+.orlinkbox{margin-top:14px}.orlinkrow{display:flex;gap:10px;flex-wrap:wrap}.orlinkrow .field{flex:1;min-width:220px;margin:0}
+
 </style>
 </head>
 <body>
@@ -2365,7 +2392,14 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
   <!-- MR V ENTERPRISE -->
   <div class="panel" id="sub"><div class="wrap" style="max-width:1000px">
     <div class="pagehead"><h2>Mr.V Enterprise</h2><p class="lead">Level up your account with extra V Coins, daily rewards and more ways to make your profile yours.</p></div>
+    <div class="xpbtns" style="margin:0 0 14px"><a class="btn primary" href="buy-mr-v-enterprise.html">Buy Mr V Enterprise online</a></div>
     <div id="subbody"></div>
+  </div></div>
+
+  <!-- ENTERPRISE REQUESTS (owner) -->
+  <div class="panel" id="ordreq"><div class="wrap" style="max-width:1000px">
+    <div class="pagehead"><h2>Mr V Enterprise requests</h2><p class="lead">Every order sent from the Buy Mr V Enterprise page shows up here. Give the subscription right away, or cancel it.</p></div>
+    <div id="ordbody"></div>
   </div></div>
 
   <!-- LOCKED -->
@@ -3088,8 +3122,8 @@ function setHD(x){try{localStorage.setItem(hdKey(),JSON.stringify(x.slice(-300))
 function addLocalNote(html,ico){if(!ME)return;const x=getLH();x.unshift({id:'l'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),msg:html.replace(/<[^>]*>/g,''),ts:Date.now(),ico:ico||'🔔',from:'System',local:true});setLH(x)}
 
 /* ===== class data: shared when available, otherwise this device ===== */
-const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{},devs:{},teachers:{},olock:{},party:{},spam:{},subm:{},devreq:{},visit:{},ipban:{},aiw:{},aihist:{}});
-const KINDS=['students','notes','requests','bans','profiles','wallets','music','assignments','comments','friends','events','locks','kicks','sessions','presentations','subs','games','gpl','ctrl','chat','joined','stats','secrets','teachers','olock','party','spam','subm','devreq','visit','ipban','aiw','aihist'];
+const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{},devs:{},teachers:{},olock:{},party:{},spam:{},subm:{},devreq:{},visit:{},ipban:{},aiw:{},aihist:{},orders:{}});
+const KINDS=['students','notes','requests','bans','profiles','wallets','music','assignments','comments','friends','events','locks','kicks','sessions','presentations','subs','games','gpl','ctrl','chat','joined','stats','secrets','teachers','olock','party','spam','subm','devreq','visit','ipban','aiw','aihist','orders'];
 let C=DEF(),DB=null,WRITE=true,lastXp=null,gotCls=true,loaded=true;
 const LK='mrv_local';
 function loadLocal(){try{const j=JSON.parse(localStorage.getItem(LK)||'null');if(j){C=Object.assign(DEF(),j);C.cls=Object.assign({xp:0,hue:221,coinMult:1},C.cls)}}catch(e){}}
@@ -4985,6 +5019,7 @@ const VERS=[
   'Open and save presentations as Pptx, Odp, Pdf, Txt, Jpg, Png and Svg. Print with the V loader. Full-screen naming and saved messages.',
   'Owner: IP address finder with ban reasons, a profile page, and a 5-step party wizard. Assignments can now be posted later, to certain periods or students, with due times and late rules.',
   'New V Coin and XP coin pictures, and new rewards: 35 V Coins for your first lesson each day and 50 for a perfect lesson. Game play time costs 100 V Coins a minute (500 for 5 minutes, 1,000 for 10).',
+  'Buy Mr V Enterprise page: pick a plan and send an order. The owner gets a new Mr V Enterprise requests tab to give the subscription now or cancel it.',
   'One-button device check. Notifications are now always in front.']},
  {v:'10.0',date:'October 19, 2026',name:'The Owner Update',items:[
   'Owner tools: download the login info, create or delete teachers, rename Mr. V and Mr. R, lock logins or spending, change passwords, turn the whole website off, and start a Party.',
@@ -5481,6 +5516,7 @@ function renderV9(on){
   if(on('jgame')&&typeof renderJGame==='function')renderJGame();
   if(on('calc')&&typeof renderCalc==='function')renderCalc();
   if(on('sub')&&typeof renderSub==='function')renderSub();
+  if(on('ordreq')&&typeof renderOrdReq==='function')renderOrdReq();
   if(on('friends')&&typeof renderFriends2==='function')renderFriends2();
   if(on('profile')&&typeof pfxRender==='function')pfxRender();
   if(on('presentations')&&typeof renderPresLib2==='function')renderPresLib2();
@@ -7618,7 +7654,7 @@ const teacherPer=id=>(TEACHERS[id]&&TEACHERS[id].per)||[];
 const perText=a=>{a=(a||[]).slice().sort((x,y)=>x-y);if(!a.length)return 'No periods';if(a.length>=PER_OPEN.length&&PER_OPEN.every(p=>a.includes(p)))return 'All periods (3, 4, 6, 8)';return (a.length>1?'Periods ':'Period ')+a.join(', ')};
 
 /* ===== v10 · locked secrets (AES-GCM, key made from a password) ===== */
-const OWNER_BLOB='U1Id07Nst0zaziaUl171Mg==.koTgE3IbBgOTjoHX.16z89zKDwkjMZGrYGzCAiMhTRtaBEYKd9rmR5LANBVCD+Y1qonsEItA4a67G0XpvIIqi3JMknQrZctVSQ4kh/IjUeuRu9m+PYyQC',TEACH_BLOB='zFVsqc1Sfo7Dm0EOssjhdA==.Gu0wonjP/uaeqeg7.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';
+const OWNER_BLOB='4t+RMf+AHlQv4Z/DqaxGiQ==.0sPeiLYgFogFeoUh.kHsZ9UH4qEBRSOrMw3TIXOd40uCW/lsitLb5Tp3p9BkhiRGzAIo6lPlEHDW7BL3MCUVXz45kSmi9givj/N8g7rW93O2otTpD30Te',TEACH_BLOB='xxt4K/ugZHP1MwwTAM8ynQ==.RGMs1IdyG8EWCuKO.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';
 const b64e=u=>{let s='';u.forEach(c=>{s+=String.fromCharCode(c)});return btoa(s)};
 const b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function kdf(pw,salt){
@@ -11674,6 +11710,105 @@ document.addEventListener('click',e=>{
   }
 });
 document.addEventListener('keydown',e=>{if(e.target.id==='aiq'&&e.key==='Enter'){e.preventDefault();const v=e.target.value;e.target.value='';aiAsk(v)}});
+
+/* ===== v11 · Mr V Enterprise requests (owner): orders from the Buy page ===== */
+const ORD={fil:'open',q:'',pick:{},seen:null,note:null};
+const ORDTIER={e:'starter',p:'plus'},ORDNAME={e:'Enterprise',p:'Enterprise+'},ORDMETH={envelope:'Envelope',cash:'Cash in person',debit:'Debit card',card:'Card (secure link)'};
+Object.assign(TABICON,{ordreq:'gift'});Object.assign(TABNAME,{ordreq:'Mr V Enterprise requests'});
+const _ordTabs=tabsDef;
+tabsDef=function(){const t=_ordTabs();if(ME&&ME.role==='owner'&&!t.includes('ordreq'))t.splice(1,0,'ordreq');return t};
+const _ordAllowed=allowed;
+allowed=function(id){if(ME&&ME.role==='owner'&&id==='ordreq')return true;return _ordAllowed(id)};
+const ordList=()=>Object.entries(C.orders||{}).filter(([k,o])=>o&&o.plan&&o.ts).map(([k,o])=>Object.assign({id:k},o)).sort((a,b)=>b.ts-a.ts);
+const ordMoney=n=>'$'+(+n).toFixed(2);
+const ordStatus=o=>({pending:['Waiting for payment','wait'],sent:['Buyer says payment sent','sent'],given:['Subscription given','done'],cancelled:['Cancelled','no']})[o.state]||['Waiting','wait'];
+function ordWho(o){
+  const all=allStudents();
+  if(o.sid&&all[o.sid])return {id:o.sid,name:all[o.sid].name,known:true};
+  return {id:'',name:o.name||'Unknown',known:false};
+}
+function renderOrdReq(force){
+  const box=$('ordbody');if(!box||!OWN())return;
+  if(!force&&focusIn('ordbody'))return;
+  const L=ordList(),open=L.filter(o=>o.state==='pending'||o.state==='sent'),sent=L.filter(o=>o.state==='sent').length,given=L.filter(o=>o.state==='given'),can=L.filter(o=>o.state==='cancelled');
+  const q=ORD.q.trim().toLowerCase();
+  let rows=L.filter(o=>ORD.fil==='open'?(o.state==='pending'||o.state==='sent'):ORD.fil==='given'?o.state==='given':ORD.fil==='cancelled'?o.state==='cancelled':true);
+  if(q)rows=rows.filter(o=>(ordWho(o).name+' '+o.id+' '+(o.name||'')).toLowerCase().includes(q));
+  const studs=Object.entries(allStudents()).sort((a,b)=>a[1].name.localeCompare(b[1].name));
+  const card=o=>{
+    const w=ordWho(o),st=ordStatus(o),fin=o.state==='given'||o.state==='cancelled',tier=ORDTIER[o.plan];
+    const sel=ORD.pick[o.id]||w.id;
+    return '<div class="orc '+st[1]+'" data-oid="'+esc(o.id)+'"><div class="orh"><div class="orwho">'+(w.id?avHTML(w.id,w.name,44):'<span class="orav" aria-hidden="true">?</span>')+'<div><b>'+esc(w.name)+'</b><small>'+(w.known?'Logged in account':'Guest: not logged in')+' · '+esc(o.id)+'</small></div></div><span class="orst '+st[1]+'">'+st[0]+'</span></div>'+
+     '<div class="orgrid"><div><small>Plan</small><b class="orp '+(o.plan==='p'?'plus':'')+'">'+(o.plan==='p'?'👑 ':'⭐ ')+ORDNAME[o.plan]+'</b></div><div><small>Length</small><b>'+o.days+' days</b></div><div><small>Price</small><b>'+ordMoney(o.total)+'</b></div><div><small>Pays by</small><b>'+esc(ORDMETH[o.method]||o.method||'')+'</b></div><div><small>Sent</small><b>'+ago(o.ts)+'</b></div></div>'+
+     (o.state==='given'?'<p class="note" style="margin:10px 0 0">Given '+ago(o.at||o.ts)+' to <b>'+esc(sName(o.sid)||w.name)+'</b>.</p>':o.state==='cancelled'?'<p class="note" style="margin:10px 0 0">Cancelled '+ago(o.at||o.ts)+'. Nothing was given.</p>':
+       (w.known?'':'<div class="orpick"><label class="lab" for="orsel-'+esc(o.id)+'">Which account gets it?</label><select class="field" id="orsel-'+esc(o.id)+'" data-orsel="'+esc(o.id)+'"><option value="">Pick a student account…</option>'+studs.map(([i,s])=>'<option value="'+esc(i)+'"'+(sel===i?' selected':'')+'>'+esc(s.name)+(s.period?' (P'+s.period+')':'')+'</option>').join('')+'</select></div>')+
+       '<div class="orbtn"><button class="btn primary" data-ogive="'+esc(o.id)+'">'+ic('gift')+' Give subscription now</button><button class="btn light" data-ocancel="'+esc(o.id)+'">'+ic('x')+' Cancel</button></div>')+
+    '</div>';
+  };
+  const chip=(k,l,n)=>'<button class="pchip'+(ORD.fil===k?' on':'')+'" data-ofil="'+k+'">'+l+' <b>'+n+'</b></button>';
+  const earned=given.reduce((a,o)=>a+(+o.total||0),0);
+  const h='<div class="orstats"><div class="orsc'+(open.length?' hot':'')+'"><b>'+open.length+'</b><small>Need an answer</small></div><div class="orsc"><b>'+sent+'</b><small>Say payment sent</small></div><div class="orsc"><b>'+given.length+'</b><small>Given</small></div><div class="orsc"><b>'+ordMoney(earned)+'</b><small>Total given</small></div></div>'+
+   '<div class="box orbar"><div class="pchips" style="margin:0">'+chip('open','Needs action',open.length)+chip('given','Given',given.length)+chip('cancelled','Cancelled',can.length)+chip('all','All',L.length)+'</div><div class="orsearch"><input class="field" id="orq" placeholder="Search name or order code…" value="'+esc(ORD.q)+'" autocomplete="off" aria-label="Search orders"></div></div>'+
+   (rows.length?'<div class="orlist">'+rows.map(card).join('')+'</div>':'<div class="box orempty"><div class="orbig" aria-hidden="true">'+ic('gift')+'</div><h3>'+(ORD.fil==='open'?'No requests right now':'Nothing here')+'</h3><p class="note" style="margin:0">'+(ORD.fil==='open'?'When someone orders from the Buy page, it shows up here right away.':'Orders will be listed here.')+'</p></div>')+
+   '<div class="box orlinkbox"><h3 style="margin:0 0 4px">'+ic('key')+' Card payments</h3><p class="note" style="margin:0 0 10px">The buy page never takes card numbers itself. Paste a secure payment link from Stripe, Square or PayPal and buyers can pay by card there. Leave it empty to turn card payments off.</p><div class="orlinkrow"><input class="field" id="orlink" placeholder="https://buy.stripe.com/…" value="'+esc((C.cls&&C.cls.paylink)||'')+'" autocomplete="off" aria-label="Card payment link"><button class="btn primary" id="orlinksave">Save link</button></div><p class="note" style="margin:8px 0 0">'+((C.cls&&C.cls.paylink)?'Card payments are <b>on</b>.':'Card payments are <b>off</b>.')+' For card orders, check your payment dashboard before you press Give subscription now.</p></div>'+
+   '<div class="xpbtns" style="margin:16px 0 0"><a class="btn light" href="buy-mr-v-enterprise.html" target="_blank" rel="noopener">'+ic('link')+' Open the buy page</a>'+(given.length+can.length?'<button class="btn light" id="orclear">'+ic('trash')+' Clear finished orders</button>':'')+'</div>';
+  if(box.dataset.sig===h)return;box.dataset.sig=h;box.innerHTML=h;
+}
+async function ordGive(id){
+  const o=(C.orders||{})[id];if(!o||o.state==='given'||o.state==='cancelled')return;
+  const sid=ordWho(Object.assign({id},o)).id||ORD.pick[id]||'';
+  if(!sid){flash('Pick which student account gets it first.');sfx('error');return}
+  const tier=ORDTIER[o.plan],cur=C.subs[sid],base=(cur&&cur.tier===tier&&cur.until&&cur.until>Date.now())?cur.until:Date.now();
+  const ok=await put('subs',sid,{tier,until:base+o.days*864e5,by:ME.name,ts:Date.now()});
+  if(!ok)return;
+  await put('orders',id,Object.assign({},o,{state:'given',sid,at:Date.now()}));
+  sfx('success');pushToast('Gave <b>'+ORDNAME[o.plan]+'</b> ('+o.days+' days) to <b>'+esc(short(sName(sid)))+'</b>.','🎁',4500,{hist:true});
+  box_sig();
+}
+function box_sig(){const b=$('ordbody');if(b)b.dataset.sig=''}
+document.addEventListener('click',e=>{
+  if(!OWN())return;let b;
+  if(b=e.target.closest('[data-ofil]')){ORD.fil=b.dataset.ofil;box_sig();renderOrdReq();return}
+  if(b=e.target.closest('[data-ogive]')){const id=b.dataset.ogive;act('ogive'+id,()=>ordGive(id));return}
+  if(b=e.target.closest('[data-ocancel]')){
+    const id=b.dataset.ocancel,o=(C.orders||{})[id];if(!o)return;const w=ordWho(Object.assign({id},o));
+    askConfirm('Cancel this order?','Nothing will be given to '+w.name+'. They will see that the order was cancelled.',async()=>{
+      const ok=await put('orders',id,Object.assign({},o,{state:'cancelled',at:Date.now()}));if(ok){sfx('pop');pushToast('Order cancelled.','🚫',3000);box_sig()}});return}
+  if(e.target.closest('#orlinksave')){
+    const v=($('orlink').value||'').trim();if(v&&!/^https:\/\/[^\s]+$/.test(v)){flash('The link must start with https://');sfx('error');return}
+    act('orlink',async()=>{const ok=await put('cls','',Object.assign({},C.cls,{paylink:v}));if(ok){sfx('success');pushToast(v?'Card payments are on.':'Card payments are off.','💳',3000);box_sig();renderOrdReq(true)}});return}
+  if(e.target.closest('#orclear')){
+    askConfirm('Clear finished orders?','Removes every given and cancelled order from this list. Active subscriptions are not changed.',async()=>{
+      for(const o of ordList()){if(o.state==='given'||o.state==='cancelled')await delQuiet('orders',o.id)}box_sig();renderOrdReq();pushToast('Cleared.','🧹',2500)})}
+});
+document.addEventListener('input',e=>{if(e.target.id==='orq'){ORD.q=e.target.value;const v=e.target.value;box_sig();renderOrdReq(true);const i=$('orq');if(i){i.focus();i.setSelectionRange(v.length,v.length)}}});
+document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.orsel){ORD.pick[e.target.dataset.orsel]=e.target.value}});
+
+/* owner: tell me when a new request comes in. student: tell me when it was given or cancelled */
+function ordWatch(){
+  if(!ME)return;const L=ordList();
+  if(OWN()){
+    if(!ORD.seen){try{ORD.seen=JSON.parse(localStorage.getItem('v_ordseen')||'null')}catch(e){}}
+    const open=L.filter(o=>o.state==='pending'||o.state==='sent');
+    if(!ORD.seen){ORD.seen=open.map(o=>o.id+':'+o.state);try{localStorage.setItem('v_ordseen',JSON.stringify(ORD.seen))}catch(e){}
+      if(open.length)pushToast('<b>'+open.length+'</b> Enterprise request'+(open.length>1?'s are':' is')+' waiting.','🎁',6000,{hist:true});return}
+    const fresh=open.filter(o=>!ORD.seen.includes(o.id+':'+o.state));
+    if(fresh.length){
+      fresh.forEach(o=>ORD.seen.push(o.id+':'+o.state));try{localStorage.setItem('v_ordseen',JSON.stringify(ORD.seen.slice(-200)))}catch(e){}
+      const o=fresh[0],w=ordWho(o),msg=o.state==='sent'?esc(w.name)+' says the payment was sent':'New request from '+esc(w.name);
+      pushToast('<b>'+msg+'</b><br>'+ORDNAME[o.plan]+' · '+o.days+' days · '+ordMoney(o.total),'🎁',7000,{hist:true});sfx('success');
+      try{if(window.Notification&&Notification.permission==='granted'&&document.hidden)new Notification('Mr V Enterprise request',{body:w.name+': '+ORDNAME[o.plan]+' '+o.days+' days'})}catch(e){}
+    }
+  }else if(ME.role==='student'){
+    let done=[];try{done=JSON.parse(localStorage.getItem('v_ordnote_'+ME.id)||'[]')}catch(e){}
+    L.filter(o=>o.sid===ME.id&&(o.state==='given'||o.state==='cancelled')&&!done.includes(o.id+o.state)).forEach(o=>{
+      done.push(o.id+o.state);
+      pushToast(o.state==='given'?'<b>Your '+ORDNAME[o.plan]+' is active!</b> Enjoy.':'Your '+ORDNAME[o.plan]+' order was cancelled.',o.state==='given'?'🎉':'🚫',7000,{hist:true});if(o.state==='given')sfx('success');
+    });
+    try{localStorage.setItem('v_ordnote_'+ME.id,JSON.stringify(done.slice(-60)))}catch(e){}
+  }
+}
+setInterval(()=>{try{ordWatch()}catch(e){}},3000);
 
 /* ===================== end v9 ===================== */
 $('hcoin').appendChild(coin(MAIN,'coin'));$('hvcc').appendChild(coin(GOLD,'coin','gold'));
