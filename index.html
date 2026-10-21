@@ -2026,7 +2026,7 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
 .ainp{width:100%;box-sizing:border-box;min-height:160px;resize:vertical;font:1rem/1.5 Inter,system-ui,sans-serif;border:2px solid var(--line,#cbd5e1);border-radius:10px;padding:10px;background:#fffbeb;color:#0f172a}
 @media(max-width:600px){.aiheader{flex-direction:column;text-align:center}.aimsg2{max-width:100%}}
 
-/* ===== v11 Mr V Enterprise requests ===== */
+/* ===== v11 Enterprise Subscription requests ===== */
 .orstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 14px}
 .orsc{background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:18px;padding:14px 16px;box-shadow:0 4px 14px rgba(30,64,175,.06)}
 .orsc b{display:block;font-size:1.7rem;line-height:1.1}.orsc small{color:var(--muted)}
@@ -2093,6 +2093,50 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
 .tacc .pcb{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line,#dbe4f3);border-radius:99px;padding:6px 12px;background:#fff;cursor:pointer;font-size:.9rem}
 .tacc .pcb:has(input:checked){background:#e8efff;border-color:#2563eb}
 .tacc select.field{margin-bottom:8px}
+/* v12 agenda editor */
+.agtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.agtab{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;border:2px solid var(--ac);background:transparent;color:var(--ac);font-weight:800;cursor:pointer}
+.agtab.on{background:var(--ac);color:#fff}.agtab .i{width:18px;height:18px}
+.agmain{display:grid;grid-template-columns:minmax(0,2fr) minmax(240px,1fr);gap:16px;align-items:start}
+@media(max-width:820px){.agmain{grid-template-columns:1fr}}
+.agview{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.agview .wbstage{position:absolute;left:0;top:0}
+.agempty{position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:#fff;font-weight:800;font-size:1.2rem;text-shadow:0 2px 8px rgba(0,0,0,.5);padding:20px}
+.agnav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.agside{display:grid;gap:12px}
+.agwho{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.9rem}
+.agdot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.25);flex:none;animation:agpulse 1.6s ease infinite}
+.agdot.off{background:#94a3b8;box-shadow:none;animation:none}
+@keyframes agpulse{50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.agbl{display:flex;align-items:center;gap:10px;padding:6px 0}
+.agpbar{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(34,197,94,.14);font-size:.85rem;font-weight:600;white-space:nowrap}
+.agme{opacity:.7}
+.agmenu{position:fixed;z-index:100000;width:290px;max-height:70vh;overflow:auto;background:#fff;color:#0f172a;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:10px}
+html[data-theme=dark] .agmenu,.dark .agmenu{background:#1e293b;color:#f1f5f9}
+.agmh{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;opacity:.7;padding:4px 6px}
+.agmi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:8px;border:0;border-radius:10px;background:transparent;color:inherit;cursor:pointer;font-weight:600}
+.agmi:hover,.agmi.on{background:rgba(37,99,235,.14)}.agmi small{display:block;opacity:.7;font-weight:500}
+.agsw{width:44px;height:30px;border-radius:8px;flex:none;display:block;background-size:cover}
+.agcust{display:flex;gap:8px;align-items:center;padding:4px 6px}.agcust input{width:44px;height:34px;border:0;padding:0;background:none}
+.agonly{display:none}#wbe.agmode .agonly{display:inline-flex}#wbe.agmode #wbbgb{display:none}
+#wbe.agmode #wbbox{background-color:transparent}
+/* v12 shining currency + V Ticket */
+.box.vc,.shine{position:relative;overflow:hidden;animation:shineShadow 6s ease-in-out infinite}
+.box.vc::after,.shine::after{content:"";position:absolute;top:-60%;left:-40%;width:35%;height:220%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(18deg);animation:shineSweep 4.2s ease-in-out infinite;pointer-events:none}
+@keyframes shineSweep{0%{left:-45%}55%,100%{left:125%}}
+@keyframes shineShadow{0%{box-shadow:-10px 6px 26px rgba(245,158,11,.35)}25%{box-shadow:10px 8px 26px rgba(245,158,11,.35)}50%{box-shadow:10px -6px 26px rgba(250,204,21,.4)}75%{box-shadow:-10px -6px 26px rgba(245,158,11,.35)}100%{box-shadow:-10px 6px 26px rgba(245,158,11,.35)}}
+.tkbox{margin-bottom:16px}.tkh{display:flex;align-items:center;gap:12px}.tkh small{display:block;opacity:.8}
+.tkl{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;flex:none}.tkl.big{width:48px;height:48px;border-radius:14px;transform:rotate(-8deg)}
+.tkl .i{width:70%;height:70%}
+.tkg{display:flex;flex-wrap:wrap;gap:8px}.tkgm{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;border:2px solid #cbd5e1;background:transparent;color:inherit;font-weight:700;cursor:pointer}
+.tkgm.on{border-color:#f59e0b;background:rgba(245,158,11,.18)}.tkgm .i{width:16px;height:16px}
+@media(prefers-reduced-motion:reduce){.box.vc,.shine,.box.vc::after,.shine::after{animation:none}}
+.chav{width:32px;height:32px;border-radius:50%;background:#dbeafe;color:#2563eb;display:grid;place-items:center;flex:none}.chav .i{width:18px;height:18px}
+.chpop{position:fixed;inset:0;background:rgba(15,23,42,.5);display:grid;place-items:center;z-index:9000;padding:16px}
+.chpb{position:relative;width:min(440px,100%);max-height:80vh;overflow:auto}.chpb .mx{position:absolute;right:10px;top:10px}
+.chpl{max-height:42vh;overflow:auto;margin-top:10px}.mgdel{border:0;background:none;color:#dc2626;cursor:pointer;font-size:1rem;padding:0 4px}
+.ocun{background:#ef4444;color:#fff;border-radius:999px;font-size:.72rem;padding:1px 7px;font-style:normal;font-weight:800}
+@media(max-width:760px){.ocgrid{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -2432,14 +2476,14 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
 
   <!-- MR V ENTERPRISE -->
   <div class="panel" id="sub"><div class="wrap" style="max-width:1000px">
-    <div class="pagehead"><h2>Mr.V Enterprise</h2><p class="lead">Level up your account with extra V Coins, daily rewards and more ways to make your profile yours.</p></div>
-    <div class="xpbtns" style="margin:0 0 14px"><a class="btn primary" href="/enterprise">Buy Mr V Enterprise online</a></div>
+    <div class="pagehead"><h2>Enterprise Subscription</h2><p class="lead">Level up your account with extra V Coins, daily rewards and more ways to make your profile yours.</p></div>
+    <div class="xpbtns" style="margin:0 0 14px"><a class="btn primary" href="/enterprise">Buy Enterprise Subscription online</a></div>
     <div id="subbody"></div>
   </div></div>
 
   <!-- ENTERPRISE REQUESTS (owner) -->
   <div class="panel" id="ordreq"><div class="wrap" style="max-width:1000px">
-    <div class="pagehead"><h2>Mr V Enterprise requests</h2><p class="lead">Every order sent from the Buy Mr V Enterprise page shows up here. Give the subscription right away, or cancel it.</p></div>
+    <div class="pagehead"><h2>Enterprise Subscription requests</h2><p class="lead">Every order sent from the Buy Enterprise Subscription page shows up here. Give the subscription right away, or cancel it.</p></div>
     <div id="ordbody"></div>
   </div></div>
 
@@ -2451,8 +2495,8 @@ body.turbo #qtext,body.turbo #fb{animation-duration:calc(.4s / var(--tb,1))!impo
 
   <!-- CHAT WITH MR V -->
   <div class="panel" id="chat"><div class="wrap" style="max-width:1000px">
-    <div class="pagehead"><h2>Chat with Mr V</h2><p class="lead">Ask questions about your Mr V Enterprise order. Mr V can turn chat on or off.</p></div>
-    <div id="ocbody"></div>
+    <div class="pagehead"><h2>Chat</h2><p class="lead">Message classmates and teachers, make group chats, or ask Mr V about your Enterprise Subscription order.</p></div>
+    <div id="chtop"></div><div id="chmsg"></div><div id="ocbody"></div>
   </div></div>
 
   <!-- LOCKED -->
@@ -3175,8 +3219,8 @@ function setHD(x){try{localStorage.setItem(hdKey(),JSON.stringify(x.slice(-300))
 function addLocalNote(html,ico){if(!ME)return;const x=getLH();x.unshift({id:'l'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),msg:html.replace(/<[^>]*>/g,''),ts:Date.now(),ico:ico||'🔔',from:'System',local:true});setLH(x)}
 
 /* ===== class data: shared when available, otherwise this device ===== */
-const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{},devs:{},teachers:{},olock:{},party:{},spam:{},subm:{},devreq:{},visit:{},ipban:{},aiw:{},aihist:{},orders:{},agenda:{}});
-const KINDS=['students','notes','requests','bans','profiles','wallets','music','assignments','comments','friends','events','locks','kicks','sessions','presentations','subs','games','gpl','ctrl','chat','joined','stats','secrets','teachers','olock','party','spam','subm','devreq','visit','ipban','aiw','aihist','orders','agenda'];
+const DEF=()=>({cls:{xp:0,hue:221,coinMult:1},students:{},notes:{},requests:{},bans:{},profiles:{},wallets:{},music:{},assignments:{},comments:{},friends:{},events:{},locks:{},kicks:{},sessions:{},presentations:{},subs:{},games:{},gpl:{},ctrl:{},chat:{},joined:{},stats:{},secrets:{},devs:{},teachers:{},olock:{},party:{},spam:{},subm:{},devreq:{},visit:{},ipban:{},aiw:{},aihist:{},orders:{},agenda:{},agpres:{},chatgroups:{}});
+const KINDS=['students','notes','requests','bans','profiles','wallets','music','assignments','comments','friends','events','locks','kicks','sessions','presentations','subs','games','gpl','ctrl','chat','joined','stats','secrets','teachers','olock','party','spam','subm','devreq','visit','ipban','aiw','aihist','orders','agenda','agpres','chatgroups'];
 let C=DEF(),DB=null,WRITE=true,lastXp=null,gotCls=true,loaded=true;
 const LK='mrv_local';
 function loadLocal(){try{const j=JSON.parse(localStorage.getItem(LK)||'null');if(j){C=Object.assign(DEF(),j);C.cls=Object.assign({xp:0,hue:221,coinMult:1},C.cls)}}catch(e){}}
@@ -4037,7 +4081,7 @@ function tourSteps(){
    {t:'Class XP',p:'XP belongs to the whole class.',l:['Your teacher gives the class XP. The bar stops at 500.','Reach 500 and you earn the reward your teacher picked, like Fun Friday, a class prize or Game Day.','On Fridays, request Fun Friday from the Dates tab.']},
    {t:'Game Room',p:'Spend your V Coins on play time.',l:['1 minute = 100 coins, 5 minutes = 500, 10 minutes = 1000.','Or pick your own time at 100 coins every minute.','You see the price before you pay, and the clock starts when you press Play.']},
    {t:'Live games',p:'Play with the whole class.',l:['Open <b>Join Game</b>, type the code on the board and your profile joins.','Answer fast for more points. The top 3 get the podium.'],tab:null},
-   {t:'Mr.V Enterprise',p:'Extra perks from the owner.',l:['More coins on every answer, daily coins and a streak recovery pass.','GIF profile pictures, frames and more colors.'],tab:null},
+   {t:'Enterprise Subscription',p:'Extra perks from the owner.',l:['More coins on every answer, daily coins and a streak recovery pass.','GIF profile pictures, frames and more colors.'],tab:null},
    {t:'Friends and profiles',p:'Make the site yours.',l:['Add friends in the Friends tab.','Click anyone in the class list to see their profile.','Enter your birthday (I will ask in a second) to unlock your picture, color, badge and status.']},
    {t:'Notifications and settings',p:'',l:['Messages slide in at the bottom left after you log in.','The Notifications tab keeps your history. Delete one or clear them all.','Settings has sounds, pop-up speed, text size and more.']},
    {t:"That's it!",p:'Now go be awesome, '+f+'. Stay curious, fools!'}];
@@ -5073,7 +5117,7 @@ const VERS=[
   'New: Daily Agenda tab, Chat with Mr V, universal 7th grade teachers (Mrs. Harris, Mrs. Trucios, Mr. Morris), and a 6-stage buy page with promo codes and student search.',
   'Owner: IP address finder with ban reasons, a profile page, and a 5-step party wizard. Assignments can now be posted later, to certain periods or students, with due times and late rules.',
   'New V Coin and XP coin pictures, and new rewards: 35 V Coins for your first lesson each day and 50 for a perfect lesson. Game play time costs 100 V Coins a minute (500 for 5 minutes, 1,000 for 10).',
-  'Buy Mr V Enterprise page: pick a plan and send an order. The owner gets a new Mr V Enterprise requests tab to give the subscription now or cancel it.',
+  'Buy Enterprise Subscription page: pick a plan and send an order. The owner gets a new Enterprise Subscription requests tab to give the subscription now or cancel it.',
   'One-button device check. Notifications are now always in front.']},
  {v:'10.0',date:'October 19, 2026',name:'The Owner Update',items:[
   'Owner tools: download the login info, create or delete teachers, rename Mr. V and Mr. R, lock logins or spending, change passwords, turn the whole website off, and start a Party.',
@@ -5093,7 +5137,7 @@ const VERS=[
  {v:'9.0',date:'October 15, 2026',name:'The Big Update',items:[
   'Suspended and banned screen: a blurred full-screen message with the time left, your reason and a Study button. A Log out button is ALWAYS there.',
   'Whiteboard presentation editor: drag, drop and resize pictures, GIFs, text, buttons, shapes, lines, drawings, sticky notes and more. Present in full screen like Google Slides, with passcode keypads.',
-  'Mr.V Enterprise: Starter and Enterprise+ with bigger V Coin payouts, daily coins, a streak recovery pass and more profile style.',
+  'Enterprise Subscription: Starter and Enterprise+ with bigger V Coin payouts, daily coins, a streak recovery pass and more profile style.',
   'Live Kahoot-style games: teachers create a game code, students join from the new Join Game tab.',
   'New Calculating tab: time on the website, V Coins, XP and every period at a glance.',
   'Challenge me as I go: a 30 second timer that shrinks as your streak grows, with extra coins.',
@@ -5218,13 +5262,13 @@ function tabsDef(){
   return t;
 }
 Object.assign(TABICON,{jgame:'rocket',calc:'chart',sub:'spark',asg:'note',ai:'bulb',plan:'shield'});
-Object.assign(TABNAME,{jgame:'Join Game',calc:'Calculating',sub:'Mr.V Enterprise',asg:'Assignments',ai:'AI Helper',plan:'Subscription Plan'});
+Object.assign(TABNAME,{jgame:'Join Game',calc:'Calculating',sub:'Enterprise Subscription',asg:'Assignments',ai:'AI Helper',plan:'Subscription Plan'});
 function lockText(id){
   let ti,tx;
   if(restr()){ti='Locked by a suspension';tx='Your account is restricted, so this tab is closed.'}
   else if(ME&&tabLocked(id)){ti=(TABNAME[id]||'This tab')+' is locked';tx='A teacher locked this tab for now.'}
   else if(ME&&id==='friends'){ti='Students only';tx='Friends are for students. Teachers can see everyone in the class list.'}
-  else if(ME&&id==='plan'){ti='Students only';tx='Subscription plans are for students. Teachers manage them from the Mr.V Enterprise tab.'}
+  else if(ME&&id==='plan'){ti='Students only';tx='Subscription plans are for students. Teachers manage them from the Enterprise Subscription tab.'}
   else if(ME&&(id==='tools'||id==='owner')){ti='Teachers only';tx='This tab is only for teachers.'}
   else{ti=(TABNAME[id]||'This tab')+' is locked';tx='Log in first fools! This tab opens after you log in.'}
   $('lktitle').textContent=ti;$('lktext').textContent=tx;$('lkbtn').classList.toggle('hide',!!ME);$('lkbtn').textContent='Log in';
@@ -5238,10 +5282,10 @@ function paintStudyChip(){
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act="stopstudy"]');if(b){STUDYING=false;tabSig='';render();sfx('tab')}});
 
-/* ===== v9 · Mr.V Enterprise helpers ===== */
+/* ===== v9 · Enterprise Subscription helpers ===== */
 const ENT_D={starter:1.5,lucky:2,luckyP:.2,plus:3,dStarter:50,dPlus:100};
 const entCfg=()=>Object.assign({},ENT_D,C.cls.ent||{});
-const TIERN={none:'Free',starter:'Starter Enterprise',plus:'Enterprise+'};
+const TIERN={none:'Free',starter:'Enterprise Starter',plus:'Enterprise+'};
 function tierOf(id){const s=C.subs[id];if(!s||!s.tier)return 'none';if(s.until&&s.until<Date.now())return 'none';return s.tier}
 const myTier=()=>ME&&ME.role==='student'?tierOf(ME.id):'none';
 function coinMultFor(){
@@ -5429,7 +5473,7 @@ let ldTok=0,ldT2=null;
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 const ldLines=['Warming up the lab…','Sharpening pencils…','Mixing the V Coins…','Charging the microscopes…','Almost there…'];
 function ldSetP(p){const V=$('vlogo');V.style.setProperty('--p',p.toFixed(2)+'%');const f=$('ldfill');if(f)f.style.width=p.toFixed(2)+'%'}
-const LDTIPS=['New: the AI Helper with the V logo','New: animations in presentations','New: live Kahoot-style games','New: whiteboard presentations with passcodes','New: Mr.V Enterprise perks','New: the Calculating tab','New: ten games in the Game Room','New: friends chat with pictures','New: Tuesday KORT schedule'];
+const LDTIPS=['New: the AI Helper with the V logo','New: animations in presentations','New: live Kahoot-style games','New: whiteboard presentations with passcodes','New: Enterprise Subscription perks','New: the Calculating tab','New: ten games in the Game Room','New: friends chat with pictures','New: Tuesday KORT schedule'];
 function ldVer(){const v=VERS[0];$('ldver').innerHTML='<b>Version '+v.v+'</b> · '+esc(v.name)+'<br>'+esc(LDTIPS[Math.floor(Date.now()/1500)%LDTIPS.length])}
 function showLoader(ms,done,full){
   const L=$('loader');if(!L)return;
@@ -5546,7 +5590,7 @@ document.addEventListener('keydown',e=>{
 function tourAsk(){
   let m=$('tourask');
   if(!m){m=document.createElement('div');m.className='modal hide';m.id='tourask';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-labelledby','tqt');$('v9root').appendChild(m);
-    m.innerHTML='<div class="mbox devbox"><div class="dvic">'+ic('spark')+'</div><h3 id="tqt">Want a quick tour?</h3><p class="note" style="margin:0 0 18px">First time here? Take a short tour of the Mr V website with pictures and step by step help. It opens in a new tab.</p><button class="btn primary" id="tqyes" style="width:100%;justify-content:center;margin-bottom:10px">Yes, show me the tour</button><button class="btn light" id="tqno" style="width:100%;justify-content:center">No thanks</button></div>';
+    m.innerHTML='<div class="mbox devbox"><div class="dvic">'+ic('spark')+'</div><h3 id="tqt">Want a quick tour?</h3><p class="note" style="margin:0 0 18px">First time here? Take a short tour with pictures and step by step help. Then choose your device and also allow notifications. This will help you get in touch and gather around what you need to do and get caught up.</p><button class="btn primary" id="tqyes" style="width:100%;justify-content:center;margin-bottom:10px">Yes, show me the tour</button><button class="btn light" id="tqno" style="width:100%;justify-content:center">No thanks</button></div>';
     const done=yes=>{try{localStorage.setItem('mrv_tourq','1')}catch(e){}m.classList.add('hide');syncScroll();if(yes){try{window.open(TOUR_URL,'_blank','noopener')}catch(e){}}if(!DEV)openDevice(true)};
     $('tqyes').onclick=()=>done(true);$('tqno').onclick=()=>done(false)}
   m.classList.remove('hide');syncScroll();sfx('open')}
@@ -5578,7 +5622,7 @@ function renderV9(on){
   if(on('presentations')&&typeof renderPresLib2==='function')renderPresLib2();
   if(on('asg'))renderAsg();
   if(on('plan'))renderPlan();
-  if(on('coins'))renderDaily();
+  if(on('coins')){renderDaily();try{tkCoinBox()}catch(e){}}
   if(on('ai')&&typeof renderAI==='function')renderAI();
 }
 
@@ -5733,7 +5777,7 @@ function opts(box,q,fb,cb){
   });
 }
 
-/* ===== v9 · streak recovery pass (Mr.V Enterprise) ===== */
+/* ===== v9 · streak recovery pass (Enterprise Subscription) ===== */
 let RECOV=null;
 function recUsesLeft(){if(!ME)return 0;const w=W(ME.id);return 3-((w.recDay===todayKey())?(w.recUsed||0):0)}
 const hasPass=()=>myTier()!=='none'&&recUsesLeft()>0;
@@ -5879,10 +5923,10 @@ async function giveXP(n){
 }
 function paintReward(){const t=$('rwtxt');if(!t)return;const pz=xpPrize();t.innerHTML=pz?'Rewarded! The class earned <span style="color:var(--lite)">'+esc(pz)+'</span>.':'The class XP is full. Great job, everyone!'}
 
-/* ===== v9 · Mr.V Enterprise tab ===== */
+/* ===== v9 · Enterprise Subscription tab ===== */
 const PERKS={
   starter:c=>['<b>'+c.starter+'x V Coins</b> on every right answer, and if you get lucky <b>'+c.lucky+'x</b>','Normal questions pay 2 to 3 coins, then your multiplier on top','<b>5 answer streak recovery pass</b>: lose a streak of 9, get 5 right in a row and it comes back (3 passes a day)','<b>'+c.dStarter+' free V Coins every day</b>','More profile style: upload <b>GIFs or any image</b>, full color slider and picture frames'],
-  plus:c=>['<b>'+c.plus+'x V Coins</b> on every right answer','Everything in Starter Enterprise','<b>'+c.dPlus+' free V Coins every day</b>','<b>Change the website color</b> just for you (unless your teacher picks the color for everyone)','Profile banner picture and a custom title under your name']
+  plus:c=>['<b>'+c.plus+'x V Coins</b> on every right answer','Everything in Enterprise Starter','<b>'+c.dPlus+' free V Coins every day</b>','<b>Change the website color</b> just for you (unless your teacher picks the color for everyone)','Profile banner picture and a custom title under your name']
 };
 function planCard(key,name,sub,list,cur){
   return '<div class="plan '+key+(cur?' cur':'')+'"><div class="plname">'+(key==='plus'?ic('rocket'):key==='starter'?ic('spark'):ic('user'))+' '+name+(cur?'<span class="pill ok" style="margin-left:auto">Your plan</span>':'')+'</div><div class="plsub">'+sub+'</div><ul>'+list.map(x=>'<li>'+x+'</li>').join('')+'</ul></div>';
@@ -5894,17 +5938,17 @@ function renderSub(){
   if(ME&&ME.role==='student'){
     h+='<div class="box subhero"><div><div class="tier '+t+'">'+ic(t==='plus'?'rocket':t==='starter'?'spark':'user')+' '+TIERN[t]+'</div><h3 style="margin:10px 0 4px">'+(t==='none'?'You are on the free plan':'Thanks for being '+TIERN[t]+'!')+'</h3><p class="note" style="margin:0">'+(t==='none'?'Starter is '+PLAN_PRICE.starter+' and Enterprise+ is '+PLAN_PRICE.plus+'. Give your teacher an envelope with the money to claim it.':(C.subs[ME.id].until?'Active until '+new Date(C.subs[ME.id].until).toLocaleDateString():'Active with no end date.'))+'</p></div>'+(daily?'<div class="daily"><b>'+daily+' V Coins</b><span>every day</span><button class="btn primary" id="dailyb" '+(done?'disabled':'')+'>'+(done?'Claimed today':'Claim today\'s coins')+'</button></div>':'')+'</div>';
   }
-  h+='<div class="plans">'+planCard('free','Free','Everything you have now',['Normal questions pay 2 to 3 V Coins','Cropped profile picture, colors and badges','Game Room, friends and live games'],t==='none')+planCard('starter','Starter Enterprise','Level up your coins · <b>'+PLAN_PRICE.starter+'</b>',PERKS.starter(c),t==='starter')+planCard('plus','Enterprise+','The full package · <b>'+PLAN_PRICE.plus+'</b>',PERKS.plus(c),t==='plus')+'</div>';
+  h+='<div class="plans">'+planCard('free','Free','Everything you have now',['Normal questions pay 2 to 3 V Coins','Cropped profile picture, colors and badges','Game Room, friends and live games'],t==='none')+planCard('starter','Enterprise Starter','Level up your coins · <b>'+PLAN_PRICE.starter+'</b>',PERKS.starter(c),t==='starter')+planCard('plus','Enterprise+','The full package · <b>'+PLAN_PRICE.plus+'</b>',PERKS.plus(c),t==='plus')+'</div>';
   if(ME&&ME.role==='student'&&t==='plus'){
     h+='<div class="box"><h3 style="margin:0 0 6px">'+ic('palette')+' Your website color</h3>'+(C.cls.hueLock?'<p class="note" style="margin:0">Your teacher picked the site color for everyone right now, so it can not be changed.</p>':'<p class="note" style="margin:0 0 6px">Only you see this color.</p><div class="swatches" id="mysws">'+HUES.map(x=>'<button class="swatch'+(+PF(ME.id).siteHue===x[0]?' on':'')+'" data-mysite="'+x[0]+'" title="'+x[1]+'" aria-label="'+x[1]+'" style="background:hsl('+x[0]+',83%,53%)"></button>').join('')+'</div><label class="lab" for="myhue">Or slide to any color</label><input type="range" id="myhue" min="0" max="360" value="'+(PF(ME.id).siteHue!==undefined&&PF(ME.id).siteHue!==''?PF(ME.id).siteHue:C.cls.hue)+'"><button class="btn light sm" data-mysite="">Use the class color</button>')+'</div>';
   }
-  if(!own)h+='<div class="box"><h3 style="margin:0 0 6px">'+ic('key')+' How much is it?</h3><p class="note" style="margin:0 0 6px"><b>Starter Enterprise: '+PLAN_PRICE.starter+'</b><br><b>Mr.V Enterprise+: '+PLAN_PRICE.plus+'</b></p><p class="note" style="margin:0">Give us or our teachers an envelope with the money to claim the subscription.</p>'+(ME&&ME.role==='student'&&t!=='none'?'<button class="btn light sm" data-go="plan" style="margin-top:12px">'+ic('shield')+' Open my Subscription Plan</button>':'')+'</div>';
+  if(!own)h+='<div class="box"><h3 style="margin:0 0 6px">'+ic('key')+' How much is it?</h3><p class="note" style="margin:0 0 6px"><b>Enterprise Starter: '+PLAN_PRICE.starter+'</b><br><b>Enterprise+: '+PLAN_PRICE.plus+'</b></p><p class="note" style="margin:0">Give us or our teachers an envelope with the money to claim the subscription.</p>'+(ME&&ME.role==='student'&&t!=='none'?'<button class="btn light sm" data-go="plan" style="margin-top:12px">'+ic('shield')+' Open my Subscription Plan</button>':'')+'</div>';
   if(own||isT()){
     const subs=Object.entries(C.subs).filter(([i,s])=>tierOf(i)!=='none');
-    h+='<div class="box ownbox"><h3 style="margin:0 0 6px">'+ic('shield')+' '+(own?'Owner: manage Mr.V Enterprise':'Who has Enterprise')+'</h3>';
+    h+='<div class="box ownbox"><h3 style="margin:0 0 6px">'+ic('shield')+' '+(own?'Owner: manage Enterprise Subscription':'Who has Enterprise')+'</h3>';
     if(own){
       const ids=Object.keys(allStudents()).sort((a,b)=>sName(a).localeCompare(sName(b)));
-      h+='<div class="two"><div><label class="lab" for="sgwho">Who</label><select class="field" id="sgwho"><option value="all">Every student</option>'+PER_OPEN.map(p=>'<option value="p'+p+'">Everyone in Period '+p+'</option>').join('')+ids.map(i=>'<option value="'+esc(i)+'">'+esc(short(sName(i)))+'</option>').join('')+'</select></div><div><label class="lab" for="sgtier">Plan</label><select class="field" id="sgtier"><option value="starter">Starter Enterprise</option><option value="plus">Enterprise+</option><option value="none">Remove Enterprise</option></select></div></div><div class="two"><div><label class="lab" for="sgdays">For how long</label><select class="field" id="sgdays"><option value="0">No end date</option><option value="7">7 days</option><option value="30">30 days</option><option value="90">90 days</option></select></div><div style="align-self:end"><button class="btn primary" id="sggo" data-cd="sg" style="margin-bottom:26px">Apply</button></div></div>';
+      h+='<div class="two"><div><label class="lab" for="sgwho">Who</label><select class="field" id="sgwho"><option value="all">Every student</option>'+PER_OPEN.map(p=>'<option value="p'+p+'">Everyone in Period '+p+'</option>').join('')+ids.map(i=>'<option value="'+esc(i)+'">'+esc(short(sName(i)))+'</option>').join('')+'</select></div><div><label class="lab" for="sgtier">Plan</label><select class="field" id="sgtier"><option value="starter">Enterprise Starter</option><option value="plus">Enterprise+</option><option value="none">Remove Enterprise</option></select></div></div><div class="two"><div><label class="lab" for="sgdays">For how long</label><select class="field" id="sgdays"><option value="0">No end date</option><option value="7">7 days</option><option value="30">30 days</option><option value="90">90 days</option></select></div><div style="align-self:end"><button class="btn primary" id="sggo" data-cd="sg" style="margin-bottom:26px">Apply</button></div></div>';
       h+='<div class="h4">Settings</div><div class="entset"><label>Starter coins<input class="field" type="number" step="0.1" min="1" max="10" id="es_starter" value="'+c.starter+'"></label><label>Lucky coins<input class="field" type="number" step="0.1" min="1" max="10" id="es_lucky" value="'+c.lucky+'"></label><label>Lucky chance %<input class="field" type="number" min="0" max="100" id="es_luckyP" value="'+Math.round(c.luckyP*100)+'"></label><label>Enterprise+ coins<input class="field" type="number" step="0.1" min="1" max="20" id="es_plus" value="'+c.plus+'"></label><label>Starter daily coins<input class="field" type="number" min="0" max="1000" id="es_dStarter" value="'+c.dStarter+'"></label><label>Enterprise+ daily coins<input class="field" type="number" min="0" max="1000" id="es_dPlus" value="'+c.dPlus+'"></label><label>Starter can send a day<input class="field" type="number" min="0" max="100000" id="es_giftS" value="'+(c.giftS||200)+'"></label><label>Enterprise+ can send a day<input class="field" type="number" min="0" max="100000" id="es_giftP" value="'+(c.giftP||1000)+'"></label></div><button class="btn light" id="essave" data-cd="es">Save settings</button><div class="err" id="sgerr"></div>';
     }
     h+='<div class="h4">Current members ('+subs.length+')</div>'+(subs.length?subs.map(([i,s])=>'<div class="rowi"><div class="who">'+avHTML(i,sName(i),36)+'<div><b>'+esc(short(sName(i)))+'</b><small>'+TIERN[s.tier]+' · '+(s.until?'until '+new Date(s.until).toLocaleDateString():'no end date')+'</small></div></div>'+(own?'<button class="btn light sm" data-subrm="'+esc(i)+'">Remove</button>':'')+'</div>').join(''):'<p class="note">No one has Enterprise yet.</p>')+'</div>';
@@ -5920,7 +5964,7 @@ document.addEventListener('click',e=>{
     const who=$('sgwho').value,tier=$('sgtier').value,days=+$('sgdays').value;
     let ids=who==='all'?Object.keys(allStudents()):/^p\d$/.test(who)?Object.keys(allStudents()).filter(i=>periodOf(i)===+who.slice(1)):[who];
     for(const id of ids){if(tier==='none'){if(C.subs[id])await del('subs',id)}else await put('subs',id,{tier,until:days?Date.now()+days*864e5:0,by:ME.name,ts:Date.now()})}
-    if(tier!=='none')await notify(who==='all'||/^p\d$/.test(who)?'all':who,'🚀 You got '+TIERN[tier]+'! Check the Mr.V Enterprise tab.','Mr.V Enterprise',true);
+    if(tier!=='none')await notify(who==='all'||/^p\d$/.test(who)?'all':who,'🚀 You got '+TIERN[tier]+'! Check the Enterprise Subscription tab.','Enterprise Subscription',true);
     pushToast('Updated <b>'+ids.length+'</b> student'+(ids.length>1?'s':'')+'.','🚀',4500);return true});
   if(b=e.target.closest('[data-subrm]')){const id=b.dataset.subrm;askConfirm('Remove Enterprise?',short(sName(id))+' goes back to the free plan.',()=>del('subs',id));return}
   if(e.target.closest('#essave'))act('es',async()=>{
@@ -5936,10 +5980,10 @@ $('pst').insertAdjacentHTML('afterend','<div id="pfx"></div>');
 const FRAMES=[['','None'],['gold','Gold'],['neon','Neon'],['fire','Fire'],['rainbow','Rainbow']];
 function pfxRender(){
   const el=$('pfx');if(!el||!ME)return;const t=perkTier(),st=t!=='none',pl=t==='plus';
-  const lock=need=>'<div class="pfxlock">'+ic('lock')+' '+need+' <button class="btn light sm" data-go="sub">See Mr.V Enterprise</button></div>';
+  const lock=need=>'<div class="pfxlock">'+ic('lock')+' '+need+' <button class="btn light sm" data-go="sub">See Enterprise Subscription</button></div>';
   const sig=[t,PB.frame||'',PB.banner?1:0,PB.title||'',PB.hue,canEditProfile()].join('|');if(el.dataset.sig===sig)return;el.dataset.sig=sig;
   el.innerHTML='<div class="lab" style="margin-top:22px">'+ic('spark')+' Enterprise style</div>'+
-   (st?'<div class="pfxrow"><label class="lab" for="pfhue">Any color</label><input type="range" id="pfhue" min="0" max="360" value="'+(PB.hue||221)+'"></div><div class="pfxrow"><div class="lab">Picture frame</div><div class="seg" id="pfframe">'+FRAMES.map(f=>'<button data-frame="'+f[0]+'" class="'+((PB.frame||'')===f[0]?'on':'')+'">'+f[1]+'</button>').join('')+'</div></div><p class="note" style="margin:0 0 10px">You can upload a GIF or any image as your picture.</p>':lock('Frames, any color and GIF pictures are for Starter Enterprise and up.'))+
+   (st?'<div class="pfxrow"><label class="lab" for="pfhue">Any color</label><input type="range" id="pfhue" min="0" max="360" value="'+(PB.hue||221)+'"></div><div class="pfxrow"><div class="lab">Picture frame</div><div class="seg" id="pfframe">'+FRAMES.map(f=>'<button data-frame="'+f[0]+'" class="'+((PB.frame||'')===f[0]?'on':'')+'">'+f[1]+'</button>').join('')+'</div></div><p class="note" style="margin:0 0 10px">You can upload a GIF or any image as your picture.</p>':lock('Frames, any color and GIF pictures are for Enterprise Starter and up.'))+
    (pl?'<div class="pfxrow"><div class="lab">Banner picture</div><div class="xpbtns" style="margin:0"><label class="btn light sm" for="pfbanner">Upload banner</label><input type="file" id="pfbanner" accept="image/*" class="hidefile"><button class="btn light sm" id="pfbanrm">Remove</button></div></div><label class="lab" for="pftitle">Title under your name (24 letters)</label><input class="field" id="pftitle" type="text" maxlength="24" autocomplete="off" value="'+esc(PB.title||'')+'" placeholder="Like: Future scientist">':lock('A banner and a custom title are for Enterprise+.'));
 }
 document.addEventListener('input',e=>{
@@ -5962,7 +6006,7 @@ $('pfile').addEventListener('change',async()=>{
   const t=perkTier(),gif=f.type==='image/gif';
   try{
     if(gif){
-      if(t==='none'){bad(box,$('perr'),'GIF pictures are part of Mr.V Enterprise. Pick a normal picture instead.');return}
+      if(t==='none'){bad(box,$('perr'),'GIF pictures are part of Enterprise Subscription. Pick a normal picture instead.');return}
       if(f.size>900*1024){bad(box,$('perr'),'That GIF is bigger than 900 KB. Pick a smaller one.');return}
       PB.img=await readFileURL(f);
     }else if(t!=='none'){PB.img=await shrinkImage(f,512,.85)}
@@ -7524,7 +7568,7 @@ $('chimg').addEventListener('change',async e=>{
   try{
     let src;
     if(f.type==='image/gif'){
-      if(perkTier()==='none'){flash('GIF pictures are part of Mr.V Enterprise. A normal picture works for everyone.');return}
+      if(perkTier()==='none'){flash('GIF pictures are part of Enterprise Subscription. A normal picture works for everyone.');return}
       if(f.size>600*1024){flash('That GIF is bigger than 600 KB.');return}
       src=await readFileURL(f);
     }else src=await shrinkImage(f,720,.72);
@@ -7710,7 +7754,7 @@ const teacherPer=id=>(TEACHERS[id]&&TEACHERS[id].per)||[];
 const perText=a=>{a=(a||[]).slice().sort((x,y)=>x-y);if(!a.length)return 'No periods';if(a.length>=PER_OPEN.length&&PER_OPEN.every(p=>a.includes(p)))return 'All periods (3, 4, 6, 8)';return (a.length>1?'Periods ':'Period ')+a.join(', ')};
 
 /* ===== v10 · locked secrets (AES-GCM, key made from a password) ===== */
-const OWNER_BLOB='EAl7GCOECyloGfxwBWtWmQ==.ulp13ejb2A3dh2NN.X2battGALSV/rnDjk8Bf1vgMKhnBZrJ+sW89DfT0JeOM/O5K4rR8D5hpu03cj6sdK51AGsEre3q8Z3vy6huOHF9qvpkODenTON7N',TEACH_BLOB='10/ibB55NRBgt6IKCutQag==.xOmARPxbQJvMgS14.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';
+const OWNER_BLOB='1A8bZ9WsDMCT2YSrXZFTNw==.3NFsJWtj/dx5ATe0.imi1XoQ19wcEocw4k7IeFHJs7xXtIq7CpBOZkBRRNuad1sDUsj+kyaUcIN0HPFce0FnlOrx1fVLrczqbNmZr5pwaS0PJR4nyZ7c3',TEACH_BLOB='UL5oxM5p0CzWGBGRRBk0FA==.w7QRzXnjKW8/AFJH.zoa/jIEj5tBuRhGXc789yrbNs+egHeY0feD0P1AkZT5BRV2vfcS6SsTq8Bv4Pkhx04qpis2wAW8If9/eVRolcz70bmwogxY+zPJRI3f5ysT9Fivn2QvHrNweUhIOtJJ1uXPQPQXskEBuVN4UkhiVjGZJ7pGJHm5uuSEmaoUlxWiknwv+P/BPCjmb3UtgQrMHsjy6Nzz5/g5K7QlUOHeGguiRo9rNNqBO9BNyxDYcJ90aHdWFpKSYF+GFgyWZ8OdcmwjT4uFPMXs9EIY/kxD82+jt6UC36uqxJRfOcGeD0oRtQHaPMOnDS1MULTZKK6TZTMnsWP+2m00c0nljFCyPEfZR2X5v9CNyzHnNsHm9hC5HXo07jctsVsJwJEnEXGa7pWhWuf5Yn5AIEgXJHvA5K7FeaCRuS1n2J/uFv0GfV/a8N9f88MALLzcUHvSypgfhCt3ypMNz7Y62VeJvhJpOABFsPjPMSdeLX0/N//J0i2MWcY/UCdKB+BUIX6Non6gB6kuCzmC6OdA0T/Bpp6AsO4oolyAS5ywPB4uFk4j/512n/IsObCs2iF4PBLO7lisGLech3pzGjk8TZaZ9mQZR9GZ9gx8qHqmgqVuOTc3PfwxuXXV+gwfK+i87cIR+zY0Dzb3USpPt9TeOSFEIHWFL1uYOBwOz43YOCsH3AvqQjG2PsNEo1d6Ft5BGcDDP7/PkMoTificfSOZTthQ8AsyfLqzovDuq6H2anrjQlAXj1dn6zaPafYgVga6G7GfQWsaJIJsN0bWOQlq3qbtk6gOhlAUejTn0HHmhzUzhxHjMNDmIoYhyIkhKjjQ50fWMTtvWIzAMBiOKdr1ZlxH/2XFZJd6uCHDFan2PL8u1bQrFrHAhGs/PzmDPvcko5VBgY0oYRFOyljvy0NUYwk7vpknUWk9/qqksHvwG3deMSgENmeL6EQc9z5zkqB8qYgmcCPxSqMb75Wkf/bj5nqzNYIGbsJvjKAa1fcMF9KIePYyRLhBc0bd8We0eCPVfIwEDTZYF5ULfGgwgMsGBnJi5JLqpDcTgyvny2L9Y4V2yHqZJF1ZQgfOzka/AIYOGhmlWuHys+9u0+A/zx+Dc9UPT7ygNwqM2DOBBBN9IuMCiLqYZ08LLUq1y2qtprgXHi9JzuPzmjNYTPmTZP+qADXmxwnnYK+bFhB4xXGhBVAiNYr+J6VI2EWRQUFO/RtxpgJihl9JaR30QxLZP5IEhqHBB0MrIMt1oK6NyA+UjsEYwZIfq9KmgIqr3BUHfX9DRUMbqOoSYhRRCotg3U87NH4Qe4GdZxPJzkv7WJS1bNy1BK9gOGKTBj/+S0ypBgbx7a9xDR6TKWEElCoWpmb9pnNvI1ACUC2HT4LhUSkxGuTgk6ab/mfbjxZLu8UITTN+VfFBwmmTvTL/hb+EWs/wyl5FA3TWdw7LhE1z3PGh3TkTVvrxtJ+gEZFOkELLF/0hGExlX5fwKiccE8qKBFS39LZ2DqfKWA/SFOClaY2YJU4B34rm7W4RzbV6A7OEncf6mmLaa0MNYvsUvTWn/rO7XTybpvkmkjiO77cBk29QTQRSHjD8q0W8tbSIgHYlabxoBRs/CCow1qdITp8KVY3gBabhzSNJ8Qm+yd3DYOEKfcSx32CnFMM/Y6ciG73lZMVxC3PoQBIbZ6piw9LDA2PovvZEfA5+67iHtVtnFgm6l5I8qZpAS9Bhp3JeE4oQ5BZVOixW34dPrYEEzhnx0ZXxYfFoDYW+fN0h1jUuGB17mKxoJWvTz2gO1GNCLNQfltU4lg5nvnLN7CLLRHZ+dgbiN9G7tlvHKCqvqeYTlUIrUWVdZ5GbEuHj+El94aFDv9uhrwASw405/5VjNO07Nk6YUZz/m8qY84hXY4V1dmUkvVbkbprO7a80wgEyz8WgEbAgCNkB2nvE2qd57nSD40WZtWsk4teZ+g+Kyessdz7DfRyy7OBF5CFEy8/UGHkhKp3I4wmsyIA1EB7PzWBs2X9bEFgESUzmZ9/eVj4v7Nw/eTHWcH9I6AbLrf8cFLJnLSg4XsE1OK3JtbcuEdoHpDTVLeuSo1apLo0MiIwrz9eoBWBTbsoHuyuK/fxNjxUWspsfCN7NxsorjLHyOnK4LOSBioXZ3DW2lx9asVdXg84NZwr98xt5DWGJkr6xRH/oi1377s4BrmSFfDsJkHm5X0YtwpXZtkByG3cXlcBXntGqqUql5ZM+8Ix8xmhtmoF7LTPrTwErAUoutk+HznbUu+sLv4UFbQ6p4+6K/D4idcFk/491LY/Su+7k/5CnKuDgN4ajv59Zo+q0FOh8xVU3nXN8jN8KsdSMzGCrhherF5vAGYj3dBGF9Gmqs0gwCNonV3DzAuOPmGJVxH4X5hv/btSh5Wn4ExGt2NE0YlMHtUmk+kxjcFYW030R73/G0TYsr5M1NVE4mgzI15uK8mNZN0Jjhxt59X+JDwj3qdzVEBvL/O8DgzD7BPle6Nwi+2E/22JqT974yIKR8uNB7Ik39ixBMNTp/Tb3/aVnOn6+UDtMAKmoXlDmSELVmirl13WzWTi7nF8oZlAcxkBCTfVl/inEtwRfozP5knKXOdg/k3ncr67MwlG4bPLLo+6QihiFi+zdNtdr5zeUA+VI/0D2lUj6fycob3kA1fj3G1lgo4VmayQqBeryl7FcP1S7e5P/6A8vew/o/XtupvecYkn4Z/jtidOHWNuZVOd8oLHF/IafogAbWA4rUCyHXNdF+BcUqrqs7AJladKEusZ2On0OTmFHLDo/3StFNByZajAj5pTpaICaHRZTUdzcHWY6Iqw2QFI2ZfgU7mL+vY5gMjMRQiNLGQRsZOCgUB7oS1HXHxsrLe/fJi1PYoLqnVpvF3U9TSKLd/odPtWekmoE6368lycSirGUfdbnPOIF3HBo98XZ65Cnq0DieA1raq/LFY3VCk+UKD7ZFr1wpgxu4pqUW3B6Yk921meKZxrm/NnzpCuE/mkdvhjkP4Brt9U0aQDWdWtiwK7pVNAYNqT3KtpNJ77F7XYIcZslmz/C2lXRvVrm16zq5HwnJNh9SHPGfdtCbAjWLJLqrMfL0aN57MlEeD1FoJ9ImgVRr8IveLEcKTsCCTrdW5emVTTYEvAyup3q4iSjHucTBnHZGyoqHoOedpdqd4Ti/fFE9FX0YfeFoDVW/nga1PA4oKQnB3M3LkE38B2LqrZhwIS1X3bBkLi9vjaoqda9hG2/f4GRUVLK9jDQAj4vUY4i5DicDrbYbGwwycX08G2mkMSKySj0eSCWBT+hiTGDIwLk55i1dPsapBk9Udr3JVzp84Q0XQzyFkc82vOnebG0YOc4SdCUuMWShq3j7w3BDAWr46R29HhOVWHFJOLETUbYeGmUBCj7DU9UGhc7Ky1Opwwii2vL6h95HdJVvn/+zIQnpKUjf0fGhh3T4Q//Gzo4LtJEoxODRc8shKc+4bykWvCxpUszqrtI0V5gep8+8YGtDZ7ZBqtAnfzBoWkialuyG6U5DoUgHGd5DaBCfqPBExWDUZ3KfHvU4pUkpxD9t7jk7lwanC5Y+jrK9lrFUAoZVAOjNJ5pbycdPUHHkRYRjy0fZixsSEUZdQvbkI8vq49dEIjnjJvS3dC62tfa6ghcpIh5I1ILqf8vLLc74DG9hVkSy2cxkOs5tEkSLjlgrNTlcFAcH5JiFV36223GgWcNoAnX//MB1r55KFjbvxyjl/Ji+5gaZR/PAP9IG0xlyzD5KeOdtvefSHwf67mAS7aS9SjDUDUymtw==';
 const b64e=u=>{let s='';u.forEach(c=>{s+=String.fromCharCode(c)});return btoa(s)};
 const b64d=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function kdf(pw,salt){
@@ -8712,7 +8756,7 @@ function planExpiry(id){
 }
 function renderPlan(){
   const box=$('planbody');if(!box)return;
-  if(!ME||ME.role!=='student'){box.innerHTML='<div class="box"><p class="note" style="margin:0">Subscription plans are for students. Teachers and the owner manage them from the Mr.V Enterprise tab.</p></div>';return}
+  if(!ME||ME.role!=='student'){box.innerHTML='<div class="box"><p class="note" style="margin:0">Subscription plans are for students. Teachers and the owner manage them from the Enterprise Subscription tab.</p></div>';return}
   const c=entCfg(),t=tierOf(ME.id),w=W(ME.id),ex=t!=='none'?planExpiry(ME.id):null;
   let h='<div class="box subhero plh '+t+'"><div><div class="tier '+t+'">'+ic(t==='plus'?'rocket':t==='starter'?'spark':'user')+' '+TIERN[t]+'</div><h3 style="margin:10px 0 4px">'+(t==='none'?'You are on the free plan':'Your plan is active')+'</h3>'+
     (t==='none'?'<p class="note" style="margin:0">Starter is '+PLAN_PRICE.starter+' and Enterprise+ is '+PLAN_PRICE.plus+'. Give your teacher an envelope with the money to claim it.</p>':'<div class="expiry '+ex.cls+'">'+ic('clock')+'<div><b>'+esc(ex.txt)+'</b><small>'+ex.sub+'</small></div></div>')+'</div>'+
@@ -8729,7 +8773,7 @@ function renderPlan(){
       '<div class="sl2"><div class="slhead"><span>Amount</span><input class="field num" id="gfamt" type="number" min="1" max="'+mx+'" value="'+Math.min(10,mx)+'"></div><input type="range" id="gfr" min="1" max="'+mx+'" step="1" value="'+Math.min(10,mx)+'" aria-label="Amount slider"><div class="rng"><span>1</span><span>'+mx+'</span></div></div>'+
       '<div class="xpbtns" style="margin:12px 0 0"><button class="btn primary" id="gfgo"'+(left<1||(w.coins||0)<1?' disabled':'')+'>'+ic('gift')+' Send V Coins</button></div><div class="err" id="gferr" role="alert"></div></div>';
   }
-  h+='<div class="box"><h3 style="margin:0 0 6px">'+ic('key')+' How to get or renew a plan</h3><p class="note" style="margin:0">Starter Enterprise is <b>'+PLAN_PRICE.starter+'</b> and Mr.V Enterprise+ is <b>'+PLAN_PRICE.plus+'</b>. Give your teacher an envelope with the money to claim or renew your subscription.</p></div>';
+  h+='<div class="box"><h3 style="margin:0 0 6px">'+ic('key')+' How to get or renew a plan</h3><p class="note" style="margin:0">Enterprise Starter is <b>'+PLAN_PRICE.starter+'</b> and Enterprise+ is <b>'+PLAN_PRICE.plus+'</b>. Give your teacher an envelope with the money to claim or renew your subscription.</p></div>';
   const keep=document.activeElement;
   if(keep&&box.contains(keep)&&/INPUT|SELECT/.test(keep.tagName)&&keep.type!=='checkbox')return;
   if(box.dataset.h!==h){box.dataset.h=h;box.innerHTML=h}
@@ -8746,7 +8790,7 @@ document.addEventListener('click',async e=>{
   if(!e.target.closest('#gfgo'))return;
   if(!ME||ME.role!=='student')return;
   const er=m=>{bad($('planbody'),$('gferr'),m);return false},t=myTier(),w=W(ME.id),c=entCfg();
-  if(t==='none'||!planOn(ME.id,'gift'))return er('Sending coins is part of Mr.V Enterprise.');
+  if(t==='none'||!planOn(ME.id,'gift'))return er('Sending coins is part of Enterprise Subscription.');
   if(spendBlocked())return er('Spending V Coins is locked on your account.');
   if(restr())return er('Your account is restricted.');
   const to=$('gfto').value,n=Math.floor(+$('gfamt').value),left=giftLimit(t)-giftUsed(w);
@@ -11653,7 +11697,7 @@ function aiMakePres(text,l){
   return aiBuildPres(tf,l);
 }
 function aiBuildPres(tf,l){
-  const m=/(\d+)\s*(?:slides?|pages?)/.exec(l),n=m?Math.max(3,Math.min(14,+m[1])):0;
+  const m=/(\d+)\s*(?:slides?|pages?)/.exec(l),n=m?Math.max(3,Math.min(30,+m[1])):0;
   const P=aiPresFor(tf.name,tf.tp,n,ME&&ME.role!=='owner'&&ME.name?short(ME.name):'Mr. V');
   if(!aiOpenPres(P))return 'I could not open the presentation editor here.';
   return 'Your presentation <b>'+esc(tf.name)+'</b> is open in the editor with '+P.slides.length+' slides.<ul class="ailist"><li>Colors, big ideas, vocabulary and a check-your-understanding slide with a hidden answer</li><li>Animations are on: click to reveal ideas and the answer</li><li>'+(tf.tp?'Facts come from my science library, so please read them over before class.':'I do not have facts stored for this topic, so the slides are a ready-to-edit outline.')+'</li></ul>Press <b>Save</b> in the editor to name and keep it.';
@@ -11767,10 +11811,10 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.target.id==='aiq'&&e.key==='Enter'){e.preventDefault();const v=e.target.value;e.target.value='';aiAsk(v)}});
 
-/* ===== v11 · Mr V Enterprise requests (owner): orders from the Buy page ===== */
+/* ===== v11 · Enterprise Subscription requests (owner): orders from the Buy page ===== */
 const ORD={fil:'open',q:'',pick:{},seen:null,note:null};
 const ORDTIER={e:'starter',p:'plus'},ORDNAME={e:'Enterprise Starter',p:'Enterprise+'},ORDMETH={envelope:'Envelope',cash:'Cash in person',debit:'Debit card',card:'Card (secure link)'};
-Object.assign(TABICON,{ordreq:'gift'});Object.assign(TABNAME,{ordreq:'Mr V Enterprise requests'});
+Object.assign(TABICON,{ordreq:'gift'});Object.assign(TABNAME,{ordreq:'Enterprise Subscription requests'});
 const _ordTabs=tabsDef;
 tabsDef=function(){const t=_ordTabs();if(ME&&ME.role==='owner'&&!t.includes('ordreq'))t.splice(1,0,'ordreq');return t};
 const _ordAllowed=allowed;
@@ -11874,7 +11918,7 @@ function ordWatch(){
       fresh.forEach(o=>ORD.seen.push(o.id+':'+o.state));try{localStorage.setItem('v_ordseen',JSON.stringify(ORD.seen.slice(-200)))}catch(e){}
       const o=fresh[0],w=ordWho(o),msg=o.state==='sent'?esc(w.name)+' says the payment was sent':'New request from '+esc(w.name);
       pushToast('<b>'+msg+'</b><br>'+ORDNAME[o.plan]+' · '+o.days+' days · '+ordMoney(o.total),'🎁',7000,{hist:true});sfx('success');
-      try{if(window.Notification&&Notification.permission==='granted'&&document.hidden)new Notification('Mr V Enterprise request',{body:w.name+': '+ORDNAME[o.plan]+' '+o.days+' days'})}catch(e){}
+      try{if(window.Notification&&Notification.permission==='granted')new Notification('Enterprise Subscription request',{body:w.name+': '+ORDNAME[o.plan]+' '+o.days+' days'})}catch(e){}
     }
   }else if(ME.role==='student'){
     let done=[];try{done=JSON.parse(localStorage.getItem('v_ordnote_'+ME.id)||'[]')}catch(e){}
@@ -11887,20 +11931,26 @@ function ordWatch(){
 }
 setInterval(()=>{try{ordWatch()}catch(e){}},3000);
 
-/* ===== v11 · Daily Agenda tab + Universal 7th grade teachers ===== */
+/* ===== v12 · Daily Agenda (a slides-style editor for each subject) + the 7th grade Blue Team teachers ===== */
 const UNIV0={'mrs-harris':'Mrs. Harris','mrs-trucios':'Mrs. Trucios','mr-morris':'Mr. Morris'};
+const SUBJ0={'mrs-harris':'math','mr-morris':'social','mrs-trucios':'english','mr-v':'science'};
 Object.keys(UNIV0).forEach(id=>{TEACHER_BASE[id]={name:UNIV0[id],per:[]}});
 try{syncTeachers()}catch(e){}
-const UNIVTXT='Universal 7th Grade Teacher',UNIVSUB='Part of the 7th Blue Team (not the 7th Science Blue Team). Teaches a different subject.';
 const AGSUBJ=[['english','English','book','#2563eb'],['social','American History / Social Studies','globe','#b45309'],['math','Math','chart','#7c3aed'],['science','Science','flask','#16a34a']];
-const UPERMS=[['study','Practice & Study'],['dates','Dates'],['periods','Periods'],['presentations','Presentations'],['ai','AI Helper'],['calc','Calculating'],['coins','Currency'],['gameroom','Game Room'],['classes','All Students & Teachers'],['join','Join Classroom'],['jgame','Join Game'],['sub','Mr.V Enterprise'],['chat','Chat']];
-Object.assign(TABICON,{agenda:'calendar',chat:'chat'});Object.assign(TABNAME,{agenda:'Daily Agenda',chat:'Chat with Mr V'});
+const agName=k=>(AGSUBJ.find(s=>s[0]===k)||[])[1]||'';
+const agShort=k=>k==='social'?'Social Studies':agName(k);
+const UPERMS=[['study','Practice & Study'],['dates','Dates'],['periods','Periods'],['presentations','Presentations'],['ai','AI Helper'],['calc','Calculating'],['coins','Currency'],['gameroom','Game Room'],['classes','All Students & Teachers'],['join','Join Classroom'],['jgame','Join Game'],['sub','Enterprise Subscription'],['chat','Chat']];
+Object.assign(TABICON,{agenda:'calendar',chat:'chat'});Object.assign(TABNAME,{agenda:'Daily Agenda',chat:'Chat'});
 const univ=id=>{const o=(C.teachers||{})[id];return o&&typeof o.univ==='boolean'?o.univ:!!UNIV0[id]};
 const uperm=id=>{const o=(C.teachers||{})[id];return o&&Array.isArray(o.perm)?o.perm:[]};
-const usubj=id=>{const o=(C.teachers||{})[id];return o&&Array.isArray(o.subj)?o.subj:AGSUBJ.map(s=>s[0])};
-function UTCH(){try{return !!ME&&ME.role==="teacher"&&univ(ME.id)}catch(e){return false}}
+const subjOf=id=>{const o=(C.teachers||{})[id];return (o&&typeof o.subject==='string'?o.subject:SUBJ0[id])||''};
+const blocksOf=id=>{const o=(C.teachers||{})[id];return o&&Array.isArray(o.blocks)?o.blocks:[]};
+const subjOwner=sub=>Object.keys(TEACHERS).find(id=>subjOf(id)===sub)||'';
+const UNIVTXT='7th Grade Blue Team Teacher',UNIVSUB='A teacher on the 7th Blue Team (not part of the 7th Science Blue Team). Each one teaches a different subject.';
+function UTCH(){try{return !!ME&&ME.role==='teacher'&&univ(ME.id)}catch(e){return false}}
+const roleLabel=id=>subjOf(id)?agShort(subjOf(id))+' Teacher':UNIVTXT;
 
-/* tabs */
+/* ---------- tabs and access ---------- */
 const _agTabs=tabsDef;
 tabsDef=function(){
   const t=_agTabs();if(!ME)return t;
@@ -11909,7 +11959,7 @@ tabsDef=function(){
   t.splice(t.indexOf('dates')+1,0,'agenda');
   const si=t.indexOf('sub');if(si>=0)t.splice(si+1,0,'chat');
   if(UTCH()){
-    const ok=new Set(['home','agenda','notifs','settings','profile',...uperm(ME.id)]);
+    const ok=new Set(['home','agenda','chat','notifs','settings','profile',...uperm(ME.id)]);
     const r=[];t.filter(x=>x==='|'||ok.has(x)).forEach(x=>{if(x==='|'&&(!r.length||r[r.length-1]==='|'))return;r.push(x)});
     if(r[r.length-1]==='|')r.pop();return r;
   }
@@ -11919,82 +11969,262 @@ const _agAllowed=allowed;
 allowed=function(id){
   if(ME&&ME.role==='owner'&&(id==='agenda'||id==='chat'))return true;
   let ok=_agAllowed(id);
-  if(ok&&ME&&UTCH())ok=['home','agenda','notifs','settings','profile'].includes(id)||uperm(ME.id).includes(id);
+  if(ok&&ME&&UTCH())ok=['home','agenda','chat','notifs','settings','profile'].includes(id)||uperm(ME.id).includes(id);
   return ok;
 };
 const _agHead=renderHead;
-renderHead=function(){_agHead();if(ME&&UTCH())$('wrole').textContent=UNIVTXT};
+renderHead=function(){_agHead();if(ME&&UTCH())$('wrole').textContent=roleLabel(ME.id)};
 const _agClass=renderClass;
-renderClass=function(){_agClass();document.querySelectorAll('#pt .pcard[data-role="t"]').forEach(c=>{if(univ(c.dataset.view)){const rb=c.querySelector('.rb');if(rb){rb.textContent='Universal 7th';rb.title=UNIVTXT+'. '+UNIVSUB}}})};
+renderClass=function(){_agClass();document.querySelectorAll('#pt .pcard[data-role="t"]').forEach(c=>{const id=c.dataset.view;if(subjOf(id)){const rb=c.querySelector('.rb');if(rb){rb.textContent=roleLabel(id);rb.title=univ(id)?UNIVTXT+'. '+UNIVSUB:''}}})};
 
-/* ---------- Daily Agenda ---------- */
-const AG={edit:null};
-const isoDay=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-const dayLabel=s=>{const m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(s||'');if(!m)return '';return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})};
+/* ---------- who can edit which subject ---------- */
 function agCan(sub){
   if(!ME)return false;if(ME.role==='owner')return true;
   if(ME.role!=='teacher')return false;
-  return !UTCH()||usubj(ME.id).includes(sub);
+  const o=subjOwner(sub);
+  if(o===ME.id)return true;
+  return !(o&&blocksOf(o).includes(ME.id));
 }
-function agLines(t){return String(t||'').split('\n').map(x=>x.trim()).filter(Boolean)}
+const agCanBlock=sub=>!!ME&&(ME.role==='owner'||(ME.role==='teacher'&&subjOwner(sub)===ME.id));
+
+/* ---------- animated backgrounds (every one of them moves) ---------- */
+const AGT=[
+ {id:'halloween',n:'Halloween',m:[9],c:['#1a0630','#5b1a8c','#e8590c'],L:[['🎃🦇',46,300,'fall'],['👻🕸️',38,380,'rise'],['🦇⭐',30,230,'fall']]},
+ {id:'fall',n:'Fall and Thanksgiving',m:[10],c:['#7c2d12','#c2410c','#f59e0b'],L:[['🍂🍁',44,300,'fall'],['🦃🌰',40,420,'fall'],['🍁🍂',28,220,'fall']]},
+ {id:'christmas',n:'Christmas and snow',m:[11],c:['#0b3d2e','#14532d','#b91c1c'],L:[['❄️🎄',40,300,'fall'],['⭐🎁',40,400,'fall'],['❄️',26,200,'fall']]},
+ {id:'snow',n:'Snow and New Year',m:[0],c:['#0c4a6e','#38bdf8','#e0f2fe'],L:[['❄️❄',42,300,'fall'],['🎆🎉',40,420,'rise'],['✨❄️',26,210,'fall']]},
+ {id:'hearts',n:'Hearts and Valentine\'s Day',m:[1],c:['#831843','#ec4899','#fbcfe8'],L:[['💖💕',42,300,'rise'],['🌹💌',40,400,'rise'],['💗',26,210,'rise']]},
+ {id:'stpat',n:'St. Patrick\'s Day',m:[2],c:['#064e3b','#16a34a','#bbf7d0'],L:[['🍀🪙',44,300,'fall'],['🌈🍀',40,400,'fall'],['🍀',26,210,'fall']]},
+ {id:'spring',n:'Spring',m:[3],c:['#7dd3fc','#bef264','#fef08a'],L:[['🌸🌷',42,300,'fall'],['🦋🐝',36,400,'drift'],['🌼☀️',30,230,'fall']]},
+ {id:'sunny',n:'Sunny day',m:[4,6,7,8],c:['#0ea5e9','#7dd3fc','#fef9c3'],L:[['☀️',48,520,'drift'],['⛅🌤️',44,380,'drift'],['🕊️',26,260,'drift']]},
+ {id:'summer',n:'Ice pops and summer',m:[5],c:['#fb923c','#22d3ee','#fde68a'],L:[['🍧🍦',44,300,'rise'],['🧊🍉',40,400,'rise'],['🌴😎',30,260,'fall']]},
+ {id:'ocean',n:'Ocean',m:[],c:['#082f49','#0369a1','#22d3ee'],L:[['🫧🐟',40,300,'rise'],['🐠🫧',36,400,'rise'],['🫧',24,200,'rise']]},
+ {id:'space',n:'Space',m:[],c:['#020617','#1e1b4b','#4c1d95'],L:[['⭐✨',34,300,'drift'],['🪐🚀',44,480,'drift'],['✨',20,200,'fall']]},
+ {id:'aurora',n:'Aurora',m:[],c:['#052e2b','#0f766e','#7c3aed'],L:[['✨',30,300,'drift'],['🌌',44,520,'drift'],['✨',20,200,'rise']],grad:true}
+];
+const AGMONTH=[3,4,5,6,7,8,9,10,11,0,1,2];
+function agThemeFor(bg){
+  if(bg&&bg.indexOf('custom:')===0)return {custom:bg.split(':').slice(1)};
+  const t=AGT.find(x=>x.id===bg);if(t)return t;
+  const m=new Date().getMonth();return AGT.find(x=>x.m.includes(m))||AGT.find(x=>x.id==='sunny');
+}
+function agTile(emo,size,T,seed){
+  const ch=Array.from(emo),n=Math.max(3,Math.round(T/90));let s='';
+  for(let i=0;i<n;i++){
+    const r=Math.abs(Math.sin((seed+1)*12.9898+i*78.233)*43758.5453)%1,r2=Math.abs(Math.sin((seed+1)*4.1414+i*9.31)*24634.6345)%1;
+    s+='<text x="'+Math.round(size/2+r*(T-size*1.4))+'" y="'+Math.round(size+r2*(T-size*1.6))+'" font-size="'+size+'">'+ch[i%ch.length]+'</text>';
+  }
+  return 'url("data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="'+T+'" height="'+T+'">'+s+'</svg>')+'")';
+}
+(function agCss(){
+  let css='@keyframes agmove{to{background-position:var(--e0),var(--e1),var(--e2),0 0}}@keyframes aggrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}';
+  AGT.forEach(t=>{
+    const im=t.L.map((l,i)=>agTile(l[0],l[1],l[2],i+t.id.length)),sz=t.L.map(l=>l[2]+'px '+l[2]+'px'),
+      e=t.L.map(l=>l[3]==='fall'?'0 '+l[2]+'px':l[3]==='rise'?'0 -'+l[2]+'px':l[2]+'px '+Math.round(l[2]/2)+'px');
+    css+='.agT-'+t.id+'{background-image:'+im.join(',')+',linear-gradient(160deg,'+t.c.join(',')+');background-size:'+sz.join(',')+','+(t.grad?'300% 300%':'100% 100%')+';background-repeat:repeat,repeat,repeat,no-repeat;'+
+      'animation:agmove 22s linear infinite'+(t.grad?',aggrad 14s ease infinite':'')+';'+t.L.map((l,i)=>'--e'+i+':'+e[i]).join(';')+'}';
+  });
+  css+='.agT-custom{background-size:300% 300%;animation:aggrad 10s ease infinite}@media(prefers-reduced-motion:reduce){[class*=agT-]{animation:none!important}}';
+  const st=document.createElement('style');st.id='agthemes';st.textContent=css;document.head.appendChild(st);
+})();
+function agBgApply(el,bg){
+  if(!el)return;[...el.classList].forEach(c=>{if(c.indexOf('agT-')===0)el.classList.remove(c)});el.style.backgroundImage='';el.style.background='';
+  const t=agThemeFor(bg);
+  if(t.custom){el.classList.add('agT-custom');el.style.background='linear-gradient(135deg,'+(t.custom[0]||'#2563eb')+','+(t.custom[1]||'#7c3aed')+','+(t.custom[0]||'#2563eb')+')';el.style.backgroundSize='300% 300%'}
+  else el.classList.add('agT-'+t.id);
+}
+
+/* ---------- layouts ---------- */
+const agToday=()=>new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+function agLay(kind,sub,P){
+  const W=P.w,H=P.h,E=[];let z=1;
+  const T=o=>E.push(Object.assign({id:rid(),t:'text',r:0,z:z++,color:'#0f172a',fs:30},o));
+  const S=o=>E.push(Object.assign({id:rid(),t:'shape',shape:'round',fill:'rgba(255,255,255,.9)',stroke:'',sw:0,text:'',r:0,z:z++},o));
+  const head=()=>{S({x:60,y:34,w:W-120,h:130});T({x:92,y:44,w:W-184,h:80,text:agShort(sub)+' Agenda',fs:56,bold:true,color:'#1d4ed8',valign:'middle'});T({x:92,y:112,w:W-184,h:44,text:agToday(),fs:28,color:'#475569'})};
+  if(kind==='blank'){head();return {title:'Blank',els:E}}
+  head();
+  if(kind==='today'){
+    const cw=(W-120-40)/3;
+    [['1  Warm-up','Write the warm-up here.'],['2  Lesson','What are we learning today?'],['3  Practice','Practice and exit ticket.']].forEach((c,i)=>{const x=60+i*(cw+20);S({x,y:200,w:cw,h:420});T({x:x+24,y:216,w:cw-48,h:60,text:c[0],fs:38,bold:true,color:'#2563eb'});T({x:x+24,y:290,w:cw-48,h:300,text:c[1],fs:28})});
+    return {title:'Today',els:E};
+  }
+  if(kind==='list'){S({x:60,y:200,w:W-120,h:440});T({x:96,y:224,w:W-192,h:400,text:'1. First thing we do\n2. Next we learn\n3. Then we practice\n4. Last we wrap up',fs:40});return {title:'List',els:E}}
+  if(kind==='twocol'){const cw=(W-120-30)/2;S({x:60,y:200,w:cw,h:440});S({x:60+cw+30,y:200,w:cw,h:440,fill:'rgba(254,243,199,.95)'});
+    T({x:90,y:218,w:cw-60,h:56,text:'Agenda',fs:42,bold:true,color:'#2563eb'});T({x:90,y:284,w:cw-60,h:330,text:'Warm-up\nLesson\nPractice'});
+    T({x:90+cw+30,y:218,w:cw-60,h:56,text:'Homework',fs:42,bold:true,color:'#b45309'});T({x:90+cw+30,y:284,w:cw-60,h:330,text:'No homework tonight!'});return {title:'Agenda and homework',els:E}}
+  if(kind==='homework'){S({x:60,y:200,w:W-120,h:300,fill:'rgba(254,243,199,.95)'});T({x:96,y:218,w:W-192,h:56,text:'Homework',fs:46,bold:true,color:'#b45309'});T({x:96,y:288,w:W-192,h:200,text:'Write the homework here.',fs:36});
+    S({x:60,y:520,w:W-120,h:140});T({x:96,y:534,w:W-192,h:110,text:'Reminders: bring your notebook and charger.',fs:30,color:'#475569'});return {title:'Homework',els:E}}
+  return {title:'Slide',els:E};
+}
+function agDefaultDoc(sub){
+  const P=Object.assign(wbDefaults(),{id:'ag-'+sub,bg:'transparent',title:agName(sub)+' Agenda'});
+  P.slides=[agLay('today',sub,P)];return P;
+}
+
+/* ---------- who is editing right now (only people who are online show up) ---------- */
+const AGP={t:0,last:0};
+const agMyUid=()=>ME?(ME.role==='owner'?'owner':ME.id):'';
+function agOnline(sub){
+  const now=Date.now();
+  return Object.entries(C.agpres||{}).map(([k,v])=>Object.assign({k},v)).filter(v=>v&&v.sub===sub&&v.ts>now-22000&&v.uid!==agMyUid());
+}
+function agPresStart(){
+  agPresBeat();clearInterval(AGP.t);AGP.t=setInterval(agPresBeat,8000);
+}
+function agPresBeat(){
+  if(!AGM||!ME)return;
+  putQuiet('agpres',AGM.sub+'_'+agMyUid(),{sub:AGM.sub,uid:agMyUid(),name:ME.role==='owner'?'Mr. V (owner)':ME.name,ts:Date.now()});
+  agBar();
+}
+function agPresStop(){
+  clearInterval(AGP.t);AGP.t=0;
+  if(AGM&&ME)delQuiet('agpres',AGM.sub+'_'+agMyUid());
+}
+function agBar(){
+  const b=$('agpbar');if(!b||!AGM)return;
+  const L=agOnline(AGM.sub);
+  b.innerHTML='<span class="agdot"></span>'+(L.length?'Also editing: <b>'+L.map(x=>esc(x.name)).join(', ')+'</b>':'Only you are editing')+'<span class="agme"> · You</span>';
+}
+
+/* ---------- the editor (the same editor as presentations, in agenda mode) ---------- */
+let AGM=null;
+function agEditorBar(){
+  const top=document.querySelector('#wbe .wbtop');if(!top||$('agpbar'))return;
+  const sz=$('wbsz');
+  sz.insertAdjacentHTML('beforebegin','<span id="agpbar" class="agpbar agonly"></span><button class="wbib agonly" id="aglyb">'+ic('note')+' Layouts</button><button class="wbib agonly" id="agthb">'+ic('palette')+' Background</button>');
+}
+function agOpen(sub){
+  if(!agCan(sub)){flash('You can not edit this agenda.');sfx('error');return}
+  const cur=(C.agenda||{})[sub];
+  const P=cur&&cur.doc?JSON.parse(JSON.stringify(cur.doc)):agDefaultDoc(sub);
+  P.id='ag-'+sub;P.bg='transparent';P.title=agName(sub)+' Agenda';
+  WB={id:P.id,P,si:0,sel:null,undo:[],redo:[],dirty:false,draw:false,pen:{c:'#2563eb',w:6},k:1,tab:'edit',clip:null};
+  AGM={sub,base:(cur&&cur.ts)||0,bg:(cur&&cur.bg)||'auto'};
+  agEditorBar();
+  $('wbe').classList.remove('hide');$('wbe').classList.add('agmode');syncScroll();
+  $('wbtitle').value=agName(sub)+' Agenda';$('wbtitle').readOnly=true;
+  wbRender();wbUndoBtns();setTimeout(()=>{wbFit();wbRender();agBgApply($('wbstage'),AGM.bg)},60);
+  sfx('open');agPresStart();
+}
+setInterval(()=>{
+  if(AGM&&!WB){agPresStop();AGM=null;$('wbe').classList.remove('agmode');$('wbtitle').readOnly=false;const m=$('agmenu');if(m)m.remove();AG.sig='';if(curTab==='agenda')renderAgenda(true)}
+},500);
+const _agStage=wbStage;
+wbStage=function(){_agStage();if(AGM)agBgApply($('wbstage'),AGM.bg)};
+const agAsk=(title,text)=>new Promise(res=>askConfirm(title,text,()=>res(true),{yesLabel:'Save anyway',noLabel:'Cancel',onNo:()=>res(false)}));
+const _agWbSave=wbSave;
+wbSave=async function(opt){
+  if(!AGM)return _agWbSave(opt);
+  if(!WB)return false;
+  const P=JSON.parse(JSON.stringify(WB.P));P.bg='transparent';P.title=agName(AGM.sub)+' Agenda';delete P.id;
+  const kb=wbSize(P);if(kb>4000){flash('This agenda is '+Math.round(kb/1024*10)/10+' MB. Remove a big picture so it can save.');return false}
+  const cur=(C.agenda||{})[AGM.sub];
+  if(cur&&cur.ts>AGM.base&&cur.uid!==agMyUid()){if(!await agAsk('Someone else saved this agenda',(cur.by||'Another teacher')+' saved changes after you opened it. If you save now, their changes are replaced.'))return false}
+  const o={doc:P,bg:AGM.bg,date:isoDay(new Date()),by:ME.role==='owner'?'Mr. V':ME.name,uid:agMyUid(),ts:Date.now()};
+  const ok=await put('agenda',AGM.sub,o);
+  if(ok){WB.dirty=false;AGM.base=o.ts;pushToast('Agenda saved for <b>'+esc(agName(AGM.sub))+'</b>.','📅',3000,{hist:true});sfx('success')}
+  return ok;
+};
+const _agBgMenu=wbBgMenu;
+wbBgMenu=function(btn){if(AGM)return agThemeMenu(btn||$('agthb'));return _agBgMenu(btn)};
+function agMenu(btn,html){
+  const o=$('agmenu');if(o){const same=o.dataset.b===btn.id;o.remove();if(same)return null}
+  const m=document.createElement('div');m.id='agmenu';m.className='agmenu';m.dataset.b=btn.id;m.innerHTML=html;document.body.appendChild(m);
+  const r=btn.getBoundingClientRect();m.style.top=(r.bottom+6)+'px';m.style.left=Math.max(8,Math.min(innerWidth-m.offsetWidth-8,r.left))+'px';return m;
+}
+function agThemeMenu(btn){
+  if(!AGM)return;const cur=AGM.bg,auto=agThemeFor('auto').id;
+  agMenu(btn,'<div class="agmh">Pick an animated background</div>'+
+   '<button class="agmi'+(cur==='auto'?' on':'')+'" data-agbg="auto"><i class="agsw agT-'+auto+'"></i><span>Automatic (this month)<small>'+esc(agThemeFor('auto').n)+'</small></span></button>'+
+   AGT.map(t=>'<button class="agmi'+(cur===t.id?' on':'')+'" data-agbg="'+t.id+'"><i class="agsw agT-'+t.id+'"></i><span>'+esc(t.n)+'</span></button>').join('')+
+   '<div class="agmh" style="margin-top:8px">Or make your own</div><div class="agcust"><input type="color" id="agc1" value="'+((cur.indexOf('custom:')===0?cur.split(':')[1]:'#2563eb'))+'" aria-label="First color"><input type="color" id="agc2" value="'+((cur.indexOf('custom:')===0?cur.split(':')[2]:'#7c3aed'))+'" aria-label="Second color"><button class="btn light sm" id="agcgo">Use my colors</button></div>');
+}
+function agLayoutMenu(btn){
+  agMenu(btn,'<div class="agmh">Add a new slide with a layout</div>'+[['today','Today: warm-up, lesson, practice'],['list','Numbered list'],['twocol','Agenda and homework'],['homework','Homework board'],['blank','Title only']].map(l=>'<button class="agmi" data-aglay="'+l[0]+'"><span>'+l[1]+'</span></button>').join(''));
+}
+function agSetBg(v){AGM.bg=v;agBgApply($('wbstage'),v);if(WB)WB.dirty=true;const m=$('agmenu');if(m)m.remove();sfx('pop')}
+document.addEventListener('click',e=>{
+  if(!AGM)return;let b;
+  if(e.target.closest('#aglyb')){agLayoutMenu($('aglyb'));return}
+  if(e.target.closest('#agthb')){agThemeMenu($('agthb'));return}
+  if(b=e.target.closest('[data-aglay]')){wbPush();const s=agLay(b.dataset.aglay,AGM.sub,WB.P);WB.P.slides.splice(WB.si+1,0,s);WB.si++;WB.sel=null;WB.dirty=true;wbRender();const m=$('agmenu');if(m)m.remove();sfx('pop');return}
+  if(b=e.target.closest('[data-agbg]')){agSetBg(b.dataset.agbg);return}
+  if(e.target.closest('#agcgo')){agSetBg('custom:'+$('agc1').value+':'+$('agc2').value);return}
+  if(!e.target.closest('#agmenu'))$('agmenu')&&$('agmenu').remove();
+},true);
+
+/* ---------- the viewer in the Daily Agenda tab ---------- */
+const AG={sub:'',si:{},sig:''};
+const isoDay=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const dayLabel=s=>{const m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(s||'');if(!m)return '';return new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})};
+function agFit(){
+  document.querySelectorAll('#agbody .agview').forEach(v=>{const st=v.firstElementChild;if(!st||!st.classList.contains('wbstage'))return;const k=v.clientWidth/(parseFloat(st.style.width)||1280);st.style.transformOrigin='0 0';st.style.transform='scale('+k+')'});
+}
+window.addEventListener('resize',agFit);
 function renderAgenda(force){
   const box=$('agbody');if(!box||!ME)return;
-  if(!force&&focusIn('agbody'))return;
-  const today=isoDay(new Date());
-  const card=s=>{
-    const [id,name,ico,col]=s,a=(C.agenda||{})[id],ed=AG.edit===id&&agCan(id),can=agCan(id);
-    const head='<div class="agh" style="--ac:'+col+'"><span class="agi">'+ic(ico)+'</span><div><b>'+esc(name)+'</b><small>'+(a&&a.date?(a.date===today?'Today · ':'')+esc(dayLabel(a.date)):'Nothing posted yet')+'</small></div>'+(can&&!ed?'<button class="btn light sm" data-agedit="'+id+'">'+ic('edit')+' Edit</button>':'')+'</div>';
-    if(ed){
-      const d=a||{};
-      return '<div class="box agc" data-agc="'+id+'">'+head+'<div class="agb"><label class="lab" for="agd-'+id+'">Date</label><input class="field" type="date" id="agd-'+id+'" value="'+esc(d.date||today)+'">'+
-        '<label class="lab" for="agg-'+id+'">Learning goal</label><input class="field" id="agg-'+id+'" maxlength="160" autocomplete="off" placeholder="What are we learning today?" value="'+esc(d.goal||'')+'">'+
-        '<label class="lab" for="agi-'+id+'">Today\'s agenda (one line each)</label><textarea class="field" id="agi-'+id+'" rows="6" maxlength="700" placeholder="Warm-up&#10;Lesson&#10;Practice">'+esc(d.items||'')+'</textarea>'+
-        '<label class="lab" for="agh-'+id+'">Homework</label><input class="field" id="agh-'+id+'" maxlength="200" autocomplete="off" placeholder="None" value="'+esc(d.hw||'')+'">'+
-        '<label class="lab" for="agn-'+id+'">Notes (optional)</label><input class="field" id="agn-'+id+'" maxlength="200" autocomplete="off" value="'+esc(d.notes||'')+'">'+
-        '<div class="xpbtns" style="margin:12px 0 0"><button class="btn primary" data-agsave="'+id+'">Save agenda</button><button class="btn light" data-agcancel="1">Cancel</button>'+(a?'<button class="btn light" data-agclear="'+id+'">Clear</button>':'')+'</div></div></div>';
-    }
-    if(!a||(!a.goal&&!a.items&&!a.hw&&!a.notes))return '<div class="box agc">'+head+'<div class="agb"><p class="note" style="margin:0">Nothing is posted for this class yet.'+(can?' Press Edit to add today\'s agenda.':'')+'</p></div></div>';
-    const L=agLines(a.items);
-    return '<div class="box agc">'+head+'<div class="agb">'+(a.date&&a.date!==today?'<div class="agold">Posted for '+esc(dayLabel(a.date))+', not today.</div>':'')+
-      (a.goal?'<div class="aglab">Learning goal</div><p class="agg">'+esc(a.goal)+'</p>':'')+(L.length?'<div class="aglab">Agenda</div><ol class="agl">'+L.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>':'')+
-      (a.hw?'<div class="aglab">Homework</div><p class="agp">'+esc(a.hw)+'</p>':'')+(a.notes?'<div class="aglab">Notes</div><p class="agp">'+esc(a.notes)+'</p>':'')+
-      '<small class="agby">Updated '+ago(a.ts||0)+(a.by?' by '+esc(a.by):'')+'</small></div></div>';
-  };
-  const ut=Object.keys(TEACHERS).filter(univ).map(i=>TEACHERS[i].name);
-  box.innerHTML='<div class="aggrid">'+AGSUBJ.map(card).join('')+'</div>'+
-    (ut.length?'<div class="box agleg"><b>'+ic('users')+' '+UNIVTXT+'s</b><p class="note" style="margin:6px 0 0">'+esc(ut.join(', '))+'. '+UNIVSUB+' They can post the Daily Agenda.</p></div>':'');
+  if(!AG.sub){const mine=ME.role==='teacher'?subjOf(ME.id):'';AG.sub=mine||'english'}
+  const sub=AG.sub,d=(C.agenda||{})[sub],today=isoDay(new Date());
+  const on=agOnline(sub),can=agCan(sub),P=d&&d.doc?d.doc:null,si=Math.min(AG.si[sub]||0,P?P.slides.length-1:0);
+  const owner=subjOwner(sub),blockUI=agCanBlock(sub);
+  const others=Object.keys(TEACHERS).filter(i=>i!==owner),bl=owner?blocksOf(owner):[];
+  const sig=JSON.stringify([sub,d&&d.ts,si,on.map(x=>x.name),can,bl,owner,TEACHERS[owner]&&TEACHERS[owner].name,d&&d.bg,Math.floor(Date.now()/60000),new Date().getMonth()]);
+  if(!force&&AG.sig===sig)return;AG.sig=sig;
+  const old=d&&d.date&&d.date!==today;
+  let h='<div class="agtabs">'+AGSUBJ.map(s=>'<button class="agtab'+(s[0]===sub?' on':'')+'" data-agsub="'+s[0]+'" style="--ac:'+s[3]+'">'+ic(s[2])+' '+esc(agShort(s[0]))+'</button>').join('')+'</div>';
+  h+='<div class="agmain"><div class="agstagewrap"><div class="agview agT-sunny" id="agview"></div>'+
+     (P&&P.slides.length>1?'<div class="agnav"><button class="btn light sm" data-agnav="-1" aria-label="Previous slide">‹</button><span>Slide '+(si+1)+' of '+P.slides.length+'</span><button class="btn light sm" data-agnav="1" aria-label="Next slide">›</button></div>':'')+'</div>'+
+     '<div class="agside"><div class="box"><b>'+esc(agName(sub))+'</b><p class="note" style="margin:4px 0 8px">'+(owner?'Teacher: <b>'+esc(TEACHERS[owner].name)+'</b>':'No teacher picked yet')+'</p>'+
+     (d&&d.ts?'<p class="note" style="margin:0">'+(old?'<span class="agold">Posted for '+esc(dayLabel(d.date))+', not today.</span><br>':'Posted for <b>today</b>. ')+'Updated '+ago(d.ts)+(d.by?' by '+esc(d.by):'')+'.</p>':'<p class="note" style="margin:0">Nothing is posted yet.</p>')+
+     '<div class="agwho"><span class="agdot'+(on.length?'':' off')+'"></span>'+(on.length?'Editing now: <b>'+on.map(x=>esc(x.name)).join(', ')+'</b>':'Nobody is editing right now')+'</div>'+
+     (can?'<div class="xpbtns" style="margin:12px 0 0"><button class="btn primary" data-agedit="'+sub+'">'+ic('edit')+' Edit agenda</button></div>':'<p class="note" style="margin:12px 0 0">'+(ME.role==='student'?'Only teachers can edit the agenda.':'You can not edit this agenda. '+(owner?esc(TEACHERS[owner].name)+' blocked editing.':''))+'</p>')+'</div>'+
+     (blockUI&&owner?'<div class="box"><b>Who can edit '+esc(agShort(sub))+'?</b><p class="note" style="margin:4px 0 8px">You have full access. Turn others off to block them.</p>'+others.map(i=>'<label class="sw agbl"><input type="checkbox" data-agblk="'+esc(i)+'"'+(bl.includes(i)?'':' checked')+'><i></i><span>'+esc(TEACHERS[i].name)+'</span></label>').join('')+'</div>':'')+
+     '</div></div>'+
+     (Object.keys(TEACHERS).filter(univ).length?'<div class="box agleg"><b>'+ic('users')+' '+esc(UNIVTXT)+'s</b><p class="note" style="margin:6px 0 0">'+Object.keys(TEACHERS).filter(univ).map(i=>esc(TEACHERS[i].name)+' ('+esc(agShort(subjOf(i))||'teacher')+')').join(', ')+'. '+esc(UNIVSUB)+'</p></div>':'');
+  box.innerHTML=h;
+  const v=$('agview');
+  if(v){
+    agBgApply(v,d&&d.bg||'auto');
+    if(P&&P.slides[si]){v.appendChild(slideDOM(P,P.slides[si],{}));agFit()}
+    else v.innerHTML='<div class="agempty">Nothing is posted for '+esc(agShort(sub))+' yet.'+(can?'<br>Press <b>Edit agenda</b> to make it.':'')+'</div>';
+  }
 }
-document.addEventListener('click',async e=>{
-  let b;if(!ME)return;
-  if(b=e.target.closest('[data-agedit]')){AG.edit=b.dataset.agedit;sfx('open');renderAgenda(true);return}
-  if(e.target.closest('[data-agcancel]')){AG.edit=null;renderAgenda(true);return}
-  if(b=e.target.closest('[data-agclear]')){const id=b.dataset.agclear;if(!agCan(id))return;askConfirm('Clear this agenda?','Removes everything posted for '+(AGSUBJ.find(s=>s[0]===id)||[])[1]+'.',async()=>{await put('agenda',id,{date:'',goal:'',items:'',hw:'',notes:'',by:ME.name,ts:Date.now()});AG.edit=null;renderAgenda(true);pushToast('Agenda cleared.','🧹',2500)});return}
-  if(b=e.target.closest('[data-agsave]')){
-    const id=b.dataset.agsave;if(!agCan(id)){flash('You can not edit this agenda.');return}
-    const v=k=>($(k+'-'+id).value||'').trim();
-    const data={date:v('agd')||isoDay(new Date()),goal:v('agg'),items:v('agi'),hw:v('agh'),notes:v('agn'),by:ME.name,ts:Date.now()};
-    act('agsave'+id,async()=>{if(await put('agenda',id,data)){AG.edit=null;sfx('success');renderAgenda(true);pushToast('Agenda saved for <b>'+esc((AGSUBJ.find(s=>s[0]===id)||[])[1])+'</b>.','📅',3000)}});return}
+setInterval(()=>{if(curTab==='agenda'&&ME&&!document.hidden)renderAgenda()},4000);
+document.addEventListener('click',e=>{
+  if(!ME)return;let b;
+  if(b=e.target.closest('[data-agsub]')){AG.sub=b.dataset.agsub;renderAgenda(true);sfx('tab');return}
+  if(b=e.target.closest('[data-agnav]')){const P=((C.agenda||{})[AG.sub]||{}).doc;if(!P)return;AG.si[AG.sub]=(((AG.si[AG.sub]||0)+(+b.dataset.agnav))+P.slides.length)%P.slides.length;renderAgenda(true);sfx('tab');return}
+  if(b=e.target.closest('[data-agedit]')){agOpen(b.dataset.agedit);return}
+});
+document.addEventListener('change',async e=>{
+  const t=e.target;if(!ME||!t.dataset)return;
+  if(t.dataset.agblk){
+    const sub=AG.sub,own=subjOwner(sub);if(!own||!agCanBlock(sub))return;
+    const bl=new Set(blocksOf(own));if(t.checked)bl.delete(t.dataset.agblk);else bl.add(t.dataset.agblk);
+    const ok=await put('teachers',own,Object.assign({},(C.teachers||{})[own]||{},{blocks:[...bl],ts:Date.now()}));
+    if(ok){sfx(t.checked?'unlock':'lock');pushToast((t.checked?'Allowed ':'Blocked ')+'<b>'+esc(TEACHERS[t.dataset.agblk].name)+'</b> '+(t.checked?'to edit':'from editing')+' '+esc(agShort(sub))+'.','📅',3000);AG.sig=''}
+  }
 });
 
 /* ---------- owner: who is what, and what they can open ---------- */
 (function(){
   const s=$('osec-teachers');if(!s)return;
   const d=document.createElement('details');d.className='box ownsec';d.id='osec-tacc';
-  d.innerHTML='<summary>'+ic('shield')+'<b>Teacher roles and access</b><span class="chev" aria-hidden="true"></span></summary><div class="osb"><p class="note" style="margin:0 0 12px">Universal 7th grade teachers can log in and only edit the <b>Daily Agenda</b>. Unlock more tabs for them here, or make them a full teacher. Changes save right away.</p><div id="otacc"></div></div>';
+  d.innerHTML='<summary>'+ic('shield')+'<b>Teacher roles and access</b><span class="chev" aria-hidden="true"></span></summary><div class="osb"><p class="note" style="margin:0 0 12px">The 7th Blue Team teachers can log in and only edit the <b>Daily Agenda</b>. Pick their subject, unlock more tabs for them, or make them a full teacher. Changes save right away.</p><div id="otacc"></div></div>';
   s.after(d);
   const nb=document.querySelector('#ownnav [data-oj="teachers"]');if(nb){const c=nb.cloneNode(true);c.dataset.oj='tacc';c.textContent='Teacher access';nb.after(c)}
 })();
 function ownTacc(){
   const host=$('otacc');if(!host||focusIn('otacc'))return;
-  const ids=Object.keys(TEACHERS),sg=JSON.stringify(ids.map(i=>[i,TEACHERS[i].name,univ(i),uperm(i),usubj(i)]));
+  const ids=Object.keys(TEACHERS),sg=JSON.stringify(ids.map(i=>[i,TEACHERS[i].name,univ(i),uperm(i),subjOf(i)]));
   if(!sigSet('tacc',sg))return;
   host.innerHTML=ids.map(id=>{
     const u=univ(id),locked=id==='mr-v';
-    return '<div class="tacc" data-tacc="'+esc(id)+'"><div class="who">'+avHTML(id,TEACHERS[id].name,38)+'<div><b>'+esc(TEACHERS[id].name)+'</b><small>'+(u?UNIVTXT+' · 7th Blue Team, not 7th Science Blue Team':'Full teacher')+'</small></div></div>'+
+    return '<div class="tacc"><div class="who">'+avHTML(id,TEACHERS[id].name,38)+'<div><b>'+esc(TEACHERS[id].name)+'</b><small>'+esc(subjOf(id)?roleLabel(id):'Teacher')+(u?' · '+UNIVTXT+' (not 7th Science Blue Team)':' · Full teacher')+'</small></div></div>'+
+     '<label class="lab">Agenda subject</label><select class="field" data-tasub="'+esc(id)+'"><option value="">None</option>'+AGSUBJ.map(s=>'<option value="'+s[0]+'"'+(subjOf(id)===s[0]?' selected':'')+'>'+esc(agShort(s[0]))+'</option>').join('')+'</select>'+
      (locked?'<p class="note" style="margin:8px 0 0">Mr. V always has full access.</p>':
       '<label class="lab">Role</label><select class="field" data-taty="'+esc(id)+'"><option value="full"'+(u?'':' selected')+'>Full teacher (all teacher tabs)</option><option value="univ"'+(u?' selected':'')+'>'+UNIVTXT+' (Daily Agenda only)</option></select>'+
-      (u?'<div class="lab">Agenda subjects they can edit</div><div class="pcbs">'+AGSUBJ.map(x=>'<label class="pcb"><input type="checkbox" data-tasu="'+esc(id)+'" value="'+x[0]+'"'+(usubj(id).includes(x[0])?' checked':'')+'><span>'+esc(x[1])+'</span></label>').join('')+'</div>'+
-        '<div class="lab">Extra tabs you unlock for them</div><div class="pcbs">'+UPERMS.map(x=>'<label class="pcb"><input type="checkbox" data-tape="'+esc(id)+'" value="'+x[0]+'"'+(uperm(id).includes(x[0])?' checked':'')+'><span>'+esc(x[1])+'</span></label>').join('')+'</div>':''))+'</div>';
+      (u?'<div class="lab">Extra tabs you unlock for them</div><div class="pcbs">'+UPERMS.map(x=>'<label class="pcb"><input type="checkbox" data-tape="'+esc(id)+'" value="'+x[0]+'"'+(uperm(id).includes(x[0])?' checked':'')+'><span>'+esc(x[1])+'</span></label>').join('')+'</div>':''))+'</div>';
   }).join('');
 }
 const _agOwnRef=ownerRefresh;
@@ -12004,13 +12234,13 @@ async function taccSave(id,patch){
   if(ok){ownSig.tacc='';sfx('success');pushToast('Saved access for <b>'+esc(TEACHERS[id]?TEACHERS[id].name:'teacher')+'</b>.','✅',2500)}
 }
 document.addEventListener('change',e=>{
-  if(!OWN())return;const t=e.target;
-  if(t.dataset&&t.dataset.taty){taccSave(t.dataset.taty,{univ:t.value==='univ'});return}
-  if(t.dataset&&t.dataset.tasu){const id=t.dataset.tasu,v=[...document.querySelectorAll('[data-tasu="'+id+'"]')].filter(x=>x.checked).map(x=>x.value);if(!v.length){t.checked=true;flash('Pick at least one subject.');sfx('error');return}taccSave(id,{subj:v});return}
-  if(t.dataset&&t.dataset.tape){const id=t.dataset.tape;taccSave(id,{perm:[...document.querySelectorAll('[data-tape="'+id+'"]')].filter(x=>x.checked).map(x=>x.value)})}
+  if(!OWN())return;const t=e.target;if(!t.dataset)return;
+  if(t.dataset.taty){taccSave(t.dataset.taty,{univ:t.value==='univ'});return}
+  if(t.dataset.tasub!==undefined){taccSave(t.dataset.tasub,{subject:t.value});return}
+  if(t.dataset.tape){const id=t.dataset.tape;taccSave(id,{perm:[...document.querySelectorAll('[data-tape="'+id+'"]')].filter(x=>x.checked).map(x=>x.value)})}
 });
 
-/* ===== v11 · Chat with Mr V (for people who bought or ordered Mr V Enterprise) ===== */
+/* ===== v11 · Chat with Mr V (for people who bought or ordered Enterprise Subscription) ===== */
 const OCH={sel:'',last:0,key:'',base:null,sendT:0};
 const ocKey=s=>'oc:'+s;
 const ocMe=()=>ME?(ME.role==='owner'?'owner':ME.id):'';
@@ -12053,14 +12283,14 @@ function renderOChat(force){
   root.dataset.key=mode;
   if(!staff){
     let ok=true,why='';
-    if(!ocEligible(sel)){ok=false;why='Chat opens after you place a Mr V Enterprise order.'}
+    if(!ocEligible(sel)){ok=false;why='Chat opens after you place a Enterprise Subscription order.'}
     else if(!ocStuOn(sel)){ok=false;why='Chat is turned off by Mr V right now. You can still read old messages.'}
-    root.innerHTML='<div class="box occ"><div class="ochd"><div class="ocav">'+ic('chat')+'</div><div><b>Mr V</b><small>Questions about your Mr V Enterprise order</small></div></div>'+(ocEligible(sel)||ocThread(sel).length?ocBox(sel,ok,why):'<div class="orempty" style="padding:30px"><div class="orbig" aria-hidden="true">'+ic('gift')+'</div><h3>No order yet</h3><p class="note" style="margin:0 0 12px">Chat opens after you place a Mr V Enterprise order.</p><a class="btn primary" href="/enterprise">Buy Mr V Enterprise</a></div>')+'</div>';
+    root.innerHTML='<div class="box occ"><div class="ochd"><div class="ocav">'+ic('chat')+'</div><div><b>Mr V</b><small>Questions about your Enterprise Subscription order</small></div></div>'+(ocEligible(sel)||ocThread(sel).length?ocBox(sel,ok,why):'<div class="orempty" style="padding:30px"><div class="orbig" aria-hidden="true">'+ic('gift')+'</div><h3>No order yet</h3><p class="note" style="margin:0 0 12px">Chat opens after you place a Enterprise Subscription order.</p><a class="btn primary" href="/enterprise">Buy Enterprise Subscription</a></div>')+'</div>';
   }else{
     const g=ocGlobalOn();
     root.innerHTML='<div class="box ocbar"><label class="sw" style="margin:0"><input type="checkbox" id="ocglobal"'+(g?' checked':'')+(OWN()?'':' disabled')+'><i></i><span>Students can chat with me'+(OWN()?'':' (only the owner can change this)')+'</span></label></div>'+
      '<div class="ocgrid"><div class="box ocside"><div class="h4" style="margin-top:0">Conversations</div><div id="oclist"></div></div><div class="box occ" id="occ">'+(sel?
-       '<div class="ochd"><div class="ocav">'+avHTML(sel,sName(sel),40)+'</div><div><b>'+esc(sName(sel))+'</b><small>'+(ocEligible(sel)?'Has a Mr V Enterprise order or plan':'No order yet')+'</small></div>'+(OWN()?'<label class="sw" style="margin:0 0 0 auto"><input type="checkbox" id="ocone"'+(ocStuOn(sel)?' checked':'')+'><i></i><span>Chat on</span></label>':'')+'</div>'+ocBox(sel,true,''):
+       '<div class="ochd"><div class="ocav">'+avHTML(sel,sName(sel),40)+'</div><div><b>'+esc(sName(sel))+'</b><small>'+(ocEligible(sel)?'Has a Enterprise Subscription order or plan':'No order yet')+'</small></div>'+(OWN()?'<label class="sw" style="margin:0 0 0 auto"><input type="checkbox" id="ocone"'+(ocStuOn(sel)?' checked':'')+'><i></i><span>Chat on</span></label>':'')+'</div>'+ocBox(sel,true,''):
        '<div class="orempty" style="padding:30px"><h3>No conversations yet</h3><p class="note" style="margin:0">When someone orders, they can message you here.</p></div>')+'</div></div>';
     ocList();
   }
@@ -12118,6 +12348,380 @@ setInterval(()=>{
     pushToast('<b>'+esc(who)+'</b> sent a chat message.','💬',5000,{hist:true});sfx('success');
   }catch(e){}
 },3000);
+
+/* ===== v12 · V Ticket (daily game pass for Enterprise members) + shining currency ===== */
+(function(){const g=document.querySelector('symbol#e-gift');if(g&&g.parentNode)g.parentNode.insertAdjacentHTML('beforeend','<symbol id="e-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 9.5l2 5 2-5M15 12h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>')})();
+const TK_SECS={starter:30,plus:90};
+const tkFmt=s=>s<60?s+' seconds':Math.floor(s/60)+' minute'+(s>=120?'s':'')+(s%60?' '+(s%60)+' seconds':'');
+const tkMine=()=>{if(!ME||ME.role!=='student')return null;const t=tierOf(ME.id);if(t==='none')return null;const w=W(ME.id),k=w.tk&&w.tk.day===todayKey()?w.tk:null;return {tier:t,secs:TK_SECS[t],tk:k}};
+async function tkClaim(game){
+  const m=tkMine();if(!m||m.tk)return;const w=W(ME.id);
+  w.tk={day:todayKey(),game,secs:m.secs,used:false};
+  if(await saveW(ME.id,w)){sfx('coin');confetti();pushToast('Your daily <b>V Ticket</b> is ready: '+esc(GAMES.find(g=>g.id===game).name)+' for '+tkFmt(m.secs)+'.','🎟️',4500,{hist:true})}
+}
+async function tkPlay(){
+  const m=tkMine();if(!m||!m.tk||m.tk.used||restr())return;const w=W(ME.id);
+  w.tk.used=true;if(!await saveW(ME.id,w))return;
+  GS={game:m.tk.game,mins:m.tk.secs/60,end:null,ticket:1};saveGS();go('gameroom',true);showArena();
+}
+const tkLogo=(big)=>'<span class="tkl'+(big?' big':'')+'">'+ic('ticket')+'</span>';
+function tkBox(){
+  const m=tkMine();if(!m)return '';
+  const pick=(m.tk&&m.tk.game)||'dash',used=m.tk&&m.tk.used;
+  let h='<div class="box tkbox shine"><div class="tkh">'+tkLogo(true)+'<div><b>Your daily V Ticket</b><small>'+(m.tier==='plus'?'Enterprise+':'Enterprise Starter')+': one free game every day for <b>'+tkFmt(m.secs)+'</b></small></div></div>';
+  if(!m.tk)h+='<p class="note" style="margin:10px 0 6px">Pick the game for today\'s ticket:</p><div class="tkg">'+GAMES.map(g=>'<button class="tkgm'+(g.id===TKSEL?' on':'')+'" data-tksel="'+g.id+'">'+ic(g.i)+' '+g.name+'</button>').join('')+'</div><div class="xpbtns" style="margin:12px 0 0"><button class="btn primary" data-tkget="1">'+ic('ticket')+' Get my V Ticket</button></div>';
+  else if(!used)h+='<p class="note" style="margin:10px 0">Ticket ready: <b>'+esc(GAMES.find(g=>g.id===pick).name)+'</b> for '+tkFmt(m.tk.secs)+'.</p><div class="xpbtns" style="margin:0"><button class="btn primary" data-tkplay="1">'+ic('play')+' Use ticket and play</button></div>';
+  else h+='<p class="note" style="margin:10px 0 0">You used today\'s ticket. A new one is waiting tomorrow.</p>';
+  return h+'</div>';
+}
+let TKSEL='dash';
+const _tkSub=renderSub;
+renderSub=function(){_tkSub();const b=$('subbody');if(!b||!ME||ME.role!=='student')return;const x=tkBox();if(!x)return;const o=b.querySelector('.tkbox');if(o)o.remove();b.insertAdjacentHTML('afterbegin',x)};
+const _tkGR=renderGameRoom;
+renderGameRoom=function(){
+  _tkGR();const s=$('gsetup');if(!s||!ME||GS)return;const old=s.querySelector('.tkbox');if(old)old.remove();
+  const m=tkMine();if(m&&m.tk&&!m.tk.used)s.insertAdjacentHTML('afterbegin',tkBox());
+};
+const _tkArena=showArena;
+showArena=function(){
+  _tkArena();
+  if(GS&&!GS.end&&GS.mins!==Math.floor(GS.mins)||(GS&&!GS.end&&GS.ticket)){
+    const s=Math.round(GS.mins*60);$('gtime').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+    $('gsn').textContent=(GS.ticket?'Your V Ticket: ':'')+tkFmt(s)+(GS.ticket?'':' paid')+'. The clock starts after you press Play.';
+  }
+};
+function tkCoinBox(){
+  const host=document.querySelector('#coins .cur');if(!host)return;let b=$('tkcur');
+  const m=tkMine();
+  if(!m){if(b)b.remove();return}
+  if(!b){b=document.createElement('div');b.id='tkcur';b.className='box tkbox shine';host.appendChild(b)}
+  const st=m.tk?(m.tk.used?'Used today':'Ready: use it in the Game Room'):'Not claimed yet';
+  const h='<div class="tkh">'+tkLogo(true)+'<div><b>V Ticket</b><small>You get 1 every day with Enterprise. Today: <b>'+st+'</b></small></div></div><div class="xpbtns" style="margin:10px 0 0"><button class="btn light sm" data-go="sub">'+(m.tk?'Open ticket':'Get today\'s ticket')+'</button></div>';
+  if(b.dataset.h!==h){b.dataset.h=h;b.innerHTML=h}
+}
+document.addEventListener('click',e=>{
+  let b;if(!ME)return;
+  if(b=e.target.closest('[data-tksel]')){TKSEL=b.dataset.tksel;renderSub();sfx('tab');return}
+  if(e.target.closest('[data-tkget]')){act('tkg',()=>tkClaim(TKSEL));return}
+  if(e.target.closest('[data-tkplay]')){act('tkp',tkPlay)}
+});
+setInterval(()=>{try{if(curTab==='coins'&&ME)tkCoinBox()}catch(e){}},1500);
+
+/* ===== v12 · browser notifications: ask after the device check, and a Settings switch ===== */
+const nSupported=()=>{try{return 'Notification' in window}catch(e){return false}};
+const nPerm=()=>nSupported()?Notification.permission:'denied';
+function notifAsk(){
+  let m=$('notifask');
+  if(!m){m=document.createElement('div');m.className='modal hide';m.id='notifask';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');$('v9root').appendChild(m);
+    m.innerHTML='<div class="mbox devbox"><div class="dvic">'+ic('bell')+'</div><h3>Allow notifications?</h3><p class="note" style="margin:0 0 18px">This will help you get in touch and gather around what you need to do and get caught up. You can change it any time in Settings.</p><button class="btn primary" id="nqyes" style="width:100%;justify-content:center;margin-bottom:10px">Allow notifications</button><button class="btn light" id="nqno" style="width:100%;justify-content:center">Not now</button></div>';
+    const done=yes=>{try{localStorage.setItem('mrv_notifq','1')}catch(e){}m.classList.add('hide');syncScroll();if(yes)notifAllow()};
+    $('nqyes').onclick=()=>done(true);$('nqno').onclick=()=>done(false)}
+  m.classList.remove('hide');syncScroll();sfx('open');
+}
+async function notifAllow(){
+  if(!nSupported()){flash('This browser does not support notifications.');return}
+  let r='denied';try{r=await Notification.requestPermission()}catch(e){}
+  if(r==='granted'){try{new Notification('Notifications are on',{body:'You will get updates from the Mr V website here.'})}catch(e){}pushToast('Notifications are <b>on</b>.','🔔',3000);sfx('success')}
+  else flash('Notifications are blocked. Turn them on in your browser site settings.');
+  try{renderSettings.force=true;renderSettings()}catch(e){}
+}
+setInterval(()=>{
+  try{
+    if(!DEV||!nSupported()||nPerm()!=='default')return;
+    if(localStorage.getItem('mrv_notifq')==='1'||localStorage.getItem('mrv_tourq')!=='1')return;
+    if(document.querySelector('.modal:not(.hide)'))return;
+    notifAsk();
+  }catch(e){}
+},4000);
+const _nSet=renderSettings;
+renderSettings=function(){
+  _nSet();const el=$('setlist');if(!el)return;
+  const st=nPerm(),txt=!nSupported()?'Not supported here':st==='granted'?'On':st==='denied'?'Blocked':'Off';
+  let r=$('notifrow');
+  const h='<div><b>Allow notifications for browsers</b><small>Get alerts about orders, chats and what you need to do. Status: <b>'+txt+'</b></small></div>'+(st==='granted'?'<span class="pill ok">On</span>':'<button class="btn light sm" id="notifbtn"'+(nSupported()&&st!=='denied'?'':' disabled')+'>Allow</button>');
+  if(!r){r=document.createElement('div');r.id='notifrow';r.className='setrow';el.insertBefore(r,el.firstChild)}
+  if(r.dataset.h!==h){r.dataset.h=h;r.innerHTML=h}
+};
+document.addEventListener('click',e=>{if(e.target.closest('#notifbtn'))notifAllow()});
+
+/* ===== v12 · AI helper: flowing sentences, "did you mean", long presentations, and the V AI helper inside the presentation editor ===== */
+const AIQ=(label,q)=>'<button class="aib" data-aichip="'+esc(q)+'">'+label+'</button>';
+const aiLow=s=>/^(The|A|An|All|Each|Every|Most|Some|Many|When|If|In|It|They|There|These|This|Those|You|We|Plants|Animals|Living|Cells|Water|Energy|Light|Heat|Earth|Atoms|Matter|Force|Forces)\b/.test(s)?s.charAt(0).toLowerCase()+s.slice(1):null;
+const aiEnd=s=>/[.!?]$/.test(s)?s:s+'.';
+function aiLink(f,i){
+  const lo=aiLow(f),C0=['Here is something important to remember. ','To understand it better, think about this. ','There is another key idea. ','Here is one more thing scientists want you to know. ','Last, remember this. '];
+  const lead=[['First, ','Next, ','Also, ','On top of that, ','Finally, '][i%5],''][lo?0:1];
+  return lo?lead+aiEnd(lo):C0[i%5]+aiEnd(f);
+}
+function aiProse(tp){
+  const f=tp.facts;let a=aiEnd(tp.intro)+' Let me explain it so it is easy to picture. '+f.slice(0,3).map(aiLink).join(' ');
+  return a;
+}
+function aiProse2(tp){
+  const f=tp.facts.slice(3).map((x,i)=>aiLink(x,i+3)).join(' ');
+  const v=tp.vocab.map(w=>'<b>'+esc(w[0])+'</b> means '+esc(aiLowFirst(w[1]))).join('. ');
+  return (f?esc(f)+' ':'')+'Some key words you will hear are these: '+v+'. Now think about this question: '+esc(tp.bigq);
+}
+const aiLowFirst=s=>s.charAt(0).toLowerCase()+s.slice(1);
+aiTopicCard=function(tp){
+  AIS.last=tp;
+  return '<b>'+esc(tp.n)+'</b><p>'+esc(aiProse(tp))+'</p><div class="aibtns">'+AIQ('Tell me more','Tell me more about '+tp.n)+AIQ('Explain it simpler','Explain '+tp.n+' in simple words')+AIQ('Give an example','Give me an example of '+tp.n)+aiBtn('quiz','Quiz me',tp.k)+aiBtn('vocab','Vocabulary',tp.k)+(isT()?aiBtn('pres','Make a presentation',tp.k)+aiBtn('asg','Make an assignment',tp.k):'')+'</div>';
+};
+aiVocab=function(tp){
+  AIS.last=tp;
+  return '<b>'+esc(tp.n)+' vocabulary</b><p>'+tp.vocab.map(v=>'The word <b>'+esc(v[0])+'</b> means '+esc(aiLowFirst(v[1]))+'.').join(' ')+' Learning these words makes it much easier to read and talk about '+esc(tp.n.toLowerCase())+'.</p><div class="aibtns">'+aiBtn('quiz','Quiz me',tp.k)+AIQ('Tell me more','Tell me more about '+tp.n)+'</div>';
+};
+function aiMore(tp){AIS.last=tp;return '<b>More about '+esc(tp.n)+'</b><p>'+aiProse2(tp)+'</p><div class="aibtns">'+AIQ('Give an example','Give me an example of '+tp.n)+aiBtn('quiz','Quiz me',tp.k)+'</div>'}
+function aiSimple(tp){AIS.last=tp;return '<b>'+esc(tp.n)+' in simple words</b><p>'+esc(aiEnd(tp.intro))+' If that still feels tricky, try picturing it this way. '+esc(aiEnd(tp.facts[0]))+' That is the main thing to hold on to. When you are ready, I can quiz you to see how much you remember.</p><div class="aibtns">'+aiBtn('quiz','Quiz me',tp.k)+AIQ('Tell me more','Tell me more about '+tp.n)+'</div>'}
+function aiExample(tp){AIS.last=tp;const v=tp.vocab[0],f=tp.facts[Math.min(1,tp.facts.length-1)];return '<b>An example of '+esc(tp.n)+'</b><p>Here is one way to see it in real life. '+esc(aiEnd(f))+' That is a good example of why the word <b>'+esc(v[0])+'</b> matters, because it means '+esc(aiLowFirst(v[1]))+'. Try finding an example of '+esc(tp.n.toLowerCase())+' at home or outside and tell a classmate about it.</p><div class="aibtns">'+AIQ('Tell me more','Tell me more about '+tp.n)+aiBtn('quiz','Quiz me',tp.k)+'</div>'}
+
+/* did you mean */
+const AIDO=[['Calculate something','15% of 80'],['Open a calculator','Give me a calculator'],['Open a ruler','Open a ruler'],['Open a timer','Open a timer'],['Open a notepad','Open a notepad'],['Explain a topic','Explain photosynthesis'],['Quiz me','Quiz me on cells'],['Vocabulary','Vocabulary for atoms']];
+const AITEACH=[['Make a long presentation','Make a presentation about the water cycle'],['Make an assignment','Create a quiz assignment about density']];
+function aiLev(a,b){const m=a.length,n=b.length;if(Math.abs(m-n)>2)return 9;let p=[];for(let j=0;j<=n;j++)p[j]=j;for(let i=1;i<=m;i++){let c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}return p[n]}
+function aiDidYouMean(text){
+  const words=text.toLowerCase().replace(/[^a-z' ]+/g,' ').split(/\s+/).filter(w=>w.length>2);
+  const vocab=[];AI_TOPICS.forEach(tp=>{[tp.n.toLowerCase()].concat(tp.al).forEach(a=>{if(!/\s/.test(a))vocab.push([a,'Explain '+tp.n,tp.n])})});
+  [['calculator','Give me a calculator','a calculator'],['ruler','Open a ruler','a ruler'],['timer','Open a timer','a timer'],['notepad','Open a notepad','a notepad'],['quiz','Quiz me on cells','a quiz'],['vocabulary','Vocabulary for atoms','vocabulary'],['presentation','Make a presentation about the water cycle','a presentation'],['assignment','Create a quiz assignment about density','an assignment'],['explain','Explain photosynthesis','an explanation'],['calculate','15% of 80','a calculation']].forEach(x=>vocab.push(x));
+  const hits=[];
+  words.forEach(w=>vocab.forEach(v=>{const d=aiLev(w,v[0]),lim=v[0].length>=7?2:1;if(d>0&&d<=lim&&!hits.find(h=>h[2]===v[2]))hits.push([d,v[1],v[2]])}));
+  hits.sort((a,b)=>a[0]-b[0]);return hits.slice(0,3);
+}
+function aiEverything(){
+  const t=isT(),L=AIDO.concat(t?AITEACH:[]);
+  return '<div class="aibtns">'+L.map(x=>AIQ(x[0],x[1])).join('')+'</div>';
+}
+const _aiThink2=aiThink;
+aiThink=function(text){
+  const l=' '+text.toLowerCase().replace(/[^\w\s%+\-*\/^().,=?!$°'":]/g,' ')+' ';
+  const wantTopic=()=>aiFindTopic(l)||AIS.last||null;
+  if(!AIS.quiz){
+    if(/\b(tell me more|more about|explain more|go deeper|say more|more details?)\b/.test(l)){const tp=wantTopic();if(tp)return aiMore(tp)}
+    if(/\b(simple words|simpler|easier|like i'?m (5|five)|eli5|dumb it down)\b/.test(l)){const tp=wantTopic();if(tp)return aiSimple(tp)}
+    if(/\b(example|for instance|real life)\b/.test(l)&&!/\b(assignment|presentation|slide)/.test(l)){const tp=wantTopic();if(tp)return aiExample(tp)}
+  }
+  const r=_aiThink2(text);
+  if(typeof r==='string'&&r.indexOf('I am not sure about that one')===0){
+    const h=aiDidYouMean(text);
+    const sug=h.length?'Did you mean - '+h.map(x=>'<b>'+esc(x[2])+'</b>').join(', or ')+'?<div class="aibtns">'+h.map(x=>AIQ(esc(x[2]),x[1])).join('')+'</div>':'I did not understand that one, and that is okay. Sometimes a small typo changes a word.';
+    return sug+'<p>Here is everything I can do. I can calculate numbers and solve equations, I can open a calculator, ruler, timer or notepad, I can explain science topics in full sentences, give you vocabulary and quiz you'+(isT()?', and I can build long presentations and assignments for your class':'')+'. Just press a button or type it in your own words.</p>'+aiEverything();
+  }
+  return r;
+};
+aiHelp=function(){
+  const t=isT();
+  return '<p>I am the V helper, and I am happy to help. I can calculate anything you type, like fifteen percent of eighty or the average of a list of numbers. I can open a calculator, a ruler, a timer or a notepad'+(t?', and I can send those windows to your students':'')+'. I can explain '+AI_TOPICS.length+' science topics in full sentences, tell you the vocabulary, and quiz you until you feel ready.'+(t?' I can also build a long presentation with animations, quiz slides and vocabulary, build an assignment for you to check, and in the presentation editor the <b>V AI helper</b> button can make your slides better.':'')+'</p>'+aiEverything()+'<span class="ainote">I run inside this website and do not connect to the internet.</span>';
+};
+
+/* long auto presentations */
+const _aiPresFor=aiPresFor;
+aiPresFor=function(name,tp,n,who){
+  const P=_aiPresFor(name,tp,n,who),target=n||14;
+  if(P.slides.length>=target)return P;
+  const cat=AI_CAT[tp?tp.cat:'physical'],M=cat[0],L=cat[1],D=cat[2];
+  const hd=t=>[TSH(0,0,1280,150,'rect','linear-gradient(90deg,'+M+','+D+')'),TTX(70,25,1140,100,t,60,'#ffffff',{bold:true,valign:'middle'})];
+  const add=[],facts=tp?tp.facts:[],vocab=tp?tp.vocab:[];
+  facts.forEach((f,i)=>add.push(['#ffffff',hd('Look closer: idea '+(i+1)).concat([TSH(70,190,1140,470,'round',L,{stroke:M,sw:3}),TTX(110,215,1060,420,aiEnd(f)+'\n\nWhy does this matter? Talk with a partner and explain it in your own words.',42,'#0f172a',{lh:1.4,valign:'middle'})])]));
+  vocab.forEach(v=>add.push(['#f8fafc',hd('Word to know').concat([TTX(90,200,1100,130,v[0],96,D,{bold:true,valign:'middle'}),TTX(90,350,1100,160,aiEnd(v[1]),48,'#0f172a'),TTX(90,540,1100,100,'Use this word in a sentence of your own.',36,'#64748b')])]));
+  if(tp)add.push(['#fff7ed',hd('In summary').concat([TTX(90,200,1100,440,aiEnd(tp.intro)+' '+facts.slice(0,3).map(aiEnd).join(' '),40,'#431407',{lh:1.45,valign:'middle'})])]);
+  add.push(['#ecfeff',hd('Turn and talk').concat([TTX(90,210,1100,400,'What is the most surprising thing you learned about '+name+'?\nWhat do you still wonder?',52,'#164e63',{lh:1.5,valign:'middle'})])]);
+  add.push(['#ffffff',hd('Draw it').concat([TSH(90,190,1100,480,'round','#ffffff',{stroke:M,sw:4,text:'Draw and label a diagram of '+name,fs:40,color:'#94a3b8'})])]);
+  add.push(['#fefce8',hd('Real life connection').concat([TTX(90,210,1100,400,'Where do you see '+name+' in real life?\nWrite two examples.',54,'#713f12',{lh:1.5,valign:'middle'})])]);
+  const last=P.slides.pop();
+  while(P.slides.length+1<target&&add.length){const a=add.shift();P.slides.push({title:'',bg:a[0],els:a[1].map((e,k)=>Object.assign({id:rid(),z:k+1},e))})}
+  P.slides.push(last);P.slides.forEach((s,i)=>s.title='Slide '+(i+1));return P;
+};
+
+/* V AI helper in the presentation editor */
+function vaiFixText(t){
+  t=String(t||'').replace(/[ \t]+/g,' ').replace(/ ?\n ?/g,'\n').trim();
+  if(!t)return t;
+  t=t.replace(/(^|[.!?]\s+)([a-z])/g,(m,a,b)=>a+b.toUpperCase());
+  t=t.replace(/\bi\b/g,'I').replace(/\s+([,.!?])/g,'$1');
+  if(t.split(/\s+/).length>=5&&!/[.!?:]$/.test(t)&&!/\n/.test(t))t+='.';
+  return t;
+}
+function vaiImprove(){
+  if(!WB)return 0;wbPush();let n=0;
+  WB.P.slides.forEach((s,i)=>{
+    (s.els||[]).forEach(e=>{if(e.t==='text'||e.t==='sticky'||(e.t==='shape'&&e.text)){const a=vaiFixText(e.text);if(a!==e.text){e.text=a;n++}}});
+    const tx=(s.els||[]).filter(e=>e.t==='text'&&e.text).sort((a,b)=>(a.y||0)-(b.y||0))[0];
+    if(!s.title||/^Slide \d+$/.test(s.title))s.title=tx?tx.text.split('\n')[0].slice(0,40):'Slide '+(i+1);
+  });
+  if(!WB.P.trans)WB.P.trans='slide';WB.dirty=true;wbRender();return n;
+}
+function vaiSlide(bg,els){return {title:'',bg,els:els.map((e,k)=>Object.assign({id:rid(),z:k+1},e))}}
+function vaiHead(t){const a=WB.P.accent||'#2563eb';return [TSH(0,0,1280,150,'rect','linear-gradient(90deg,'+a+',#1e3a8a)'),TTX(70,25,1140,100,t,60,'#ffffff',{bold:true,valign:'middle'})]}
+function vaiSummary(){
+  wbPush();const heads=WB.P.slides.map((s,i)=>s.title&&!/^Slide \d+$/.test(s.title)?s.title:'').filter(Boolean).slice(0,8);
+  const s=vaiSlide('#f8fafc',vaiHead('Summary').concat([TTX(90,200,1100,440,'Today we learned about:\n'+(heads.length?heads.map(h=>'• '+h).join('\n'):'• Write your main ideas here'),44,'#0f172a',{lh:1.5,valign:'middle'})]));
+  WB.P.slides.push(s);WB.si=WB.P.slides.length-1;WB.dirty=true;wbRender();
+}
+function vaiTopic(name){
+  const tp=aiFindTopic(name),nm=tp?tp.n:aiCap(name.trim());wbPush();
+  const Q=aiPresFor(nm,tp,tp?16:10,'Mr. V');Q.slides.forEach(s=>{s.els.forEach(e=>e.id=rid());WB.P.slides.push(s)});
+  WB.si=WB.P.slides.length-Q.slides.length;WB.dirty=true;wbRender();return Q.slides.length;
+}
+(function(){
+  const ids=setInterval(()=>{const sz=$('wbsz');if(!sz)return;clearInterval(ids);
+    if(!$('vaib'))sz.insertAdjacentHTML('beforebegin','<button class="wbib" id="vaib" title="V AI helper makes your presentation better">'+aiLogo(18,'')+' V AI helper</button>')},800);
+})();
+document.addEventListener('click',e=>{
+  if(!WB)return;
+  if(!AGM&&!e.target.closest('#agmenu,#vaib')){const o0=$('agmenu');if(o0)o0.remove()}
+  if(e.target.closest('#vaib')){
+    const o=$('agmenu');if(o){o.remove();return}
+    const m=document.createElement('div');m.id='agmenu';m.className='agmenu';m.innerHTML='<div class="agmh">V AI helper</div><button class="agmi" data-vai="fix"><span>Make my slides better<small>Fix capital letters, spacing, full sentences and slide names</small></span></button><button class="agmi" data-vai="sum"><span>Add a summary slide<small>Built from your slide names</small></span></button><div class="agmh" style="margin-top:8px">Add slides about a topic</div><div class="agcust"><input class="field" id="vaitp" placeholder="Photosynthesis, the water cycle..." style="flex:1;min-width:0;padding:8px"><button class="btn primary sm" data-vai="topic">Add</button></div><p class="note" style="margin:6px 6px 0;font-size:.8rem">Adds a long set of slides with big ideas, vocabulary, questions and animations.</p>';
+    document.body.appendChild(m);const r=$('vaib').getBoundingClientRect();m.style.top=(r.bottom+6)+'px';m.style.left=Math.max(8,Math.min(innerWidth-300,r.left))+'px';return;
+  }
+  const b=e.target.closest('[data-vai]');if(!b)return;
+  const k=b.dataset.vai;
+  if(k==='fix'){const n=vaiImprove();pushToast(n?'V AI helper improved <b>'+n+'</b> piece'+(n>1?'s':'')+' of text.':'Your slides already look great!','✨',3200);sfx('success')}
+  else if(k==='sum'){vaiSummary();sfx('pop')}
+  else if(k==='topic'){const v=($('vaitp').value||'').trim();if(!v){flash('Type a topic first.');return}const n=vaiTopic(v);pushToast('Added <b>'+n+'</b> slides about '+esc(v)+'.','✨',3500);sfx('success')}
+  const m=$('agmenu');if(m&&k!=='topic'||m&&k==='topic'&&($('vaitp')||{}).value)m.remove();
+});
+
+/* ===== v12 · Chat tab: group chats, student chats, teacher chats, plus Enterprise help ===== */
+const MGS={view:'msg',sel:'',pop:'',base:null,sendT:0,sig:''};
+const mgMe=()=>ME?(ME.role==='owner'?'owner':ME.id):'';
+const mgIsT=()=>!!ME&&ME.role==='teacher';
+const mgNm=id=>id==='owner'?'Mr. V':(TEACHERS[id]?TEACHERS[id].name:(allStudents()[id]?sName(id):'Someone'));
+const mgGlobalOn=()=>!(C.cls&&C.cls.chatall===false);
+const mgGroups=()=>Object.entries(C.chatgroups||{}).filter(([i,g])=>g&&g.name).map(([i,g])=>Object.assign({id:i},g));
+const mgDmKey=(a,b)=>'dm:'+(a<b?a+'__'+b:b+'__'+a);
+const mgTh=k=>Object.entries(C.chat||{}).filter(([i,m])=>m&&m.t===k).map(([i,m])=>Object.assign({id:i},m)).sort((a,b)=>a.ts-b.ts);
+const mgSeenKey=()=>'v_chseen_'+mgMe();
+const mgSeen=()=>{try{return JSON.parse(localStorage.getItem(mgSeenKey())||'{}')}catch(e){return{}}};
+function mgMark(k,ts){const x=mgSeen();if((x[k]||0)>=ts)return;x[k]=ts;try{localStorage.setItem(mgSeenKey(),JSON.stringify(x))}catch(e){}}
+function mgCanSee(g){if(!ME)return false;if(ME.role==='owner')return true;if(g.kind==='all')return true;return (g.members||[]).includes(mgMe())}
+/* the list of conversations for me */
+function mgConvos(){
+  const me=mgMe(),L=[];
+  mgGroups().filter(mgCanSee).forEach(g=>L.push({k:'g:'+g.id,name:g.name,kind:g.kind==='all'?'Everyone':'Group',g}));
+  const dms=new Set();
+  Object.values(C.chat||{}).forEach(m=>{if(m&&m.t&&m.t.indexOf('dm:')===0){const ids=m.t.slice(3).split('__');if(ids.includes(me))dms.add(m.t)}});
+  if(MGS.sel&&MGS.sel.indexOf('dm:')===0)dms.add(MGS.sel);
+  dms.forEach(k=>{const o=k.slice(3).split('__').find(x=>x!==me)||me;L.push({k,name:mgNm(o),kind:'Chat',other:o})});
+  L.forEach(c=>{const t=mgTh(c.k);c.last=(t[t.length-1]||{}).ts||(c.g&&c.g.ts)||0;const seen=mgSeen()[c.k]||0;c.un=t.filter(m=>m.from!==me&&m.ts>seen).length});
+  return L.sort((a,b)=>b.last-a.last);
+}
+function mgCanDm(a,b){ /* who may start a chat with whom */
+  if(a===b)return false;
+  if(ME.role==='student')return !!allStudents()[b];
+  if(ME.role==='teacher')return !!TEACHERS[b]&&b!==a;
+  return true;
+}
+function mgBubbles(k){
+  const me=mgMe(),L=mgTh(k);
+  if(!L.length)return '<p class="note" style="text-align:center;margin:40px 0">No messages yet. Say hi!</p>';
+  return L.map(m=>'<div class="ocm'+(m.from===me?' me':'')+'"><div class="ocb">'+esc(m.text||'')+'</div><small>'+(m.from===me?'You':esc(short(mgNm(m.from))))+' · '+ago(m.ts)+(ME.role==='owner'?' <button class="mgdel" data-mgdel="'+esc(m.id)+'" title="Delete message" aria-label="Delete message">×</button>':'')+'</small></div>').join('');
+}
+function mgTop(){
+  const el=$('chtop');if(!el)return;
+  const ent=typeof ocUnread==='function'?0:0;
+  const h='<div class="agtabs"><button class="agtab'+(MGS.view==='msg'?' on':'')+'" data-mgv="msg" style="--ac:#2563eb">'+ic('chat')+' Messages</button><button class="agtab'+(MGS.view==='ent'?' on':'')+'" data-mgv="ent" style="--ac:#b45309">'+ic('gift')+' Enterprise help</button></div>';
+  if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}
+}
+const _ocRender=renderOChat;
+renderOChat=function(force){
+  const top=$('chtop'),root=$('ocbody'),mm=$('chmsg');if(!root||!ME)return;
+  mgTop();
+  if(MGS.view==='ent'){mm.innerHTML='';mm.dataset.h='';root.classList.remove('hide');return _ocRender(force)}
+  root.classList.add('hide');mgRender(force);
+};
+function mgRender(force){
+  const box=$('chmsg');if(!box||!ME)return;
+  const convos=mgConvos(),sel=convos.find(c=>c.k===MGS.sel)?MGS.sel:(convos[0]&&convos[0].k)||'';
+  if(!MGS.sel||MGS.sel!==sel)MGS.sel=sel;
+  const cur=convos.find(c=>c.k===sel),can=mgGlobalOn()&&(ME.role==='owner'||!cur||!cur.g||cur.g.kind==='all'||(cur.g.members||[]).includes(mgMe()));
+  const sig=JSON.stringify([sel,convos.map(c=>[c.k,c.name,c.un,c.last]),mgTh(sel).length,mgTh(sel).slice(-1)[0]&&mgTh(sel).slice(-1)[0].ts,MGS.pop,mgGlobalOn(),Object.keys(C.chat||{}).length]);
+  if(!force&&box.dataset.sig===sig)return;
+  if(!force&&focusIn('chmsg')&&box.dataset.keep)return;
+  const keepTxt=($('mgin')||{}).value||'',hadF=document.activeElement&&document.activeElement.id==='mgin';
+  box.dataset.sig=sig;
+  const canNew=true,teacher=mgIsT();
+  let h='';
+  if(ME.role==='owner')h+='<div class="box ocbar"><label class="sw" style="margin:0"><input type="checkbox" id="chglobal"'+(mgGlobalOn()?' checked':'')+'><i></i><span>Chat is turned on for everyone</span></label></div>';
+  h+='<div class="ocgrid"><div class="box ocside"><div class="xpbtns" style="margin:0 0 10px">'+
+    (ME.role==='student'?'<button class="btn primary sm" data-chnew="dm">'+ic('plus')+' New chat</button><button class="btn light sm" data-chnew="group">'+ic('users')+' New group</button>':
+     teacher?'<button class="btn primary sm" data-chnew="dm">'+ic('plus')+' Chat with a teacher</button><button class="btn light sm" data-chnew="all">'+ic('users')+' Chat for everyone</button>':
+     '<button class="btn primary sm" data-chnew="dm">'+ic('plus')+' New chat</button><button class="btn light sm" data-chnew="all">'+ic('users')+' Chat for everyone</button>')+'</div>'+
+    '<div id="chlist">'+(convos.length?convos.map(c=>'<button class="ocrow'+(c.k===sel?' on':'')+'" data-chpick="'+esc(c.k)+'">'+(c.g?'<span class="chav">'+ic('users')+'</span>':avHTML(c.other,c.name,32))+'<span><b>'+esc(short(c.name))+'</b><small>'+c.kind+(c.last?' · '+ago(c.last):'')+'</small></span>'+(c.un?'<i class="ocun">'+c.un+'</i>':'')+'</button>').join(''):'<p class="note" style="margin:6px 0">No chats yet. Press <b>New chat</b> to start one.</p>')+'</div></div>'+
+   '<div class="box occ">'+(cur?
+     '<div class="ochd"><div class="ocav">'+(cur.g?ic('users'):avHTML(cur.other,cur.name,40))+'</div><div><b>'+esc(cur.name)+'</b><small>'+(cur.g?(cur.g.kind==='all'?'Everyone is in this chat · made by '+esc(mgNm(cur.g.by)):(cur.g.members||[]).length+' people · made by '+esc(mgNm(cur.g.by))):'Private chat')+'</small></div>'+(cur.g&&(ME.role==='owner'||cur.g.by===mgMe())?'<button class="btn light sm" style="margin-left:auto" data-chdelg="'+esc(cur.g.id)+'">Delete chat</button>':'')+'</div>'+
+     (cur.g&&cur.g.kind==='group'?'<p class="note" style="margin:0 0 6px;font-size:.82rem">Members: '+(cur.g.members||[]).map(x=>esc(short(mgNm(x)))).join(', ')+'</p>':'')+
+     '<div class="ocmsgs" id="chmsgs" aria-live="polite">'+mgBubbles(sel)+'</div>'+
+     (can?'<div class="ocin"><input class="field" id="mgin" maxlength="300" autocomplete="off" placeholder="Type a message…" aria-label="Message"><button class="btn primary" id="mgsend">'+ic('send')+' Send</button></div>':'<div class="ocoff">'+ic('lock')+' Chat is turned off right now.</div>'):
+     '<div class="orempty" style="padding:30px"><h3>Pick a chat</h3><p class="note" style="margin:0">Start a new chat or open one from the list.</p></div>')+'</div></div>';
+  if(MGS.pop)h+=mgPopup();
+  box.innerHTML=h;
+  const m=$('chmsgs');if(m)m.scrollTop=m.scrollHeight;
+  const i=$('mgin');if(i){i.value=keepTxt;if(hadF)i.focus()}
+  if(cur){const t=mgTh(sel);if(t.length&&curTab==='chat')mgMark(sel,t[t.length-1].ts)}
+}
+function mgPopup(){
+  const k=MGS.pop,me=mgMe();let body='';
+  if(k==='dm'){
+    const ppl=(ME.role==='teacher'?Object.keys(TEACHERS):Object.keys(allStudents())).filter(x=>x!==me);
+    body='<h3>Start a chat</h3><input class="field" id="chsearch" placeholder="Search names…" aria-label="Search names" autocomplete="off"><div class="chpl" id="chpl">'+ppl.sort((a,b)=>mgNm(a).localeCompare(mgNm(b))).map(x=>'<button class="ocrow" data-chdm="'+esc(x)+'" data-n="'+esc(mgNm(x).toLowerCase())+'">'+avHTML(x,mgNm(x),30)+'<span><b>'+esc(mgNm(x))+'</b></span></button>').join('')+'</div>';
+  }else{
+    const all=k==='all',ppl=Object.keys(allStudents()).filter(x=>x!==me);
+    body='<h3>'+(all?'Chat for everyone':'New group chat')+'</h3><label class="lab" for="chgname">Chat name</label><input class="field" id="chgname" maxlength="40" placeholder="'+(all?'Class chat':'Study group')+'" autocomplete="off">'+
+      (all?'<p class="note" style="margin:8px 0">Everyone (all students and teachers) can read and write in this chat.</p>':'<label class="lab" style="margin-top:10px">Pick who is in it</label><div class="chpl pcbs">'+ppl.sort((a,b)=>mgNm(a).localeCompare(mgNm(b))).map(x=>'<label class="pcb"><input type="checkbox" data-chmem value="'+esc(x)+'"><span>'+esc(mgNm(x))+'</span></label>').join('')+'</div>')+
+      '<div class="xpbtns" style="margin-top:12px"><button class="btn primary" data-chmake="'+k+'">Create chat</button></div>';
+  }
+  return '<div class="chpop" id="chpop"><div class="chpb box"><button class="mx dark" data-chclose="1" aria-label="Close">'+ic('x')+'</button>'+body+'</div></div>';
+}
+async function mgSend(){
+  const inp=$('mgin');if(!inp||!ME||!MGS.sel)return;const txt=(inp.value||'').trim().slice(0,300);if(!txt)return;
+  if(!mgGlobalOn()){flash('Chat is turned off right now.');return}
+  if(Date.now()-MGS.sendT<700){flash('Slow down a little.');return}MGS.sendT=Date.now();
+  const k=MGS.sel,id='c'+rid();
+  const ok=await putSilent('chat',id,{t:k,from:mgMe(),fromName:mgNm(mgMe()),text:txt,ts:Date.now(),react:{}});
+  if(ok){inp.value='';sfx('send');mgRender(true);if(k.indexOf('dm:')===0){const o=k.slice(3).split('__').find(x=>x!==mgMe());try{if(o&&o!=='owner')await notify(o,'sent you a chat message.',mgNm(mgMe()),true)}catch(e){}}}
+  else flash('Your message could not be saved.');
+}
+document.addEventListener('click',async e=>{
+  if(!ME)return;let b;
+  if(b=e.target.closest('[data-mgv]')){MGS.view=b.dataset.mgv;MGS.pop='';$('chtop').dataset.h='';renderOChat(true);sfx('tab');return}
+  if(b=e.target.closest('[data-chpick]')){MGS.sel=b.dataset.chpick;mgRender(true);return}
+  if(b=e.target.closest('[data-chnew]')){MGS.pop=b.dataset.chnew;mgRender(true);const s=$('chsearch')||$('chgname');if(s)s.focus();return}
+  if(e.target.closest('[data-chclose]')){MGS.pop='';mgRender(true);return}
+  if(b=e.target.closest('[data-chdm]')){const o=b.dataset.chdm;if(!mgCanDm(mgMe(),o)){flash('You can not chat with this person.');return}MGS.sel=mgDmKey(mgMe(),o);MGS.pop='';mgRender(true);setTimeout(()=>{const i=$('mgin');if(i)i.focus()},50);return}
+  if(e.target.closest('#mgsend')){mgSend();return}
+  if(b=e.target.closest('[data-chmake]')){
+    const kind=b.dataset.chmake,name=($('chgname').value||'').trim();
+    if(!name){flash('Give the chat a name.');$('chgname').focus();return}
+    if(kind==='all'&&ME.role==='student')return;
+    const mem=kind==='all'?null:[...document.querySelectorAll('[data-chmem]:checked')].map(x=>x.value).concat([mgMe()]);
+    if(kind!=='all'&&mem.length<3){flash('Pick at least two people for a group.');return}
+    const id='g'+rid();
+    const ok=await put('chatgroups',id,Object.assign({name,kind:kind==='all'?'all':'group',by:mgMe(),ts:Date.now()},mem?{members:mem}:{}));
+    if(ok){MGS.sel='g:'+id;MGS.pop='';sfx('success');mgRender(true);if(kind==='all')try{await notify('all','started a chat for everyone: '+name,mgNm(mgMe()),true)}catch(x){}}return}
+  if(b=e.target.closest('[data-chdelg]')){const id=b.dataset.chdelg;askConfirm('Delete this chat?','The chat and its messages are removed for everyone.',async()=>{for(const [i,m] of Object.entries(C.chat||{}))if(m&&m.t==='g:'+id)await delQuiet('chat',i);await del('chatgroups',id);MGS.sel='';mgRender(true)});return}
+  if(b=e.target.closest('[data-mgdel]')){if(ME.role!=='owner')return;await delQuiet('chat',b.dataset.mgdel);mgRender(true);return}
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='chsearch'){const q=e.target.value.toLowerCase();document.querySelectorAll('#chpl [data-n]').forEach(b=>b.classList.toggle('hide',!b.dataset.n.includes(q)))}
+});
+document.addEventListener('change',async e=>{
+  if(e.target.id==='chglobal'&&ME&&ME.role==='owner'){await put('cls','',Object.assign({},C.cls,{chatall:e.target.checked}));mgRender(true)}
+});
+document.addEventListener('keydown',e=>{if(e.target.id==='mgin'&&e.key==='Enter'){e.preventDefault();mgSend()}});
+/* live refresh and message alerts */
+setInterval(()=>{
+  try{
+    if(!ME)return;
+    const me=mgMe(),mine=Object.values(C.chat||{}).filter(m=>m&&m.t&&(m.t.indexOf('dm:')===0&&m.t.slice(3).split('__').includes(me)||m.t.indexOf('g:')===0&&(()=>{const g=(C.chatgroups||{})[m.t.slice(2)];return g&&mgCanSee(Object.assign({id:m.t.slice(2)},g))})())&&m.from!==me);
+    if(MGS.base==null){MGS.base=Math.max(0,...mine.map(m=>m.ts||0));return}
+    const fresh=mine.filter(m=>m.ts>MGS.base);
+    if(fresh.length){MGS.base=Math.max(...fresh.map(m=>m.ts));const m=fresh[fresh.length-1];
+      if(!(curTab==='chat'&&MGS.view==='msg'&&MGS.sel===m.t)){pushToast('<b>'+esc(short(mgNm(m.from)))+'</b>: '+esc(String(m.text).slice(0,60)),'💬',5000,{hist:true});sfx('success');
+        try{if(window.Notification&&Notification.permission==='granted'&&document.hidden)new Notification(mgNm(m.from),{body:String(m.text).slice(0,100)})}catch(x){}}}
+    if(curTab==='chat'&&MGS.view==='msg'&&!document.hidden)mgRender();
+  }catch(e){}
+},2500);
 
 /* ===================== end v9 ===================== */
 $('hcoin').appendChild(coin(MAIN,'coin'));$('hvcc').appendChild(coin(GOLD,'coin','gold'));
