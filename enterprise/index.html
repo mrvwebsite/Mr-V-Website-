@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Buy Mr V Enterprise</title>
+<title>Buy Enterprise Subscription</title>
 <style>
 /* ============ design tokens ============ */
 :root{
@@ -284,14 +284,13 @@ details.faq p{margin:8px 0 0;color:var(--mut)}
 <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
 <header>
   <div class="logo" aria-hidden="true">V</div>
-  <div><b>Mr V Enterprise</b><small>vandernoth.com</small></div>
+  <div><b>Enterprise Subscription</b><small>vandernoth.com</small></div>
   <div class="sp"></div>
   <button class="hbtn" id="hcompare">Compare plans</button>
   <button class="hbtn" id="hfaq">Help</button>
   <button class="hbtn" id="hordersb">My orders</button>
   <button class="hbtn" id="htheme" aria-label="Switch light or dark">🌙</button>
 </header>
-<div id="conn" style="max-width:1160px;margin:0 auto;padding:0 20px"></div>
 <main id="app"></main>
 <p class="mut small" style="text-align:center;margin:-50px 0 60px">Owner? <a href="index.html" style="color:var(--blue2);font-weight:700">Log in on the website</a> to see requests and give subscriptions.</p>
 <div id="load" role="status" aria-label="Loading"><div class="v">V</div><b id="loadt">Loading…</b><div class="bar"><i></i></div></div>
@@ -299,15 +298,15 @@ details.faq p{margin:8px 0 0;color:var(--mut)}
 <div id="toast" class="hide" role="status"></div>
 <script>
 /* =====================================================================
-   Mr V Enterprise - buy page (v2)
+   Enterprise Subscription - buy page (v2)
    Subscription > Promo > Student > Payment > Arrival > Notes > Order
    Card numbers are NEVER typed here. Online card payment is turned off.
    ===================================================================== */
 const PR={e:{7:.99,30:2.99,90:6.99},p:{7:1.49,30:4.99,90:11.99}};
 const NAME={e:'Enterprise Starter',p:'Enterprise+'},ICON={e:'⭐',p:'👑'};
 const FEAT={
-  e:['All Mr V Enterprise features','Works on every device','Pick your own expiry date','Live order updates','Chat with Mr V about your order'],
-  p:['Everything in Enterprise Starter','Extra Enterprise+ features','Priority claim in Mr V\'s room','Crown badge on your plan','Chat with Mr V about your order']
+  e:['<b>1.5 V Coins</b> for every correct answer','<b>50 V Coins</b> free every day','<b>1 free V Ticket every day</b>: pick one game in your subscription tab and play it for <b>30 seconds</b>','Works on every device','Chat with Mr V about your order','And more Enterprise Starter features coming soon'],
+  p:['Everything in Enterprise Starter','<b>3x V Coins</b> for every correct answer','<b>100 V Coins</b> free every day from your subscription tab','<b>1 minute 30 seconds</b> of one game with your daily V Ticket','Crown badge on your plan']
 };
 const METH={envelope:'Envelope',cash:'Cash in person',card:'Card (turned off)'};
 const STEPS=[['promo','Promo'],['student','Student'],['pay','Payment'],['arrive','Arrival'],['notes','Notes']];
@@ -473,7 +472,7 @@ function faqModal(){
     q('Where are my orders saved?','In this browser, plus a copy that Mr V can see so he can give your plan.'),true);
 }
 function receiptModal(o){
-  openModal('<div class="receipt" id="rc"><h3>Mr V Enterprise</h3><div style="text-align:center">'+SITE+'</div><hr>'+
+  openModal('<div class="receipt" id="rc"><h3>Enterprise Subscription</h3><div style="text-align:center">'+SITE+'</div><hr>'+
     '<div class="r"><span>Order</span><b>'+o.id+'</b></div><div class="r"><span>Student</span><span>'+esc(o.name)+'</span></div>'+
     '<div class="r"><span>Plan</span><span>'+NAME[o.plan]+'</span></div><div class="r"><span>Length</span><span>'+o.days+' days</span></div>'+
     '<div class="r"><span>Pay with</span><span>'+METH[o.method]+'</span></div><div class="r"><span>Arrive</span><span>'+arrText(o.arrive)+'</span></div>'+
@@ -515,7 +514,7 @@ const V={
     const card=p=>'<button class="plan '+(p==='p'?'plus':'')+'" data-plan="'+p+'"><div class="ico" aria-hidden="true">'+ICON[p]+'</div><h2>Mr V '+NAME[p]+(p==='p'?' <span class="chip g">MORE</span>':'')+'</h2>'+
       '<div class="price">'+money(PR[p][30])+'<span class="mut small" style="font-weight:600"> / 30 days</span></div><div class="mut small">or '+money(PR[p][7])+' for 7 days · '+money(PR[p][90])+' for 90 days</div>'+
       '<ul>'+FEAT[p].map(f=>'<li>'+f+'</li>').join('')+'</ul><span class="go">See '+NAME[p]+'</span></button>';
-    return '<div class="pagehero"><span class="kick">Mr V Enterprise</span><h1>Choose your subscription</h1><p class="mut">Pick Enterprise Starter or Enterprise+. You choose how many days on the next page.</p></div>'+
+    return '<div class="pagehero"><span class="kick">Enterprise Subscription</span><h1>Choose your subscription</h1><p class="mut">Pick Enterprise Starter or Enterprise+. You choose how many days on the next page.</p></div>'+
       '<div class="plans full stagger">'+card('e')+card('p')+'</div><div class="btnrow" style="max-width:980px;margin:16px auto 0"><button class="btn light" id="cmp">Compare plans side by side</button></div>';
   },
   detail(){
@@ -523,9 +522,9 @@ const V={
     const days=[7,30,90].map(d=>{const sv=savePct(p,d);return '<div class="day '+(S.dur===d?'on':'')+'" data-dur="'+d+'" tabindex="0" role="button"><b>'+d+' days'+(d===30?'':'')+'</b><small>'+(d===30?'Default':sv>0?'Save '+sv+'%':'Short')+'</small><div class="p">'+money(PR[p][d])+'</div></div>'}).join('');
     return back('plan','All subscriptions')+'<div class="detail page-in">'+
       '<div class="dleft '+(pl?'plus':'')+'"><span class="kick">'+(pl?'Most features':'Great start')+'</span><div class="top" style="margin-top:12px"><div class="bigprice">'+money(PR[p][S.dur])+'</div><span class="mut">for '+S.dur+' days</span></div>'+
-        '<h2>'+ICON[p]+' Mr V '+NAME[p]+'</h2><p class="mut">All the features that come with this subscription:</p><ul>'+FEAT[p].map(f=>'<li>'+f+'</li>').join('')+'</ul><p class="mut small" style="margin:10px 0 0">More features are coming soon.</p></div>'+
+        '<h2>'+ICON[p]+' '+NAME[p]+'</h2><p class="mut">All the features that come with this subscription:</p><ul>'+FEAT[p].map(f=>'<li>'+f+'</li>').join('')+'</ul><p class="mut small" style="margin:10px 0 0">More features are coming soon.</p></div>'+
       '<div class="dright"><div class="panel"><h3>Your subscription</h3>'+
-        '<div class="sum"><div class="row"><span>Name</span><b>'+ICON[p]+' '+NAME[p]+'</b></div><div class="row"><span>Subscription</span><b>Mr V Enterprise</b></div><div class="row"><span>Days</span><b>'+S.dur+' days</b></div><div class="row"><span>Expires</span><b>'+expDate(S.dur)+'</b></div></div>'+
+        '<div class="sum"><div class="row"><span>Name</span><b>'+ICON[p]+' '+NAME[p]+'</b></div><div class="row"><span>Subscription</span><b>Enterprise Subscription</b></div><div class="row"><span>Days</span><b>'+S.dur+' days</b></div><div class="row"><span>Expires</span><b>'+expDate(S.dur)+'</b></div></div>'+
         '<label class="lab">How many days?</label><div class="days">'+days+'</div>'+
         '<div class="mut small">One payment</div><div class="big">'+money(PR[p][S.dur])+'</div>'+
         '<button class="btn '+(pl?'gold':'')+'" id="gopay" style="margin-top:16px">Continue and pay</button></div></div></div>';
@@ -568,7 +567,7 @@ const V={
       '<div class="wc '+(over?'bad':'')+'" id="wc">'+(S.nonote?'':w+' of '+MAXW+' words')+'</div>'+
       '<label class="check"><input type="checkbox" id="nonote"'+(S.nonote?' checked':'')+'><span><b>No note needed</b><br><span class="mut small">Check this box if you do not want to write anything.</span></span></label>'+
       '<div class="mut small" style="margin-top:6px">Total, paid once</div><div class="big">'+money(price())+(S.promo?'<span class="was">'+money(base())+'</span>':'')+'</div>'+
-      '<button class="btn '+(S.plan==='p'?'gold':'')+'" id="payb" disabled>Pay Mr V Enterprise<i class="cd" id="cdbar" style="width:0"></i></button><p class="small mut" id="cdtxt" style="text-align:center;margin:10px 0 0"></p></div>';
+      '<button class="btn '+(S.plan==='p'?'gold':'')+'" id="payb" disabled>Pay Enterprise Subscription<i class="cd" id="cdbar" style="width:0"></i></button><p class="small mut" id="cdtxt" style="text-align:center;margin:10px 0 0"></p></div>';
   }
 };
 function stuRows(L){
@@ -686,7 +685,7 @@ document.addEventListener('click',e=>{
     const orig=base(),total=price(),st=stuOf(S.sid);
     const o={id:code(),sid:S.sid,name:st?st.name:stuName(S.sid),plan:S.plan,days:S.dur,total,orig,method:S.method,arrive:S.arrive,note:S.nonote?'':S.note.trim(),promo:S.promo?S.promo.pct:0,ts:Date.now(),state:'pending'};
     const ph=S.promo&&S.promo.h,prev=ls.g(LK,0);ls.s(LK,Date.now());
-    withLoad('Paying Mr V Enterprise…',async()=>{
+    withLoad('Paying Enterprise Subscription…',async()=>{
       await fbReady;Object.assign(o,await ipInfo());
       try{
         if(ph){const u=await fetch(FB+'/promo/'+ph+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():null);
@@ -747,7 +746,7 @@ setInterval(syncOrders,6000);
 setInterval(()=>{if(view==='order'&&cur&&!busy){const e=document.querySelector('.eta i');if(e)e.style.width=etaPct(cur)+'%'}},30000);
 
 /* ---------- start ---------- */
-withLoad('Loading Mr V Enterprise…',async()=>{await fbReady;draw();if(!ls.g(NK,''))setTimeout(askNotif,500)},1000);
+withLoad('Loading Enterprise Subscription…',async()=>{await fbReady;draw();if(!ls.g(NK,''))setTimeout(askNotif,500)},1000);
 </script>
 </body>
 </html>
