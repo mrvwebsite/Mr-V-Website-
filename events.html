@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class Events · VANDERNOTH</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232563eb'/%3E%3Ctext x='32' y='46' font-size='40' font-weight='900' text-anchor='middle' fill='white' font-family='Arial'%3EV%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#0b1020;--card:#131a2e;--soft:#1a2340;--ink:#eaf0ff;--mut:#9aa8c7;--line:#27335a;--blue:#3b82f6;--gold:#f59e0b;--red:#ef4444;--ok:#22c55e;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#1d2b6b55,transparent),radial-gradient(900px 500px at -10% 10%,#4c1d9555,transparent),var(--bg);color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{margin:0;letter-spacing:-.02em;line-height:1.15}p{margin:0 0 10px}.mut{color:var(--mut)}.small{font-size:.88rem}.hide{display:none!important}
+:focus-visible{outline:3px solid #93b4f5;outline-offset:2px}
+header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;padding:12px 20px;background:rgba(11,16,32,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#3b82f6,#1d4ed8);display:grid;place-items:center;font:900 24px/1 Inter;box-shadow:0 8px 20px rgba(37,99,235,.4)}
+header b{font-size:1.05rem}header small{display:block;color:var(--mut);margin-top:-2px}.sp{flex:1}
+.btn{border:0;border-radius:12px;padding:10px 16px;font-weight:800;cursor:pointer;background:var(--soft);color:var(--ink);border:1px solid var(--line);transition:transform .2s var(--ease),background .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);background:#222d52}.btn:active{transform:none}
+.btn.pri{background:linear-gradient(135deg,#3b82f6,#1d4ed8);border-color:transparent;box-shadow:0 8px 22px rgba(37,99,235,.4)}
+.btn.red{background:linear-gradient(135deg,#ef4444,#b91c1c);border-color:transparent}.btn.gold{background:linear-gradient(135deg,#fbbf24,#d97706);color:#2a1700;border-color:transparent}
+.btn.sm{padding:6px 12px;font-size:.85rem;border-radius:10px}.btn[disabled]{opacity:.45;pointer-events:none}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-weight:700;font-size:.85rem}
+main{max-width:1280px;margin:0 auto;padding:22px 18px 90px}
+.hero{padding:30px 0 10px}.hero h1{font-size:clamp(2rem,5vw,3.2rem);background:linear-gradient(90deg,#fff,#93c5fd 60%,#fbbf24);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-top:20px}
+.ecard{background:linear-gradient(160deg,var(--card),#0f1630);border:1px solid var(--line);border-radius:22px;padding:20px;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s;position:relative;overflow:hidden;text-align:left;color:inherit}
+.ecard:hover{transform:translateY(-6px);border-color:#3b82f6;box-shadow:0 24px 50px rgba(59,130,246,.22)}
+.ecard .big{font-size:2.4rem}.ecard h3{font-size:1.25rem}.ecard .live{position:absolute;right:14px;top:14px;background:var(--red);color:#fff;font-weight:800;font-size:.7rem;border-radius:99px;padding:3px 10px;letter-spacing:.06em;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}0%{box-shadow:0 0 0 0 rgba(239,68,68,.6)}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px}
+.field{width:100%;background:#0e1530;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--ink)}.field:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(59,130,246,.2)}
+label.lab{display:block;font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:12px 0 6px}
+.modalbg{position:fixed;inset:0;background:rgba(3,6,18,.7);backdrop-filter:blur(6px);z-index:200;display:grid;place-items:center;padding:16px;animation:fi .2s}
+.modalbg.out{animation:fo .2s forwards}@keyframes fi{from{opacity:0}}@keyframes fo{to{opacity:0}}
+.modal{width:min(520px,100%);background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:mi .3s var(--ease);max-height:90vh;overflow:auto}
+@keyframes mi{from{opacity:0;transform:translateY(20px) scale(.97)}}
+#toast{position:fixed;left:16px;bottom:16px;z-index:300;display:grid;gap:8px}
+#toast div{background:#0e1530;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:14px;padding:10px 14px;box-shadow:0 14px 30px rgba(0,0,0,.5);animation:mi .3s var(--ease);max-width:320px}
+/* wolf hunt */
+.wh{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+@media(max-width:1000px){.wh{grid-template-columns:1fr}}
+.stage{position:relative;border-radius:26px;overflow:hidden;min-height:330px;background:linear-gradient(180deg,#050816,#14204a 55%,#2b1b3d);border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:12px}
+.stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 18%,#fde68a 0 38px,#fde68a55 39px 90px,transparent 91px);opacity:.85;pointer-events:none}
+.stage .trees{position:absolute;left:0;right:0;bottom:0;height:90px;background:repeating-linear-gradient(90deg,transparent 0 30px,#060b1c 30px 34px),linear-gradient(0deg,#060b1c,transparent);opacity:.9;pointer-events:none}
+.stage>*:not(.trees){position:relative;z-index:1}
+.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:#0b1230aa;border:1px solid var(--line);border-radius:16px;padding:10px 16px;min-width:110px;backdrop-filter:blur(4px)}
+.stat b{display:block;font-size:1.9rem;line-height:1}.stat span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:800}
+.mode{background:#0b1230cc;border:1.5px solid #3b82f6;border-radius:22px;padding:18px 22px;min-height:120px;display:flex;flex-direction:column;justify-content:center;backdrop-filter:blur(4px)}
+.mode small{color:var(--mut);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem}
+.mode h2{font-size:clamp(1.6rem,4vw,2.6rem);margin:4px 0}.mode p{margin:0;color:#cbd5f5}
+.mode.spin h2{animation:flick .12s infinite}@keyframes flick{50%{opacity:.6;transform:translateY(-3px)}}
+.mode.pop{animation:popm .6s var(--ease)}@keyframes popm{0%{transform:scale(.9);box-shadow:0 0 0 0 #3b82f6}60%{transform:scale(1.03)}100%{box-shadow:0 0 0 30px transparent}}
+.say{background:#0b1230cc;border-left:4px solid var(--gold);border-radius:14px;padding:12px 16px;min-height:54px;font-weight:600}
+.say small{display:block;color:var(--gold);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.7rem}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.roster{display:flex;flex-direction:column;gap:10px;position:sticky;top:76px;max-height:calc(100vh - 96px)}
+.ptabs{display:flex;gap:6px;flex-wrap:wrap}.ptab{border:1px solid var(--line);background:var(--soft);border-radius:99px;padding:6px 12px;font-weight:800;font-size:.82rem;cursor:pointer;color:var(--mut)}.ptab.on{background:var(--blue);color:#fff;border-color:transparent}
+.rlist{overflow:auto;display:grid;gap:6px;padding-right:4px;min-height:200px}
+.stu{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:var(--soft);border:1.5px solid transparent;cursor:default;transition:.2s var(--ease)}
+.stu .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:.8rem;background:#2a3768;flex:none}
+.stu b{display:block;line-height:1.1;font-size:.95rem}.stu small{color:var(--mut)}
+.stu.alive{border-color:#22c55e55}.stu.alive .av{background:linear-gradient(135deg,#16a34a,#15803d)}
+.stu.out{opacity:.55;border-color:#ef444455}.stu.out b{text-decoration:line-through}.stu.out .av{background:linear-gradient(135deg,#ef4444,#991b1b)}
+.stu.idle{opacity:.7}
+.stu .acts{margin-left:auto;display:flex;gap:4px}.stu .acts button{border:0;border-radius:9px;padding:5px 9px;font-weight:800;font-size:.75rem;cursor:pointer;background:#222d52;color:var(--ink)}
+.stu .acts .x{background:#7f1d1d}.stu .acts .r{background:#14532d}.stu .gb{opacity:.8}
+.musicbox{display:grid;gap:8px}.musicbox .row{display:flex;gap:8px;flex-wrap:wrap}
+.log{display:grid;gap:6px;max-height:200px;overflow:auto;font-size:.88rem}.log div{background:var(--soft);border-radius:10px;padding:6px 10px}.log small{color:var(--mut)}
+.bar{height:8px;border-radius:99px;background:#0e1530;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#16a34a);transition:width .6s var(--ease)}
+/* elimination scene */
+#elim{position:fixed;inset:0;z-index:400;background:rgba(2,4,12,.92);display:grid;place-items:center;cursor:pointer;overflow:hidden}
+#elim .scene{position:relative;width:min(900px,96vw);height:min(520px,70vh);border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#050816,#1a2759 60%,#3a2147);box-shadow:0 0 120px #ef444455}
+#elim .moon{position:absolute;right:9%;top:8%;width:84px;height:84px;border-radius:50%;background:#fde68a;box-shadow:0 0 60px #fde68a88}
+#elim .ground{position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(180deg,#0a1226,#050816)}
+#elim .wolf{position:absolute;bottom:16%;left:-30%;width:300px;animation:wrun 1.5s cubic-bezier(.3,.6,.4,1) forwards}
+#elim .wolf svg{width:100%;overflow:visible}
+@keyframes wrun{0%{left:-30%}55%{left:14%}60%{left:14%}100%{left:14%}}
+#elim .wolf.fall svg{animation:wfall .7s .0s cubic-bezier(.5,0,.8,.6) forwards}
+@keyframes wfall{to{transform:translateY(40px) rotate(78deg);opacity:.9}}
+#elim .xh{position:absolute;width:130px;height:130px;border:3px solid #ef4444;border-radius:50%;left:calc(14% + 110px);bottom:calc(16% + 20px);opacity:0;transform:scale(2.4)}
+#elim .xh:before,#elim .xh:after{content:"";position:absolute;background:#ef4444}#elim .xh:before{left:50%;top:-14px;bottom:-14px;width:3px}#elim .xh:after{top:50%;left:-14px;right:-14px;height:3px}
+#elim .xh.go{animation:xhin .5s .0s ease-out forwards}@keyframes xhin{to{opacity:1;transform:scale(1)}}
+#elim .flash{position:absolute;inset:0;background:#fff;opacity:0}#elim .flash.go{animation:flash .35s ease-out}@keyframes flash{0%{opacity:.95}100%{opacity:0}}
+#elim .scene.shake{animation:shk .4s}@keyframes shk{20%{transform:translate(-10px,6px)}40%{transform:translate(9px,-6px)}60%{transform:translate(-6px,4px)}80%{transform:translate(4px,-3px)}}
+#elim .stamp{position:absolute;left:50%;top:30%;transform:translate(-50%,-50%) rotate(-8deg) scale(3);font-size:clamp(2.2rem,8vw,5.4rem);font-weight:900;color:#ef4444;border:8px solid #ef4444;padding:4px 22px;border-radius:12px;letter-spacing:.04em;opacity:0;text-shadow:0 0 30px #ef444488;background:#0006;white-space:nowrap}
+#elim .stamp.go{animation:stp .5s cubic-bezier(.2,1.4,.4,1) forwards}@keyframes stp{to{opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1)}}
+#elim .who{position:absolute;right:7%;bottom:12%;width:min(300px,40%);text-align:center;opacity:0;transform:translateY(20px)}
+#elim .who.go{animation:wi .5s .1s var(--ease) forwards}@keyframes wi{to{opacity:1;transform:none}}
+#elim .who .av{width:76px;height:76px;margin:0 auto 6px;border-radius:50%;background:linear-gradient(135deg,#ef4444,#7f1d1d);display:grid;place-items:center;font-weight:900;font-size:1.7rem;border:3px solid #fff}
+#elim .who b{font-size:clamp(1.4rem,4vw,2.2rem)}#elim .who small{display:block;color:#fca5a5;font-weight:700}
+#elim .hint{position:absolute;bottom:10px;right:16px;color:#ffffff88;font-size:.8rem}
+#win{position:fixed;inset:0;z-index:390;background:radial-gradient(circle at 50% 40%,#78350f,#0b1020 70%);display:grid;place-items:center;text-align:center;padding:20px;cursor:pointer}
+#win h1{font-size:clamp(2.2rem,8vw,5rem);background:linear-gradient(90deg,#fde68a,#f59e0b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:popm .8s}
+#win .crown{font-size:5rem;animation:flt 2.4s ease-in-out infinite}@keyframes flt{50%{transform:translateY(-12px)}}
+.conf{position:fixed;top:-20px;width:10px;height:14px;z-index:395;animation:cf linear forwards;pointer-events:none}@keyframes cf{to{transform:translateY(110vh) rotate(720deg)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style></head><body>
+<header>
+  <a href="#" id="home" style="display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit"><div class="logo">V</div><div><b>Class Events</b><small>vandernoth.com/events</small></div></a>
+  <div class="sp"></div>
+  <span class="chip hide" id="who"></span>
+  <a class="btn" id="back" href="../">Back to the website</a>
+</header>
+<main id="app"></main>
+<div id="toast"></div>
+<script>
+const STU=[["aaron-edwards", "Aaron Edwards", 6], ["adam-campos", "Adam Campos", 8], ["akia-bryan", "Akia Bryan", 3], ["alessandro-ponce-martinez", "Alessandro Ponce Martinez", 6], ["alyssa-ayub", "Alyssa Ayub", 3], ["anthony-repetti", "Anthony Repetti", 4], ["ariana-campos", "Ariana Campos", 8], ["ashley-gigila", "Ashley Gigila", 3], ["austin-mcnamara", "Austin McNamara", 8], ["ava-oliviera", "Ava Oliviera", 4], ["bennett-kleczka", "Bennett Kleczka", 8], ["betty-driscoll", "Betty Driscoll", 4], ["breadan-foley", "Breadan Foley", 8], ["brynn-winters", "Brynn Winters", 4], ["caitlin-maggiore", "Caitlin Maggiore", 3], ["carter-baravarian", "Carter Baravarian", 4], ["christopher-clarke", "Christopher Clarke", 6], ["christopher-lucero-sarceno", "Christopher Lucero Sarceno", 3], ["colton-hughes", "Colton Hughes", 6], ["damian-peranio", "Damian Peranio", 6], ["danie-schnipper", "Danie Schnipper", 6], ["declan-rennard", "Declan Rennard", 6], ["diego-quirogas-escobar", "Diego Quirogas Escobar", 3], ["eden-peral-fieseler", "Eden Peral Fieseler", 8], ["elizabeth-arana", "Elizabeth Arana", 8], ["elizabeth-ho", "Elizabeth Ho", 4], ["ella-negreira", "Ella Negreira", 4], ["emily-quevara-cruz", "Emily Guevara Cruz", 3], ["emma-buckely", "Emma Buckley", 4], ["ethan-turner", "Ethan Turner", 8], ["finn-borg", "Finn Borg", 4], ["francesca-lanzetta", "Francesca Lanzetta", 6], ["frank-ofrias", "Frank Ofrias", 4], ["genesis-ventura", "Genesis Ventura", 8], ["gianluca-gesmundo", "Gianluca Gesmundo", 3], ["giuliana-lanzetta", "Giuliana Lanzetta", 8], ["giuliana-sangimino", "Giuliana Sangimino", 8], ["grace-park", "Grace Park", 6], ["hailey-zak", "Hailey Zak", 8], ["hansel-fuentess-murillo", "Hansel Fuentes Murillo", 4], ["hunter-allstadt", "Hunter Allstadt", 4], ["isabella-molina-narvaes", "Isabella Molina-Narvaes", 6], ["isabelle-minkoff", "Isabelle Minkoff", 6], ["jace-rowe", "Jace Rowe", 6], ["jack-mitola", "Jack Mitola", 6], ["jackson-liskow", "Jackson Liskow", 3], ["jacqueline-paz", "Jacqueline Paz", 6], ["jenna-brenseke", "Jenna Brenseke", 4], ["jeremy-cruz", "Jeremy Cruz", 6], ["jolie-roman", "Jolie Roman", 3], ["joseph-demarco", "Joseph DeMarco", 3], ["joshua-flores-padilla", "Joshua Flores Padilla", 6], ["juila-petrone", "Julia Petrone", 6], ["juliana-dos-santos", "Juliana Dos Santos", 6], ["juliana-reciniello", "Juliana Reciniello", 3], ["kaia-trombetta", "Kaia Trombetta", 4], ["kendrick-scott", "Kendrick Scott", 8], ["kent-bianco", "Kent Bianco", 3], ["khadija-alvi", "Khadija Alvi", 8], ["kiera-florio", "Kiera Florio", 3], ["kyla-ashcroff", "Kyla Ashcroff", 6], ["leo-johnson", "Leo Johnson", 6], ["liam-vivas-colman", "Liam Vivas-Colman", 4], ["luca-kaminsky", "Luca Kaminsky", 8], ["lucas-yabut", "Lucas Yabut", 8], ["luke-caviedes", "Luke Caviedes", 6], ["macky-robert", "Macky Robert", 4], ["madison-roseto", "Madison Roseto", 4], ["makayla-bickoff", "Makayla Bickoff", 8], ["mariah-fardette", "Mariah Fardette", 8], ["massimo-kazandjilan", "Massimo Kazandjian", 8], ["melanie-fardette", "Melanie Fardette", 6], ["melany-guevara-cruz", "Melany Guevara Cruz", 6], ["meybelin-saravia-garcia", "Meybelin Saravia Garcia", 8], ["mikayla-zito", "Mikayla Zito", 8], ["oliva-portugal", "Olivia Portugal", 8], ["peter-grimaldi", "Peter Grimaldi", 8], ["phoenix-callway", "Phoenix Callway", 3], ["rebecca-station", "Rebecca Station", 3], ["saika-dalusma", "Saika Dalusma", 6], ["sakina-shazad", "Sakina Shazad", 4], ["samuel-davis", "Samuel Davis", 4], ["sarah-pensamiento-bratti", "Sarah Pensamiento Bratti", 3], ["savannah-hardy", "Savannah Hardy", 4], ["sean-reinhardt", "Sean Reinhardt", 4], ["taylor-lawrence", "Taylor Lawrence", 3], ["tiffany-show", "Tiffany Show", 3], ["victoria-risani", "Victoria Risani", 8], ["william-gallagher", "William Gallagher", 3], ["yonatan-adaki", "Yonatan Adaki", 3], ["zoey-jung", "Zoey Jung", 3]];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rid=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);
+const SONGS0=[{name:'Hungry Like the Wolf · Duran Duran',url:'https://videotourl.com/audio/1792719601375-c7c91790-baf5-489f-9ada-ae28d8c23a53.mp3'},{name:'I Will Survive · Gloria Gaynor',url:'https://www.image2url.com/r2/default/audio/1792719488131-60cd676d-b0b2-4b5e-94dc-a528a79d75da.mp3'}];
+const MODES0=[
+ {name:'Pack of Wolves',desc:'Stay with your pack and move together.',ic:'🐺'},
+ {name:'Pregnant Wolf',desc:'Move carefully. This wolf has to protect her pups.',ic:'🤰'},
+ {name:'Injured',desc:'You are hurt. Hop to the food!',ic:'🩹'},
+ {name:'Hunted',desc:'No food and the sniper got you. If you get out of the game, you are hunted.',ic:'🎯'},
+ {name:'Boys vs Girls',desc:'Two packs. Boys against girls.',ic:'⚔️'}];
+const PERIODS=[3,4,6,8];
+const STUDENTS=STU.map(a=>({id:a[0],name:a[1],period:a[2]}));
+const BYID={};STUDENTS.forEach(s=>BYID[s.id]=s);
+const sh=n=>{const p=String(n).split(' ');return p.length>1?p[0]+' '+p[p.length-1][0]+'.':n};
+const ini=n=>String(n).split(' ').map(x=>x[0]).slice(0,2).join('').toUpperCase();
+/* ---------- who am I ---------- */
+function sess(){try{return JSON.parse(localStorage.getItem('mrv_sess')||'null')}catch(e){return null}}
+const ME=(()=>{const s=sess();let own=false;try{own=!!localStorage.getItem('mrv_owner')}catch(e){}
+  if(own||(s&&s.role==='owner'))return {role:'owner',name:'Mr. V'};
+  if(s&&s.role==='teacher')return {role:'teacher',id:s.id,name:s.name||'Teacher'};
+  if(s&&s.role==='student'){const st=BYID[s.id];return {role:'student',id:s.id,name:st?st.name:'Student'}}
+  return null})();
+const HOST=!!ME&&(ME.role==='teacher'||ME.role==='owner');
+if(ME){$('who').classList.remove('hide');$('who').textContent=(HOST?'Host · ':'')+ME.name}
+/* ---------- data: shared Firebase, or this device only ---------- */
+let BASE='',EV={},LIVE=false;const LK='mrv_events_local';
+const subs=[];const notify=()=>subs.forEach(f=>{try{f()}catch(e){console.error(e)}});
+function setPath(o,path,val){const s=String(path).split('/').filter(Boolean);let c=o;for(let i=0;i<s.length-1;i++){if(c[s[i]]==null||typeof c[s[i]]!=='object')c[s[i]]={};c=c[s[i]]}
+  if(val==null)delete c[s[s.length-1]];else c[s[s.length-1]]=val}
+function applyFb(path,data,merge){
+  const segs=String(path||'/').split('/').filter(Boolean);
+  if(!segs.length){if(merge){Object.keys(data||{}).forEach(k=>{if(data[k]==null)delete EV[k];else EV[k]=data[k]})}else EV=data||{}}
+  else if(merge&&data&&typeof data==='object'){Object.keys(data).forEach(k=>setPath(EV,segs.concat(k).join('/'),data[k]))}
+  else setPath(EV,segs.join('/'),data);
+  LIVE=true;notify();
+}
+async function boot(){
+  let u='';
+  for(const f of ['../firebase.txt','firebase.txt']){try{const r=await fetch(f+'?'+Date.now(),{cache:'no-store'});if(r.ok){const t=String(await r.text()).trim().split(/\s+/)[0];if(/^https?:\/\//.test(t)){u=t;break}}}catch(e){}}
+  if(u){BASE=u.replace(/\/+$/,'');
+    try{const es=new EventSource(BASE+'/cevents.json');
+      es.addEventListener('put',m=>{try{const j=JSON.parse(m.data);applyFb(j.path,j.data,false)}catch(e){}});
+      es.addEventListener('patch',m=>{try{const j=JSON.parse(m.data);applyFb(j.path,j.data,true)}catch(e){}});
+      es.onerror=()=>{};}catch(e){}
+    try{const r=await fetch(BASE+'/cevents.json');if(r.ok){EV=(await r.json())||{};LIVE=true}}catch(e){}
+  }else{
+    try{EV=JSON.parse(localStorage.getItem(LK)||'{}')||{}}catch(e){EV={}}
+    addEventListener('storage',e=>{if(e.key===LK){try{EV=JSON.parse(e.newValue||'{}')||{};notify()}catch(x){}}});LIVE=true;
+  }
+  route();
+}
+const saveLocal=()=>{if(!BASE){try{localStorage.setItem(LK,JSON.stringify(EV))}catch(e){}}};
+async function createEv(o){EV[o.id]=o;notify();saveLocal();if(BASE)try{await fetch(BASE+'/cevents/'+o.id+'.json',{method:'PUT',body:JSON.stringify(o)})}catch(e){toast('Could not save. Check your internet.')}}
+async function delEv(id){delete EV[id];notify();saveLocal();if(BASE)try{await fetch(BASE+'/cevents/'+id+'.json',{method:'DELETE'})}catch(e){}}
+async function patch(id,obj){ /* obj: {"state/x/y":value|null} */
+  const e=EV[id];if(!e)return;Object.keys(obj).forEach(k=>setPath(e,k,obj[k]));notify();saveLocal();
+  if(BASE)try{await fetch(BASE+'/cevents/'+id+'.json',{method:'PATCH',body:JSON.stringify(obj)})}catch(x){toast('Could not save. Check your internet.')}
+}
+/* ---------- small ui helpers ---------- */
+function toast(t){const d=document.createElement('div');d.textContent=t;$('toast').appendChild(d);setTimeout(()=>{d.style.transition='.3s';d.style.opacity='0';setTimeout(()=>d.remove(),300)},3500)}
+function modal(html,onmount){const b=document.createElement('div');b.className='modalbg';b.innerHTML='<div class="modal" role="dialog" aria-modal="true">'+html+'</div>';
+  const close=()=>{b.classList.add('out');setTimeout(()=>b.remove(),200)};b.addEventListener('mousedown',e=>{if(e.target===b)close()});document.body.appendChild(b);if(onmount)onmount(b,close);return close}
+function ask(title,text,yes){modal('<h2>'+esc(title)+'</h2><p class="mut" style="margin-top:8px">'+esc(text)+'</p><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:18px"><button class="btn" data-x>Cancel</button><button class="btn red" data-y>Yes</button></div>',(b,c)=>{b.querySelector('[data-x]').onclick=c;b.querySelector('[data-y]').onclick=()=>{c();yes()}})}
+function beep(freq,dur,type,vol){try{const A=window.AC||(window.AC=new (window.AudioContext||window.webkitAudioContext)());const o=A.createOscillator(),g=A.createGain();o.type=type||'sine';o.frequency.value=freq;g.gain.value=vol||.08;o.connect(g);g.connect(A.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,A.currentTime+dur);o.stop(A.currentTime+dur)}catch(e){}}
+function shot(){try{const A=window.AC||(window.AC=new (window.AudioContext||window.webkitAudioContext)());const n=A.sampleRate*.5,b=A.createBuffer(1,n,A.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);const s=A.createBufferSource();s.buffer=b;const g=A.createGain();g.gain.value=.5;const f=A.createBiquadFilter();f.type='lowpass';f.frequency.value=1800;s.connect(f);f.connect(g);g.connect(A.destination);s.start()}catch(e){}}
+function confetti(n){const c=['#fde68a','#f59e0b','#3b82f6','#22c55e','#ef4444','#a78bfa'];for(let i=0;i<(n||60);i++){const d=document.createElement('i');d.className='conf';d.style.left=Math.random()*100+'vw';d.style.background=c[i%c.length];d.style.animationDuration=(2+Math.random()*2.5)+'s';d.style.animationDelay=Math.random()*.6+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),5500)}}
+/* ---------- the Event AI (the Wolf Master) ---------- */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const AIL={
+ start:['Round {r} begins. The pack moves out. Stay sharp.','The music starts and Round {r} is on. Find your food and stay alive.','Round {r}! The moon is up and the sniper is watching.'],
+ elim:['{n} never saw the sniper coming.','A shot rings out. {n} is out of the hunt.','{n} ran out of luck. The forest goes quiet.','The sniper found {n}. Eliminated!','{n} is down. {l} wolves are still alive.'],
+ mode:{'Pack of Wolves':['A pack is only as strong as its members. Stay together.','Pack of Wolves! Stick close to your group.'],'Pregnant Wolf':['Slow and careful. A mother wolf must protect her pups.','Pregnant Wolf round. No running. Protect the pack.'],'Injured':['Someone is hurt. Hop to the food, one hop at a time.','Injured! Hop to the food and do not stop.'],'Hunted':['The hunters are close. No food means you are out.','Hunted! One mistake and the sniper will find you.'],'Boys vs Girls':['Boys against girls. Two packs, one forest.','Boys vs Girls! Pick your side and survive.']},
+ left:['Only {l} wolves are left. Every step counts now.','{l} wolves remain. The forest is getting smaller.','The pack is down to {l}. Who will survive?'],
+ win:['{n} is the last wolf standing. What a hunt!','The forest belongs to {n}. Survivor!'],
+ all:['Everyone is out. The sniper wins this time.']
+};
+function fmt(t,c){return t.replace(/\{(\w+)\}/g,(m,k)=>c[k]!=null?c[k]:'')}
+function suggestMode(s){const a=aliveIds(s).length,last=(s.mode||{}).name;const m=modesOf(s).map(x=>x.name);
+  let want=a>40?'Pack of Wolves':a>20?'Injured':a>10?'Pregnant Wolf':a>4?'Hunted':'Hunted';
+  if(!m.includes(want))want=m[0];if(want===last&&m.length>1)want=m.find(x=>x!==last);return want}
+/* ---------- wolf hunt helpers ---------- */
+const stOf=e=>e.state||(e.state={});
+const modesOf=s=>(Array.isArray(s.modes)&&s.modes.length?s.modes:MODES0);
+const songsOf=s=>SONGS0.concat(Array.isArray(s.songs)?s.songs:[]);
+const playersOf=s=>Object.keys(s.players||{});
+const aliveIds=s=>playersOf(s).filter(id=>!(s.out||{})[id]);
+const statusOf=(s,id)=>!(s.players||{})[id]?'idle':((s.out||{})[id]?'out':'alive');
+let CUR='',LOCALSONGS=[],AUDIO=null,SEEN={elim:0,mode:0,say:0,over:0,song:0},FIRST=true,VOL=.8,PERIOD=0,Q='',HEARME=false;
+function route(){const h=location.hash.replace(/^#/,'');const m=/^e=(.+)$/.exec(h);CUR=m?m[1]:'';SEEN={elim:0,mode:0,say:0,over:0,song:0};FIRST=true;render()}
+addEventListener('hashchange',route);
+subs.push(()=>{if(!document.querySelector('.modalbg input:focus,.modalbg textarea:focus'))render(false)});
+$('home').onclick=e=>{e.preventDefault();location.hash=''};
+function render(full){
+  const app=$('app');if(!LIVE){app.innerHTML='<p class="mut" style="padding:60px;text-align:center">Loading events…</p>';return}
+  const e=CUR&&EV[CUR];
+  if(CUR&&!e){app.innerHTML='<div class="hero"><h1>That event is gone</h1><p class="mut">It may have been removed.</p><a class="btn pri" href="#">See all events</a></div>';return}
+  if(!e)return hub();
+  if(e.type==='wolf')return wolf(e,full);
+  return custom(e);
+}
+/* ---------- the hub ---------- */
+function hub(){
+  const L=Object.values(EV).filter(e=>e&&e.id).sort((a,b)=>b.ts-a.ts);
+  const sig=JSON.stringify([L.map(e=>[e.id,e.title,e.ts,(e.state||{}).round]),HOST]);const app=$('app');if(app.dataset.sig===sig&&app.dataset.v==='hub')return;app.dataset.sig=sig;app.dataset.v='hub';
+  app.innerHTML='<div class="hero"><span class="chip">🎉 CLASS EVENTS</span><h1 style="margin-top:10px">Events for the whole class</h1><p class="mut" style="max-width:640px;margin-top:8px">Play live class events like Wolf Hunt, see what is coming up and join in. Teachers can create new events.</p>'+(HOST?'<div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn pri" id="mk">＋ Create an event</button><button class="btn gold" id="mkw">🐺 Start Wolf Hunt</button></div>':'')+'</div>'+
+   '<div class="grid">'+(L.length?L.map(e=>{const w=e.type==='wolf',s=e.state||{},live=w&&s.round>0&&Date.now()-(s.ts||0)<3*3600e3;
+     return '<button class="ecard" data-open="'+esc(e.id)+'">'+(live?'<span class="live">LIVE</span>':'')+'<div class="big">'+(w?'🐺':(e.icon||'📌'))+'</div><h3>'+esc(e.title)+'</h3><p class="mut small" style="margin:0">'+esc(w?'Last wolf standing. Music, a randomizer and a sniper.':(e.desc||'').slice(0,110))+'</p>'+(e.date?'<div class="chip" style="width:fit-content">📅 '+esc(new Date(e.date).toLocaleString([], {weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}))+'</div>':'')+'<small class="mut">By '+esc(e.by||'Teacher')+'</small></button>'}).join(''):'<div class="panel" style="grid-column:1/-1;text-align:center;padding:50px"><div style="font-size:3rem">🗓️</div><h3>No events yet</h3><p class="mut">'+(HOST?'Press <b>Create an event</b> to make the first one.':'Check back soon. Your teacher will post events here.')+'</p></div>')+'</div>';
+  app.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>location.hash='e='+b.dataset.open);
+  if($('mk'))$('mk').onclick=()=>createModal('custom');if($('mkw'))$('mkw').onclick=()=>createModal('wolf');
+}
+function createModal(type){
+  modal('<h2>Create an event</h2><label class="lab">Type</label><select class="field" id="ct"><option value="wolf">🐺 Wolf Hunt (live game)</option><option value="custom">📌 Custom event (info, date and link)</option></select><label class="lab">Name</label><input class="field" id="cn" maxlength="60" placeholder="Wolf Hunt"><div id="cx"><label class="lab">What is it about?</label><textarea class="field" id="cd" rows="4" placeholder="Tell the class what is happening."></textarea><label class="lab">Date and time (optional)</label><input class="field" id="cdt" type="datetime-local"><label class="lab">Link (optional)</label><input class="field" id="cl" placeholder="https://"><label class="lab">Emoji</label><input class="field" id="ci" maxlength="2" value="📌"></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:18px"><button class="btn" data-x>Cancel</button><button class="btn pri" data-y>Create</button></div>',(b,c)=>{
+    const t=b.querySelector('#ct'),n=b.querySelector('#cn'),x=b.querySelector('#cx');t.value=type;
+    const sync=()=>{x.classList.toggle('hide',t.value==='wolf');if(!n.dataset.t||n.value===n.dataset.t){n.value=t.value==='wolf'?'Wolf Hunt':'';n.dataset.t=n.value}};t.onchange=sync;sync();
+    b.querySelector('[data-x]').onclick=c;
+    b.querySelector('[data-y]').onclick=async()=>{const title=n.value.trim();if(!title){toast('Give it a name.');return}
+      const o={id:rid(),type:t.value,title,by:ME.name,ts:Date.now()};
+      if(o.type==='wolf'){o.state={round:0,players:{},out:{},modes:MODES0.map(m=>m.name),ts:Date.now()}}
+      else{o.desc=b.querySelector('#cd').value.trim();const d=b.querySelector('#cdt').value;if(d)o.date=new Date(d).getTime();o.link=b.querySelector('#cl').value.trim();o.icon=b.querySelector('#ci').value||'📌'}
+      await createEv(o);c();location.hash='e='+o.id;sfxOk()}})}
+const sfxOk=()=>{beep(660,.12,'triangle');setTimeout(()=>beep(880,.16,'triangle'),90)};
+/* ---------- custom event ---------- */
+function custom(e){
+  const app=$('app');app.dataset.v='c';
+  const when=e.date?new Date(e.date):null,left=when?when-Date.now():0;
+  app.innerHTML='<a class="btn sm" href="#">← All events</a><div class="hero"><div style="font-size:3rem">'+esc(e.icon||'📌')+'</div><h1>'+esc(e.title)+'</h1><p class="mut" style="margin-top:8px">By '+esc(e.by||'Teacher')+'</p></div><div class="panel" style="max-width:760px"><p style="white-space:pre-wrap;font-size:1.1rem">'+esc(e.desc||'No details yet.')+'</p>'+(when?'<div class="chip">📅 '+esc(when.toLocaleString([], {weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'}))+'</div> <span class="chip" id="cdn">'+(left>0?'Starts in '+cd(left):'Started')+'</span>':'')+
+   (e.link&&/^https?:\/\//.test(e.link)?'<div style="margin-top:16px"><a class="btn pri" href="'+esc(e.link)+'" target="_blank" rel="noopener">Open the link</a></div>':'')+(HOST?'<div style="margin-top:16px;display:flex;gap:8px"><button class="btn red sm" id="dl">Delete event</button></div>':'')+'</div>';
+  if($('dl'))$('dl').onclick=()=>ask('Delete this event?','Everyone will lose it. You can not undo this.',async()=>{await delEv(e.id);location.hash=''});
+}
+const cd=ms=>{const s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return d?d+'d '+h+'h':h?h+'h '+m+'m':m+'m '+(s%60)+'s'};
+setInterval(()=>{const c=$('cdn');if(c&&CUR&&EV[CUR]&&EV[CUR].date){const l=EV[CUR].date-Date.now();c.textContent=l>0?'Starts in '+cd(l):'Started'}},1000);
+/* ---------- WOLF HUNT ---------- */
+function wolf(e,full){
+  const s=stOf(e),app=$('app'),alive=aliveIds(s),n=playersOf(s).length,outN=n-alive.length;
+  /* first build the frame once, then update parts so the page never jumps */
+  if(app.dataset.v!=='w'||app.dataset.id!==e.id){app.dataset.v='w';app.dataset.id=e.id;app.dataset.sig='';buildWolf(e)}
+  fillWolf(e,s,alive,n,outN);
+  reactions(e,s,alive);
+}
+function buildWolf(e){
+  $('app').innerHTML='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px"><a class="btn sm" href="#">← All events</a><h2 style="font-size:1.5rem">🐺 '+esc(e.title)+'</h2><span class="sp" style="flex:1"></span><button class="btn sm" id="fs">⛶ Big screen</button>'+(HOST?'<button class="btn red sm" id="dl">Delete</button>':'')+'</div>'+
+  '<div class="wh"><div style="display:grid;gap:14px;min-width:0"><div class="stage"><div class="stats" id="stats"></div><div class="mode" id="mode"></div><div class="say" id="say"></div>'+(HOST?'<div class="ctrls" id="hctrl"></div>':'')+'<div class="trees"></div></div>'+
+  (HOST?'<div class="panel musicbox" id="musicbox"></div><div class="panel" id="aibox"></div>':'<div class="panel musicbox" id="musicv"></div>')+
+  '<div class="panel"><h3 style="margin-bottom:8px">Event feed</h3><div class="log" id="log"></div></div></div>'+
+  '<div class="panel roster" id="roster"></div></div>';
+  if($('fs'))$('fs').onclick=()=>{const el=document.documentElement;if(document.fullscreenElement)document.exitFullscreen();else el.requestFullscreen&&el.requestFullscreen()};
+  if($('dl'))$('dl').onclick=()=>ask('Delete this event?','Everyone will lose it. You can not undo this.',async()=>{await delEv(e.id);location.hash=''});
+  if(HOST)wireHost(e.id);
+  else $('musicv').addEventListener('change',ev=>{if(ev.target.id==='hear'){HEARME=ev.target.checked;syncAudio(EV[CUR])}});
+}
+function fillWolf(e,s,alive,n,outN){
+  $('stats').innerHTML='<div class="stat"><b>'+(s.round||0)+'</b><span>Round</span></div><div class="stat"><b style="color:#4ade80">'+alive.length+'</b><span>Alive</span></div><div class="stat"><b style="color:#f87171">'+outN+'</b><span>Out</span></div><div class="stat"><b>'+n+'</b><span>Playing</span></div>';
+  const m=s.mode;const mm=m&&modesOf(s).length?(MODES0.find(x=>x.name===m.name)||{}):{};
+  const mhtml=m?'<small>This round</small><h2>'+esc((m.ic||mm.ic||'🐺')+' '+m.name)+'</h2><p>'+esc(m.desc||mm.desc||'')+'</p>'+(m.name==='Boys vs Girls'?teamsHtml(s):''):'<small>This round</small><h2>Waiting for the randomizer…</h2><p>'+(HOST?'Press <b>Spin</b> to pick what happens this round.':'Your teacher will spin the randomizer.')+'</p>';
+  if($('mode').dataset.h!==mhtml&&!$('mode').classList.contains('spin')){$('mode').dataset.h=mhtml;$('mode').innerHTML=mhtml}
+  if(!$('say').dataset.t)$('say').innerHTML='<small>Wolf Master</small><span id="saytx">'+esc(s.say?s.say.text:'The forest is quiet…')+'</span>';
+  const L=Object.values(s.log||{}).sort((a,b)=>b.ts-a.ts).slice(0,15);
+  const lh=L.length?L.map(x=>'<div>'+esc(x.t)+' <small>'+new Date(x.ts).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+'</small></div>').join(''):'<div class="mut">Nothing yet.</div>';if($('log').dataset.h!==lh){$('log').dataset.h=lh;$('log').innerHTML=lh}
+  if(HOST)hostPanels(e,s,alive);else viewerMusic(s);
+  roster(e,s);
+}
+function teamsHtml(s){const ids=aliveIds(s),g=s.gender||{};let b=0,gg=0,u=0;ids.forEach(i=>{if(g[i]==='b')b++;else if(g[i]==='g')gg++;else u++});
+  return '<p style="margin-top:8px"><span class="chip">👦 Boys '+b+'</span> <span class="chip">👧 Girls '+gg+'</span>'+(u?' <span class="chip">❔ Not marked '+u+'</span>':'')+'</p>'}
+/* roster */
+function roster(e,s){
+  const el=$('roster');const q=Q.toLowerCase();
+  let L=STUDENTS.filter(x=>(!PERIOD||x.period===PERIOD)&&(!q||x.name.toLowerCase().includes(q)));
+  const rank={alive:0,idle:1,out:2};L.sort((a,b)=>a.name.localeCompare(b.name));
+  const sig=JSON.stringify([PERIOD,q,HOST,L.map(x=>statusOf(s,x.id)+((s.gender||{})[x.id]||''))]);
+  if(el.dataset.sig===sig)return;el.dataset.sig=sig;
+  const counts=p=>{const ids=STUDENTS.filter(x=>!p||x.period===p).map(x=>x.id);return ids.filter(i=>statusOf(s,i)==='alive').length+'/'+ids.length};
+  const keepQ=document.activeElement&&document.activeElement.id==='rq';
+  el.innerHTML='<h3>Students ('+STUDENTS.length+')</h3><input class="field" id="rq" placeholder="Search a student" value="'+esc(Q)+'" autocomplete="off"><div class="ptabs"><button class="ptab'+(!PERIOD?' on':'')+'" data-p="0">All</button>'+PERIODS.map(p=>'<button class="ptab'+(PERIOD===p?' on':'')+'" data-p="'+p+'">P'+p+' <small>'+counts(p)+'</small></button>').join('')+'</div>'+
+   (HOST?'<div class="ctrls"><button class="btn sm" data-bulk="add">＋ Add '+(PERIOD?'period '+PERIOD:'everyone')+'</button><button class="btn sm" data-bulk="rem">Remove</button><button class="btn sm" data-bulk="rev">Revive</button><button class="btn sm red" data-bulk="out">Out</button></div>':'')+
+   '<div class="rlist">'+L.map(x=>{const st=statusOf(s,x.id),g=(s.gender||{})[x.id];
+     return '<div class="stu '+st+'" data-id="'+x.id+'"><div class="av">'+esc(ini(x.name))+'</div><div><b>'+esc(x.name)+'</b><small>P'+x.period+' · '+(st==='alive'?'Alive':st==='out'?'Out':'Not playing')+'</small></div>'+
+     (HOST?'<div class="acts">'+(st==='idle'?'<button data-a="add">Add</button>':st==='alive'?'<button class="x" data-a="out">Out</button><button data-a="rem">✕</button>':'<button class="r" data-a="rev">Revive</button>')+'<button class="gb" data-a="g" title="Boy or girl (for Boys vs Girls)">'+(g==='b'?'👦':g==='g'?'👧':'⚪')+'</button></div>':'')+'</div>'}).join('')+'</div>';
+  const rq=$('rq');rq.oninput=()=>{Q=rq.value;el.dataset.sig='';roster(e,EV[CUR].state||{});const r2=$('rq');r2.focus();r2.setSelectionRange(r2.value.length,r2.value.length)};
+  if(keepQ){rq.focus();rq.setSelectionRange(rq.value.length,rq.value.length)}
+  el.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{PERIOD=+b.dataset.p;el.dataset.sig='';roster(e,EV[CUR].state||{})});
+}
+/* ---------- host actions ---------- */
+function logEntry(id,t){const k=rid();return {['state/log/'+k]:{t,ts:Date.now()}}}
+function say(id,text,kind){return {'state/say':{text,ts:Date.now(),kind:kind||''}}}
+async function doElim(id,sid,quiet){
+  const e=EV[id],s=stOf(e),st=BYID[sid];if(!st||statusOf(s,sid)!=='alive')return;
+  const left=aliveIds(s).length-1,o={['state/out/'+sid]:Date.now(),'state/ts':Date.now()};
+  Object.assign(o,logEntry(id,st.name+' was eliminated.'));
+  if(!quiet)o['state/elim']={id:sid,ts:Date.now()};
+  if(AUTO)Object.assign(o,say(id,fmt(pick(AIL.elim),{n:sh(st.name),l:left}),'elim'));
+  if(left===1&&playersOf(s).length>1){const w=aliveIds(s).find(x=>x!==sid);o['state/over']={id:w,ts:Date.now()+1};if(AUTO)Object.assign(o,say(id,fmt(pick(AIL.win),{n:sh(BYID[w].name)}),'win'))}
+  else if(left===0)o['state/say']={text:pick(AIL.all),ts:Date.now(),kind:'all'};
+  else if(AUTO&&left<=8&&left>1&&Math.random()<.5)o['state/say']={text:fmt(pick(AIL.left),{l:left}),ts:Date.now()+1,kind:'left'};
+  await patch(id,o);
+}
+let AUTO=true;
+function wireHost(id){
+  const app=$('app');
+  app.onclick=async ev=>{
+    const e=EV[id];if(!e)return;const s=stOf(e);
+    const row=ev.target.closest('.stu[data-id]'),a=ev.target.closest('[data-a]');
+    if(a&&row){const sid=row.dataset.id,st=BYID[sid];const act=a.dataset.a;
+      if(act==='out')return doElim(id,sid);
+      if(act==='add')return patch(id,{['state/players/'+sid]:1,['state/out/'+sid]:null,'state/ts':Date.now()});
+      if(act==='rem')return patch(id,{['state/players/'+sid]:null,['state/out/'+sid]:null});
+      if(act==='rev')return patch(id,Object.assign({['state/out/'+sid]:null,'state/ts':Date.now()},logEntry(id,st.name+' was revived!')));
+      if(act==='g'){const g=(s.gender||{})[sid];return patch(id,{['state/gender/'+sid]:g==='b'?'g':g==='g'?null:'b'})}
+    }
+    const bk=ev.target.closest('[data-bulk]');
+    if(bk){const ids=STUDENTS.filter(x=>!PERIOD||x.period===PERIOD).map(x=>x.id),k=bk.dataset.bulk,o={'state/ts':Date.now()};
+      const lab=PERIOD?'period '+PERIOD:'everyone';
+      const run=async()=>{
+        if(k==='add')ids.forEach(i=>{o['state/players/'+i]=1;o['state/out/'+i]=null});
+        if(k==='rem')ids.forEach(i=>{o['state/players/'+i]=null;o['state/out/'+i]=null});
+        if(k==='rev')ids.forEach(i=>{if(statusOf(s,i)==='out')o['state/out/'+i]=null});
+        if(k==='out')ids.forEach(i=>{if(statusOf(s,i)==='alive')o['state/out/'+i]=Date.now()});
+        Object.assign(o,logEntry(id,({add:'Added ',rem:'Removed ',rev:'Revived ',out:'Eliminated '})[k]+lab+'.'));await patch(id,o);toast('Done: '+lab)};
+      if(k==='out'||k==='rem')ask((k==='out'?'Eliminate ':'Remove ')+lab+'?','This changes many students at once.',run);else run();return}
+    if(ev.target.closest('#spin'))return spin(id);
+    if(ev.target.closest('#startr'))return startRound(id);
+    if(ev.target.closest('#stopm'))return patch(id,{'state/song/playing':false});
+    if(ev.target.closest('#nextr')){return patch(id,Object.assign({'state/round':(s.round||0)+1,'state/ts':Date.now()},logEntry(id,'Round '+((s.round||0)+1)+' started.')))}
+    if(ev.target.closest('#newg'))return ask('Start a new game?','Everyone is revived, the round goes back to 0 and the feed is cleared.',()=>patch(id,{'state/out':null,'state/round':0,'state/log':null,'state/mode':null,'state/over':null,'state/elim':null,'state/song':{playing:false,ts:Date.now()},'state/ts':Date.now()}));
+    if(ev.target.closest('#addsong')){const n=$('sgn').value.trim()||'My song',u=$('sgu').value.trim();if(!/^https?:\/\//.test(u)){toast('Paste a link that starts with https://');return}
+      const L=(s.songs||[]).concat({name:n,url:u});$('sgn').value=$('sgu').value='';return patch(id,{'state/songs':L})}
+    if(ev.target.closest('#sgup')){$('sgf').click();return}
+    if(ev.target.closest('#addmode')){const n=$('mdn').value.trim();if(!n)return;const L=modesOf(s).map(x=>x.name).concat(n);$('mdn').value='';return patch(id,{'state/modes':L})}
+    const rm=ev.target.closest('[data-rmmode]');if(rm){const L=modesOf(s).map(x=>x.name).filter(x=>x!==rm.dataset.rmmode);return patch(id,{'state/modes':L})}
+    if(ev.target.closest('#aiann'))return announce(id);
+    if(ev.target.closest('#aisug')){const w=suggestMode(s);return patch(id,say(id,'Wolf Master suggests: '+w+'. '+pick(AIL.mode[w]||['Try it!']),'ai'))}
+    if(ev.target.closest('#aispot')){const A=aliveIds(s);if(!A.length)return toast('Nobody is alive yet.');const w=BYID[pick(A)];return patch(id,say(id,'Spotlight on '+sh(w.name)+' from period '+w.period+'. Stay sharp!','ai'))}
+    if(ev.target.closest('#aiteams')){const A=aliveIds(s),g=s.gender||{};let b=0,gg=0;A.forEach(i=>{if(g[i]==='b')b++;else if(g[i]==='g')gg++});return patch(id,say(id,'Boys vs Girls: '+b+' boys, '+gg+' girls'+(A.length-b-gg?' and '+(A.length-b-gg)+' not marked yet':'')+'.','ai'))}
+  };
+  app.addEventListener('change',ev=>{const e=EV[id];if(!e)return;
+    if(ev.target.id==='songsel')patch(id,{'state/song/sel':+ev.target.value});
+    if(ev.target.id==='auto'){AUTO=ev.target.checked}
+    if(ev.target.id==='sgf'&&ev.target.files[0]){const f=ev.target.files[0],u=URL.createObjectURL(f);LOCALSONGS.push({name:f.name+' (this device)',url:u});toast('Added '+f.name+'. It plays on this device only.');hostPanels(e,stOf(e),aliveIds(stOf(e)),true)}
+  });
+  app.addEventListener('input',ev=>{if(ev.target.id==='vol'){VOL=+ev.target.value;if(AUDIO)AUDIO.volume=VOL}});
+}
+function hostPanels(e,s,alive,force){
+  const songs=songsOf(s).concat(LOCALSONGS),sel=(s.song&&s.song.sel)||0;
+  const c=$('hctrl'),h='<button class="btn pri" id="startr">▶ Start round '+((s.round||0)+1)+'</button><button class="btn gold" id="spin">🎰 Spin the randomizer</button><button class="btn" id="nextr">Next round +1</button><button class="btn" id="stopm">⏹ Stop music</button><button class="btn red sm" id="newg">New game</button>';
+  if(c.dataset.h!==h){c.dataset.h=h;c.innerHTML=h}
+  const mb=$('musicbox'),mh='<h3>🎵 Music</h3><div class="row"><select class="field" id="songsel" style="flex:1;min-width:200px">'+songs.map((x,i)=>'<option value="'+i+'"'+(i===sel?' selected':'')+'>'+esc(x.name)+'</option>').join('')+'</select><label class="mut small" style="display:flex;align-items:center;gap:6px">Volume <input type="range" id="vol" min="0" max="1" step="0.05" value="'+VOL+'"></label></div><div class="row"><input class="field" id="sgn" placeholder="Song name" style="flex:1;min-width:120px"><input class="field" id="sgu" placeholder="Direct link (https://…mp3)" style="flex:2;min-width:180px"><button class="btn sm" id="addsong">Add link</button><button class="btn sm" id="sgup">Upload a file</button><input type="file" id="sgf" accept="audio/*" class="hide"></div><p class="mut small" style="margin:0">Press <b>Start round</b> and the chosen song plays on this device. Choose any song with a link or a file.</p>';
+  if(!focusIn('musicbox')&&(mb.dataset.h!==mh||force)){mb.dataset.h=mh;mb.innerHTML=mh}
+  const ab=$('aibox'),M=modesOf(s),ah='<h3>🧠 Wolf Master (event AI)</h3><p class="mut small">Your announcer. It writes the announcements for everyone and suggests what to do next.</p><div class="ctrls"><button class="btn sm" id="aiann">📣 Announce</button><button class="btn sm" id="aisug">💡 Suggest next round</button><button class="btn sm" id="aispot">🔦 Spotlight a wolf</button><button class="btn sm" id="aiteams">⚔️ Count teams</button></div><label class="mut small" style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" id="auto" '+(AUTO?'checked':'')+'> Announce automatically when someone is out or a round starts</label><label class="lab">Randomizer list</label><div style="display:flex;gap:6px;flex-wrap:wrap">'+M.map(x=>'<span class="chip">'+esc(x.name||x)+' <button class="btn sm" style="padding:0 6px;border-radius:99px" data-rmmode="'+esc(x.name||x)+'">✕</button></span>').join('')+'</div><div class="row" style="display:flex;gap:6px;margin-top:8px"><input class="field" id="mdn" placeholder="Add your own (example: Blizzard)"><button class="btn sm" id="addmode">Add</button></div>';
+  if(!focusIn('aibox')&&ab.dataset.h!==ah){ab.dataset.h=ah;ab.innerHTML=ah}
+}
+const focusIn=id=>{const a=document.activeElement;return !!a&&!!$(id)&&$(id).contains(a)&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)};
+function viewerMusic(s){
+  const b=$('musicv');if(!b)return;const sg=s.song||{};
+  const h='<h3>🎵 Now playing</h3><p style="margin:0">'+(sg.playing?'♪ '+esc(sg.name||'Music'):'<span class="mut">No music right now.</span>')+'</p><label class="mut small" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="hear" '+(HEARME?'checked':'')+'> Play the music on my device too</label>';
+  if(b.dataset.h!==h){b.dataset.h=h;b.innerHTML=h}syncAudio(EV[CUR]);
+}
+async function announce(id){const s=stOf(EV[id]),A=aliveIds(s).length;const k=s.over?'win':(s.round>0&&A<=8&&A>0?'left':'start');
+  const t=k==='left'?fmt(pick(AIL.left),{l:A}):k==='win'?fmt(pick(AIL.win),{n:sh(BYID[s.over.id].name)}):fmt(pick(AIL.start),{r:s.round||1});
+  await patch(id,say(id,t,'ai'))}
+/* randomizer */
+async function spin(id){
+  const e=EV[id],s=stOf(e),M=modesOf(s).map(x=>x.name||x);if(!M.length)return;
+  const name=pick(M),d=MODES0.find(x=>x.name===name)||{desc:'A new twist for this round!',ic:'🎲'};
+  const o={'state/mode':{name,desc:d.desc,ic:d.ic,ts:Date.now()},'state/ts':Date.now()};
+  Object.assign(o,logEntry(id,'Randomizer picked: '+name));
+  if(AUTO)Object.assign(o,say(id,pick((AIL.mode[name]||['A new twist for this round.'])),'mode'));
+  await patch(id,o);
+}
+async function startRound(id){
+  const e=EV[id],s=stOf(e),songs=songsOf(s).concat(LOCALSONGS),sel=(s.song&&s.song.sel)||0,sg=songs[sel]||songs[0];
+  const r=(s.round||0)+1,o={'state/round':r,'state/ts':Date.now(),'state/song':{url:/^blob:/.test(sg.url)?'':sg.url,name:sg.name,playing:true,sel,ts:Date.now()},'state/over':null};
+  Object.assign(o,logEntry(id,'Round '+r+' started · '+sg.name));
+  if(AUTO)Object.assign(o,say(id,fmt(pick(AIL.start),{r}),'start'));
+  /* the host's device plays it, so a file from this device works too */
+  playSong(sg.url);await patch(id,o);
+}
+/* ---------- audio ---------- */
+function playSong(url){stopSong();if(!url)return;AUDIO=new Audio(url);AUDIO.loop=true;AUDIO.volume=VOL;AUDIO.play().catch(()=>toast('This song could not play. Check the link or try another song.'))}
+function stopSong(){if(AUDIO){try{AUDIO.pause()}catch(e){}AUDIO=null}}
+let lastSong=0;
+function syncAudio(e){ /* viewers who turned it on, and the host after a refresh, follow the shared song */
+  if(!e)return;const sg=(e.state||{}).song;if(!sg)return;
+  if(HOST){if(!sg.playing)stopSong();return}
+  if(!HEARME||!sg.playing){if(AUDIO)stopSong();lastSong=0;return}
+  if(sg.url&&lastSong!==sg.ts){lastSong=sg.ts;playSong(sg.url)}
+}
+/* ---------- reactions that everyone sees ---------- */
+function reactions(e,s,alive){
+  const now=Date.now();
+  if(FIRST){FIRST=false;SEEN.elim=(s.elim||{}).ts||0;SEEN.mode=(s.mode||{}).ts||0;SEEN.say=(s.say||{}).ts||0;SEEN.over=(s.over||{}).ts||0;
+    if($('say')&&s.say){$('say').innerHTML='<small>Wolf Master</small><span id="saytx">'+esc(s.say.text)+'</span>'}
+    syncAudio(e);return}
+  if(s.elim&&s.elim.ts>SEEN.elim){SEEN.elim=s.elim.ts;if(now-s.elim.ts<20000)elimScene(s.elim.id)}
+  if(s.mode&&s.mode.ts>SEEN.mode){SEEN.mode=s.mode.ts;if(now-s.mode.ts<20000)modeSpin(s)}
+  if(s.say&&s.say.ts>SEEN.say){SEEN.say=s.say.ts;typeSay(s.say.text)}
+  if(s.over&&s.over.ts>SEEN.over){SEEN.over=s.over.ts;setTimeout(()=>winScene(s.over.id),s.elim&&now-s.elim.ts<5000?4200:300)}
+  syncAudio(e);
+}
+function typeSay(t){const el=$('say');if(!el)return;el.dataset.t='1';el.innerHTML='<small>Wolf Master</small><span id="saytx"></span>';const sp=$('saytx');let i=0;clearInterval(typeSay.t);typeSay.t=setInterval(()=>{sp.textContent=t.slice(0,++i);if(i>=t.length)clearInterval(typeSay.t)},22)}
+function modeSpin(s){
+  const m=$('mode'),M=modesOf(s).map(x=>x.name||x),fin=s.mode;m.classList.add('spin');m.classList.remove('pop');let i=0,d=60;
+  const step=()=>{m.innerHTML='<small>Randomizer</small><h2>'+esc(M[i++%M.length])+'</h2><p>…</p>';beep(300+(i%6)*70,.05,'square',.03);d*=1.13;if(d<420)setTimeout(step,d);else{m.classList.remove('spin');m.dataset.h='';m.classList.add('pop');beep(880,.25,'triangle',.1);fillWolf(EV[CUR],stOf(EV[CUR]),aliveIds(stOf(EV[CUR])),playersOf(stOf(EV[CUR])).length,0)}};step();
+}
+const WOLF='<svg viewBox="0 0 250 150"><path fill="#070b18" stroke="#4b5fa8" stroke-width="2.5" stroke-linejoin="round" d="M12 98c6-12 14-20 26-22 4-14 18-26 40-30 24-4 46-2 66-6 14-3 26-12 38-22l4-14 10 12 12-6 2 16 22 22-18 4c-8 4-16 6-26 6-6 14-6 26-2 40l10 30h-16l-12-26c-18 6-44 6-62 2l-6 24H62l6-26c-12-2-22-8-28-16-8 2-16 2-24-6z"/><circle cx="206" cy="42" r="3.4" fill="#fde68a"/><path d="M12 98c-6 6-8 14-4 22 8-4 14-10 16-20z" fill="#070b18" stroke="#4b5fa8" stroke-width="2.5"/></svg>';
+function elimScene(id){
+  const st=BYID[id];if(!st)return;document.querySelectorAll('#elim').forEach(x=>x.remove());
+  const d=document.createElement('div');d.id='elim';
+  d.innerHTML='<div class="scene" id="esc"><div class="moon"></div><div class="ground"></div><div class="wolf" id="ew">'+WOLF+'</div><div class="xh" id="exh"></div><div class="flash" id="efl"></div><div class="stamp" id="est">ELIMINATED!</div><div class="who" id="ewho"><div class="av">'+esc(ini(st.name))+'</div><b>'+esc(st.name)+'</b><small>Period '+st.period+' · hit by the sniper</small></div><div class="hint">Tap to close</div></div>';
+  document.body.appendChild(d);const T=(f,ms)=>setTimeout(f,ms);
+  T(()=>{$('exh')&&$('exh').classList.add('go');beep(220,.4,'sawtooth',.05)},1100);
+  T(()=>{if(!$('esc'))return;shot();$('efl').classList.add('go');$('esc').classList.add('shake');$('ew').classList.add('fall')},1650);
+  T(()=>{if(!$('est'))return;$('est').classList.add('go');$('ewho').classList.add('go');beep(120,.5,'sawtooth',.08)},2050);
+  const close=()=>{d.style.transition='opacity .3s';d.style.opacity='0';setTimeout(()=>d.remove(),300)};d.onclick=close;T(close,6500);
+}
+function winScene(id){
+  const st=BYID[id];if(!st)return;document.querySelectorAll('#win').forEach(x=>x.remove());
+  const d=document.createElement('div');d.id='win';d.innerHTML='<div><div class="crown">👑</div><p class="mut" style="letter-spacing:.2em;font-weight:800">LAST WOLF STANDING</p><h1>'+esc(st.name)+'</h1><p style="font-size:1.2rem">Period '+st.period+' · Survivor!</p><p class="mut small">Tap to close</p></div>';
+  document.body.appendChild(d);confetti(90);[523,659,784,1047].forEach((f,i)=>setTimeout(()=>beep(f,.3,'triangle',.1),i*140));d.onclick=()=>d.remove();setTimeout(()=>d.remove(),12000);
+}
+boot();
+
+</script></body></html>
